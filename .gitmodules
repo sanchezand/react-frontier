@@ -1,0 +1,3 @@
+[submodule "frontier"]
+	path = style
+	url = git@github.com:sanchezand/frontier.git
