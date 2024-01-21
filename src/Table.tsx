@@ -94,7 +94,7 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 
 	const Component : ElementType = props.as || null;
 
-	return <tr style={props.style} className={classNames({
+	return <tr style={style} className={classNames({
 		noselect: selectable===false,
 		selectable: selectable,
 		compact: compact,
@@ -117,9 +117,14 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 	</tr>
 }
 
-const TableRowDivider : React.FC = ()=>{
-	return <tr className='divider'>
-		<td colSpan={999}></td>
+interface TableRowDividerProps{
+	rowStyle?: React.CSSProperties,
+	cellStyle?: React.CSSProperties,
+}
+
+const TableRowDivider : React.FC = (props: TableRowDividerProps)=>{
+	return <tr className='divider' style={props.rowStyle}>
+		<td colSpan={999} style={props.cellStyle}></td>
 	</tr>
 }
 
@@ -136,8 +141,10 @@ interface TableProps extends PropsWithChildren{
 	details?: boolean,
 	fitted?: boolean,
 	className?: string,
-	headers?: any[]
+	headers?: any[],
+	headersStyle?: React.CSSProperties,
 	emptyText?: string,
+	emptyStyle?: React.CSSProperties,
 	title?: string,
 	titleSize?: 'small' | 'normal' | 'big',
 	titleCentered?: boolean,
@@ -151,6 +158,8 @@ interface TableProps extends PropsWithChildren{
 	style?: React.CSSProperties,
 	button?: JSX.Element,
 	actions?: React.ReactNode,
+	actionsStyle?: React.CSSProperties,
+	footerStyle?: React.CSSProperties,
 }
 
 const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
@@ -191,7 +200,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 						<th className={classNames({
 							collapsing: props.collapsingIndexes && props.collapsingIndexes.indexOf(i)!=-1,
 							centered: props.centeredIndexes && props.centeredIndexes.indexOf(i)!=-1
-						})} key={`TH-${id}-${i}`}>{a}</th>
+						})} style={props.headersStyle} key={`TH-${id}-${i}`}>{a}</th>
 					))}
 				</tr>
 			)}
@@ -219,7 +228,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 				)
 			}) : props.emptyText ? (
 				<tr>
-					<td className='empty' colSpan={colspan}>{props.emptyText}</td>
+					<td className='empty' style={props.emptyStyle} colSpan={colspan}>{props.emptyText}</td>
 				</tr>
 			) : null}
 		</tbody>
@@ -227,12 +236,12 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 			<tfoot>
 				{!!props.footer && (
 					<tr>
-						<td colSpan={colspan}>{props.footer}</td>
+						<td colSpan={colspan} style={props.footerStyle}>{props.footer}</td>
 					</tr>
 				)}
 				{!!props.actions && (
 					<tr>
-						<td colSpan={colspan} className='actions'>
+						<td colSpan={colspan} className='actions' style={props.actionsStyle}>
 							{props.actions}
 						</td>
 					</tr>	
