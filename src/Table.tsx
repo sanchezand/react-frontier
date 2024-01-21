@@ -1,10 +1,9 @@
+import React, { ElementType, PropsWithChildren, useState } from 'react';
 import classNames from 'classnames';
-import React, { ElementType, PropsWithChildren, useEffect, useState } from 'react';
 import { randomRange } from './Util';
-import { PolymorphicProps } from 'Classes';
+import { PolymorphicProps } from './Classes'
 
-
-type TableCellProps<E extends ElementType = null> = PolymorphicProps<E> & {
+type TableCellProps<E extends ElementType = any> = PolymorphicProps<E> & {
 	className?: string,
 	children?: React.ReactNode | string,
 	collapsing?: boolean,
@@ -48,10 +47,10 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 			) : children}
 		</td>
 	)
-	return props.row ? <tr>{Element}</tr> : Element
+	return row ? <tr>{Element}</tr> : Element
 }
 
-type TableRowProps<E extends ElementType = null> = PolymorphicProps<E> & {
+type TableRowProps<E extends ElementType = any> = PolymorphicProps<E> & {
 	style?: React.CSSProperties,
 	selectable?: boolean,
 	collapsingIndexes?: number[],
@@ -78,11 +77,13 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		details,
 		compact,
 		as,
+		children,
 		...restProps
 	} = props;
 
-	var childs = (Array.isArray(props.children) ? props.children : [props.children]).map((a,i)=>{
+	var childs = (Array.isArray(children) ? children : [children]).map((a,i)=>{
 		if(React.isValidElement(a)){
+			console.log(restProps)
 			return React.cloneElement(a, { 
 				...(a.props as any),
 				as: (a.props as any).as || props.as,
@@ -96,21 +97,22 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 	return <tr style={props.style} className={classNames({
 		noselect: selectable===false,
 		selectable: selectable,
-		compact: compact || props.as==='a',
+		compact: compact,
 		empty: empty,
 		header: header,
 		details: details,
 	})}>
-		{data && data.map((b, bi)=>(
-			<td key={`TD-${id}-${bi}`} className={classNames({
-				collapsing: collapsingIndexes && collapsingIndexes.indexOf(bi)!=-1,
-				centered: centeredIndexes && centeredIndexes.indexOf(bi)!=-1,
-			})}>
-				{Component ? (
-					<Component {...restProps}>{b}</Component>
-				) : b}
-			</td>
-		))}
+		{data && data.map((b, bi)=>{
+			var ComponentRender = Component ? <Component {...restProps}>{b}</Component> : b;
+			return (
+				<td key={`TD-${id}-${bi}`} className={classNames({
+					collapsing: collapsingIndexes && collapsingIndexes.indexOf(bi)!=-1,
+					centered: centeredIndexes && centeredIndexes.indexOf(bi)!=-1,
+				})}>
+					{ComponentRender}
+				</td>
+			)
+		})}
 		{childs}
 	</tr>
 }
@@ -130,19 +132,19 @@ type TableSubComponents = {
 interface TableProps extends PropsWithChildren{
 	striped?: boolean,
 	divided?: boolean,
+	celled?: boolean,
 	details?: boolean,
 	fitted?: boolean,
 	className?: string,
 	headers?: any[]
 	emptyText?: string,
 	title?: string,
-	titleSmall?: boolean,
+	titleSize?: 'small' | 'normal' | 'big',
 	titleCentered?: boolean,
 	selectable?: boolean,
 	collapsingIndexes?: number[],
 	centeredIndexes?: number[],
 	onClick?: (v: any[], i: number)=>any,
-	rowUrl?: (v: any[], i: number)=>string,
 	linkTarget?: '_self' | '_blank' | '_parent' | '_top',
 	data?: any[][]
 	footer?: any,
@@ -166,6 +168,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 		striped: props.striped,
 		divided: props.divided,
 		details: props.details,
+		celled: props.celled,
 		fitted: props.fitted,
 		selectable: props.selectable,
 	})} style={props.style}>
@@ -173,9 +176,8 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 			{!!props.title && (
 				<tr>
 					<th className={classNames('title', {
-						small: props.titleSmall,
 						button: !!props.button,
-					})} colSpan={colspan}>
+					}, props.titleSize)} colSpan={colspan}>
 						<div style={{ display: 'flex', flexDirection: 'row', justifyContent: props.titleCentered ? 'center' : 'space-between', alignItems: 'center', }}>
 							{props.title}
 							{props.button}
@@ -197,12 +199,9 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 		<tbody>
 			{props.children}
 			{props.data && props.data.length>0 ? props.data.map((a,i)=>{
-				var url = (a!==null && a.length>0 && props.rowUrl) ? props.rowUrl(a, i) : null;
 				return (
 					<tr key={`TR-${id}-${i}`} className={classNames({ 
 						divider: a===null || a.length==0,
-						selectable: !!url,
-						compact: !!url,
 					})} onClick={clickRow(a, i)}>
 						{(a===null || a.length===0) ? (
 							new Array(props.headers ? props.headers.length : (props.details ? 2 : 1)).fill('a').map((d,bi)=>(
@@ -213,9 +212,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 								collapsing: props.collapsingIndexes && props.collapsingIndexes.indexOf(bi)!=-1,
 								centered: props.centeredIndexes && props.centeredIndexes.indexOf(bi)!=-1
 							})}>
-								{url ? (
-									<Link to={url} target={props.linkTarget}>{b}</Link>
-								) : b}
+								{b}
 							</td>
 						))}
 					</tr>
