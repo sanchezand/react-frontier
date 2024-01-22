@@ -40,7 +40,7 @@ type CalendarColors = 'green' | 'red' | 'purple' | 'gray' | 'blue' | 'orange';
 
 const YEAR_SECTION_SIZE = 20;
 
-interface CalendarProps{
+export interface CalendarProps{
 	mode?: CalendarMode
 	format?: string,
 	date: number,
