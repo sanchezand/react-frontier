@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 interface ComponentProps extends PropsWithChildren{
 	loading?: boolean,
-	icon?: '',
+	iconName?: string,
 	text?: string,
 	subtext?: string
 	size?: string
@@ -28,8 +28,8 @@ var Header = (props: ComponentProps)=>{
 		<div className={classNames('fr header', props.size, { centered: props.centered!==false }, props.className, {
 			size: props.size
 		})} style={{ ...(props.loading ? { fontWeight: 'bold', fontSize: 18, color: '#888' } : {}), ...(props.horizontal ? { marginBottom: 8, marginLeft: 10 } : {}), ...props.style,}}>
-			{props.icon ? (
-				<i className={classNames('icon', props.icon)} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }}></i>
+			{props.iconName ? (
+				<i className={classNames('icon', props.iconName)} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }}></i>
 			) : null}
 			<div className="content" style={props.contentStyle}>
 				{props.children || <>

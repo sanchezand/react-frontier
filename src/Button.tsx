@@ -13,7 +13,7 @@ type ButtonProps<E extends ElementType = typeof defaultType> = PolymorphicProps<
 	loading?: boolean,
 	className?: string
 	icon?: boolean,
-	iconName?: '',
+	iconName?: string,
 	target?: '_blank' | '_self' | '_parent' | '_top',
 	size?: 'small' | 'tiny' | 'big',
 	disabled?: boolean,
