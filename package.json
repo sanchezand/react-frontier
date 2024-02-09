@@ -1,6 +1,6 @@
 {
 	"name": "react-frontier",
-	"version": "0.1.2",
+	"version": "0.1.6",
 	"description": "Frontier react component library",
 	"main": "dist/index.min.js",
 	"module": "dist/index.es.js",
@@ -41,6 +41,7 @@
 		"react-dom": ">=18"
 	},
 	"scripts": {
+		"prepublish": "npm run build",
 		"start": "react-scripts start",
 		"build": "tsc && rollup -c rollup.config.js",
 		"dev": "yalc-watch"

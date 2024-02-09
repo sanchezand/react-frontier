@@ -126,7 +126,7 @@ var Input = React.forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement
 			</label>
 		)}
 		<div ref={containerRef} className={classNames('fr input', props.type, props.className, {
-			action: !!(props.onSubmit || props.button),
+			action: !!props.button,
 			error: !!props.error,
 			icon: props.icon,
 			loading,
