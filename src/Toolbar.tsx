@@ -1,34 +1,27 @@
-import React, { ComponentPropsWithoutRef, ElementType, PropsWithChildren } from 'react';
+import React, { ElementType, PropsWithChildren } from 'react';
 import { Dropdown } from 'semantic-ui-react'
 import classNames from 'classnames';
 
-type PolymorphicAsProp<E extends ElementType> = {
-	as?: E
-}
-type PolymorphicProps<E extends ElementType> = PropsWithChildren<
-	ComponentPropsWithoutRef<E> & PolymorphicAsProp<E>
->;
-
 const defaultItemElement = 'div';
 
-type ToolbarItemProps<E extends ElementType> = PolymorphicProps<E> & {
+type ToolbarItemProps<E extends ElementType> = {
+	as?: E,
 	text?: string,
 	onClick?: ()=>void,
 	icon?: string,
 	className?: string,
 	if?: boolean,
-	as?: E,
 	style?: React.CSSProperties,
-	items?: PolymorphicProps<E> & {
+	items?: React.ComponentPropsWithoutRef<E> & {
+		as?: E
 		text: string,
 		className?: string,
 		if?: boolean,
 		icon?: string,
 		onClick?: ()=>void,
 		style?: React.CSSProperties,
-		as?: E
 	}[]
-}
+} & React.ComponentPropsWithoutRef<E>;
 
 function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: ToolbarItemProps<E>){
 	var { text, onClick, icon, className, if: propIf, as, items, children, style, ...restProps } = props;

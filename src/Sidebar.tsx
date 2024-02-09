@@ -1,22 +1,25 @@
-import { PolymorphicProps } from 'Classes';
 import classNames from 'classnames';
 import React, { ElementType, PropsWithChildren, useEffect, useState } from 'react';
 
 const defaultItemElement = 'div';
 
-type SidebarItemProps<E extends ElementType> = PolymorphicProps<E> & {
-	text: string,
+type SidebarItemProps<E extends ElementType> = {
+	as?: E,
+	content?: any,
 	iconName?: string,
 	active?: boolean,
 	className?: string,
-}
+	text?: string,
+} & React.ComponentPropsWithoutRef<E> & React.PropsWithChildren;
 
-const SidebarItem = <E extends ElementType = typeof defaultItemElement>(props: SidebarItemProps<E>)=>{
-	var { text, iconName, active, as, ...restProps }  = props;
+const SidebarItem = <E extends ElementType>(props: SidebarItemProps<E>)=>{
+	var { text, iconName, active, as, children, content, ...restProps }  = props;
 	const Component = as ?? defaultItemElement;
 	return <Component className={classNames("item", props.className)} {...restProps}>
-		{!!props.iconName && <i className={classNames(props.iconName, 'icon')}></i>}
-		{props.text}
+		{children || <>
+			{!!iconName && <i className={classNames(iconName, 'icon')}></i>}
+			{content}
+		</>}
 	</Component>
 }
 
@@ -28,6 +31,7 @@ interface SidebarProps extends PropsWithChildren{
 	responsive?: boolean,
 	breakpoint?: number,
 	hideOnBreakpoint?: boolean,
+	closeDrawerOnClick?: boolean,
 	sidebarStyle?: React.CSSProperties
 	drawerStyle?: React.CSSProperties,
 	contentsStyle?: React.CSSProperties,
@@ -60,6 +64,7 @@ const Sidebar : SidebarType = (props: SidebarProps) : JSX.Element=>{
 	var toggleDrawer = ()=>{
 		setDrawer(!drawer);
 	}
+
 	return <div className={classNames('fr sidebar', { 
 		mobile,
 		fixed: props.fixed,
@@ -81,7 +86,11 @@ const Sidebar : SidebarType = (props: SidebarProps) : JSX.Element=>{
 						<div className="text">{props.title}</div>
 						<i className="caret down icon"></i>
 					</div>
-					{props.children}
+					<div onClick={()=>{
+						if(props.closeDrawerOnClick) setDrawer(false);
+					}}>
+						{props.children}
+					</div>
 				</div>
 			)
 		)}

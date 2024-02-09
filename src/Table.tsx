@@ -1,9 +1,9 @@
 import React, { ElementType, PropsWithChildren, useState } from 'react';
 import classNames from 'classnames';
 import { randomRange } from './Util';
-import { PolymorphicProps } from './Classes'
 
-type TableCellProps<E extends ElementType = any> = PolymorphicProps<E> & {
+type TableCellProps<E extends ElementType=any> = {
+	as?: E,
 	className?: string,
 	children?: React.ReactNode | string,
 	collapsing?: boolean,
@@ -13,7 +13,7 @@ type TableCellProps<E extends ElementType = any> = PolymorphicProps<E> & {
 	compact?: boolean,
 	style?: React.CSSProperties,
 	empty?: boolean,
-}
+} & React.ComponentPropsWithoutRef<E>;
 
 const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 	var {
@@ -50,8 +50,10 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 	return row ? <tr>{Element}</tr> : Element
 }
 
-type TableRowProps<E extends ElementType = any> = PolymorphicProps<E> & {
+type TableRowProps<E extends ElementType = any> = {
+	as?: E,
 	style?: React.CSSProperties,
+	className?: string,
 	selectable?: boolean,
 	collapsingIndexes?: number[],
 	centeredIndexes?: number[],
@@ -61,13 +63,14 @@ type TableRowProps<E extends ElementType = any> = PolymorphicProps<E> & {
 	empty?: boolean,
 	details?: boolean,
 	compact?: boolean,
-}
+} & React.ComponentPropsWithoutRef<E>;
 
 const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 	var [id, setId] = useState<number>(randomRange(0, 2563682));
 	var {
 		style,
 		selectable,
+		className,
 		collapsingIndexes,
 		centeredIndexes,
 		onClick,
@@ -83,7 +86,6 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 
 	var childs = (Array.isArray(children) ? children : [children]).map((a,i)=>{
 		if(React.isValidElement(a)){
-			console.log(restProps)
 			return React.cloneElement(a, { 
 				...(a.props as any),
 				as: (a.props as any).as || props.as,
@@ -101,7 +103,7 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		empty: empty,
 		header: header,
 		details: details,
-	})}>
+	}, className)}>
 		{data && data.map((b, bi)=>{
 			var ComponentRender = Component ? <Component {...restProps}>{b}</Component> : b;
 			return (
@@ -159,7 +161,6 @@ interface TableProps extends PropsWithChildren{
 	button?: JSX.Element,
 	actions?: React.ReactNode,
 	actionsStyle?: React.CSSProperties,
-	footerStyle?: React.CSSProperties,
 }
 
 const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
@@ -234,11 +235,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 		</tbody>
 		{(props.footer || props.actions) && (
 			<tfoot>
-				{!!props.footer && (
-					<tr>
-						<td colSpan={colspan} style={props.footerStyle}>{props.footer}</td>
-					</tr>
-				)}
+				{props.footer}
 				{!!props.actions && (
 					<tr>
 						<td colSpan={colspan} className='actions' style={props.actionsStyle}>

@@ -1,15 +1,14 @@
 import React, { ElementType, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { PolymorphicProps } from 'Classes';
 
-const defaultType = 'div';
-type ButtonProps<E extends ElementType = typeof defaultType> = PolymorphicProps<E> & {
+type ButtonProps<E extends ElementType> = {
+	as?: E,
 	text?: string,
 	onClick?: (setLoading: (loading: boolean)=>void)=>void,
 	nativeOnClick?: (ev?: React.MouseEvent)=>void,
 	href?: string,
 	basic?: boolean,
-	color?: 'green' | 'red' | 'purple' | 'black' | 'blue' | 'orange' | 'basic' | 'white',
+	color?: 'green' | 'red' | 'purple' | 'black' | 'blue' | 'orange' | 'basic' | 'white' | 'yellow',
 	loading?: boolean,
 	className?: string
 	icon?: boolean,
@@ -21,8 +20,9 @@ type ButtonProps<E extends ElementType = typeof defaultType> = PolymorphicProps<
 	style?: React.CSSProperties,
 	iconStyle?: React.CSSProperties,
 	onLoadingChanged?: (v: boolean)=>void,
-}
-var Button = (props: ButtonProps)=>{
+} & React.ComponentPropsWithoutRef<E>;
+
+var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 	var { 
 		text,
 		onClick,
@@ -61,7 +61,7 @@ var Button = (props: ButtonProps)=>{
 		});
 	}
 	
-	const ComponentType = props.as ?? defaultType;
+	const ComponentType = props.as ?? 'div';
 	return <ComponentType 
 		className={classNames('fr button', {
 			icon,
