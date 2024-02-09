@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 interface ImageProps extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>{
 	hideOnFail?: boolean,
-	fallback?: string
+	fallback?: string,
+	fallbackComponent?: any,
 }
 var Image = (props: ImageProps)=>{
-	var { hideOnFail, fallback, ...restProps } = props;
+	var { hideOnFail, fallback, fallbackComponent, ...restProps } = props;
 	var [error, setError] = useState<boolean>(false);
 	var [fallbackError, setFallbackError] = useState<boolean>(false);
 	var handleError = (ev: React.SyntheticEvent<HTMLImageElement, Event>)=>{
@@ -14,7 +15,9 @@ var Image = (props: ImageProps)=>{
 				ev.currentTarget.src = null;
 				setFallbackError(true);
 			}else{
-				ev.currentTarget.src = fallback;
+				if(!fallbackComponent){
+					ev.currentTarget.src = fallback;
+				}
 			}
 		}
 		setError(true);
@@ -25,6 +28,7 @@ var Image = (props: ImageProps)=>{
 	}, [props.src]);
 	
 	if(hideOnFail && error) return null;
+	if(fallbackComponent && error) return fallbackComponent;
 	return <img onClick={props.onClick} onError={handleError} {...restProps} />
 }
 
