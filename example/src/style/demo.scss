@@ -1,0 +1,11 @@
+.demo{
+	&.buttons{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		.fr.button{
+			margin: 2px 5px;
+		}
+	}
+}
