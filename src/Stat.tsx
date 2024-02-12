@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 
 export interface StatProps{
-	value?: string,
-	label?: string,
+	value?: any,
+	label?: any,
 	className?: string,
 	style?: React.CSSProperties
 	labelStyle?: React.CSSProperties,
