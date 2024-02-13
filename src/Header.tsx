@@ -53,7 +53,7 @@ var Header = (props: ComponentProps)=>{
 			) : null}
 		</div>
 		{props.actions ? (
-			<div style={{ textAlign: 'center' }}>
+			<div className='actions'>
 				{props.actions}
 			</div>
 		) : null}
