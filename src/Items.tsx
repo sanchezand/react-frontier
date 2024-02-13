@@ -3,11 +3,12 @@ import classNames from 'classnames';
 
 export interface ItemsProps<T>{
 	data: Array<T>,
-	render: (item: T)=>JSX.Element,
-	keyExtractor: (item: T)=>any,
+	render: (item: T, active: boolean)=>JSX.Element,
 	valueExtractor?: (item: T)=>any,
+	className?: string,
 	selectable?: boolean,
 	striped?: boolean,
+	disabled?: boolean,
 	toggle?: boolean,
 	selected?: any | any[],
 	single?: boolean,
@@ -21,6 +22,7 @@ export interface ItemsProps<T>{
 function Items<T>(props: ItemsProps<T>){
 	var onClick = (val: T)=>{
 		return (ev: React.MouseEvent)=>{
+			if(props.disabled) return;
 			if(props.onSelected) props.onSelected(val);
 			if(!props.valueExtractor || !props.onToggle) return;
 			var real_val = props.valueExtractor(val);
@@ -39,18 +41,24 @@ function Items<T>(props: ItemsProps<T>){
 		}
 	}
 
-	return <div style={props.style} className={classNames('fr items', {
+	if(!props.data) return null;
+
+	return <div style={props.style} className={classNames('fr items', props.className, {
 		selectable: props.selectable,
-		striped: props.striped
+		striped: props.striped,
+		interacted: props.single ? !!props.selected : (props.selected.length>0)
 	})}>
-		{props.data.map(a=>(
-			<div className="item" style={props.itemStyle} key={props.keyExtractor(a)} onClick={onClick(a)}>
+		{props.data.map(a=>{
+			var active = props.valueExtractor && (typeof props.selected!=='undefined') && (props.single ? (props.selected==props.valueExtractor(a)) : (props.selected.indexOf(props.valueExtractor(a))>-1));
+			return <div className={classNames("item", {
+				active,
+			})} style={props.itemStyle} key={`ITMS-I-${props.valueExtractor(a)}`} onClick={onClick(a)}>
 				{props.toggle ? (
-					<i className={`circle ${props.valueExtractor && (typeof props.selected!=='undefined') && (props.single ? (props.selected==props.valueExtractor(a)) : (props.selected.indexOf(props.valueExtractor(a))>-1)) ? 'check' : 'outline'} icon`} style={props.toggleIconStyle}></i>
+					<i className={`circle ${active ? 'check' : 'outline'} icon`} style={props.toggleIconStyle}></i>
 				) : null}
-				{props.render(a)}
+				{props.render(a, active)}
 			</div>
-		))}
+		})}
 	</div>
 }
 
