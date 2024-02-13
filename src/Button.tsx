@@ -13,7 +13,6 @@ type ButtonProps<E extends ElementType> = {
 	className?: string
 	icon?: boolean,
 	iconName?: string,
-	target?: '_blank' | '_self' | '_parent' | '_top',
 	size?: 'small' | 'tiny' | 'big',
 	disabled?: boolean,
 	fluid?: boolean,
@@ -34,7 +33,6 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		className,
 		icon,
 		iconName,
-		target,
 		size,
 		disabled,
 		fluid,
