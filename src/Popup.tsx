@@ -6,6 +6,9 @@ interface PopupProps extends PropsWithChildren{
 	popupStyle?: React.CSSProperties,
 	popupWidth?: number,
 	basic?: boolean,
+	containerStyle?: React.CSSProperties,
+	className?: string,
+	containerClassName?: string,
 }
 
 export interface PopupElement{
@@ -49,12 +52,12 @@ var Popup = React.forwardRef((props: PopupProps, ref: Ref<PopupElement>)=>{
 		setShown(true);
 	}
 
-	return <div onClick={showPopup} onFocus={showPopup} ref={containerRef} style={{ position: 'relative', width: 'max-content' }}>
+	return <div onClick={showPopup} onFocus={showPopup} ref={containerRef} style={{ position: 'relative', width: 'inherit', ...props.containerStyle }} className={classNames('fr popup-container', props.containerClassName)}>
 		{props.trigger}
 		{shown && (
 			<div className={classNames('fr popup', {
 				basic: props.basic
-			})} ref={popupRef} style={{
+			}, props.className)} ref={popupRef} style={{
 				...(props.popupWidth ? { width: props.popupWidth } : {}),
 				...props.popupStyle
 			}}>
