@@ -13,11 +13,13 @@ type ButtonProps<E extends ElementType> = {
 	className?: string
 	icon?: boolean,
 	iconName?: string,
+	iconStyle?: React.CSSProperties,
+	iconRight?: string,
+	iconRightStyle?: React.CSSProperties,
 	size?: 'small' | 'tiny' | 'big',
 	disabled?: boolean,
 	fluid?: boolean,
 	style?: React.CSSProperties,
-	iconStyle?: React.CSSProperties,
 	onLoadingChanged?: (v: boolean)=>void,
 } & React.ComponentPropsWithoutRef<E>;
 
@@ -38,6 +40,8 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		fluid,
 		style,
 		iconStyle,
+		iconRight,
+		iconRightStyle,
 		onLoadingChanged,
 		as,
 		...restProps
@@ -72,8 +76,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		onClick={onButtonClick} 
 		{...restProps}
 	>
-		{iconName && <i className={`${iconName} icon`} style={iconStyle}></i>}
+		{!!iconName && <i className={`${iconName} icon`} style={iconStyle}></i>}
 		{text}
+		{!!iconRight && <i className={`${iconRight} icon`} style={iconRightStyle}></i>}
 	</ComponentType>
 }
 
