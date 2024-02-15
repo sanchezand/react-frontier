@@ -46,8 +46,10 @@ export interface CalendarProps{
 	date: number,
 	color?: CalendarColors,
 	locale?: CalendarLocales,
+	minDate?: number,
+	maxDate?: number,
 	activeDays?: number[],
-	activeDaysStyle?: React.CSSProperties,
+	disabledDays?: number[],
 	onSelected?: (unix: number)=>void,
 }
 
@@ -60,9 +62,36 @@ var Calendar = (props: CalendarProps)=>{
 	var valid_date = props.date && !Number.isNaN(props.date);
 	var mdate = valid_date ? moment.unix(props.date) : moment();
 	
+	var selected_year = valid_date ? mdate.get('year') : null;
 	var selected_month = valid_date ? mdate.get('month') : null;
 	var selected_day = valid_date ? mdate.get('D') : null;
-	var selected_year = valid_date ? mdate.get('year') : null;
+
+	var min_date = props.minDate ? moment.unix(props.minDate) : null;
+	var min_year = min_date ? min_date.get('year') : null;
+	var min_month = min_date ? min_date.get('month') : null;
+	var min_day = min_date ? min_date.get('D') : null;
+
+	var max_date = props.maxDate ? moment.unix(props.maxDate) : null;
+	var max_year = max_date ? max_date.get('year') : null;
+	var max_month = max_date ? max_date.get('month') : null;
+	var max_day = max_date ? max_date.get('D') : null;
+
+	var active_days = props.activeDays ? props.activeDays.map(a=>{
+		var mdate = moment.unix(a);
+		return {
+			day: mdate.get('D'),
+			month: mdate.get('month'),
+			year: mdate.get('year')
+		}
+	}) : []
+	var disabled_days = props.disabledDays ? props.disabledDays.map(a=>{
+		var mdate = moment.unix(a);
+		return {
+			day: mdate.get('D'),
+			month: mdate.get('month'),
+			year: mdate.get('year')
+		}
+	}) : []
 
 	var [month, setMonth] = useState(mdate.get('month'));
 	var [year, setYear] = useState(mdate.get('year'));
@@ -153,6 +182,34 @@ var Calendar = (props: CalendarProps)=>{
 		}
 	}
 
+	var isDateActive = (day: number, month: number, year: number)=>{
+		var active = true;
+		if(min_date){
+			active = year>min_year || (year==min_year && month>min_month) || (year==min_year && month==min_month && day>=min_day);
+		}
+		if(active && max_date){
+			active = year<max_year || (year==max_year && month<max_month) || (year==max_year && month==max_month && day<=max_day);
+		}
+		if(active && active_days.length>0){
+			active = false;
+			for(var d of active_days){
+				if(day===d.day && d.month===month && d.year===year){
+					active = true;
+					break;
+				}
+			}
+		}
+		if(active && disabled_days.length>0){
+			for(var d of disabled_days){
+				if(day===d.day && d.month===month && d.year===year){
+					active = false;
+					break;
+				}
+			}
+		}
+		return active;
+	}
+
 	var CALENDAR_MONTH = <>
 		<thead>
 			<tr>
@@ -171,22 +228,23 @@ var Calendar = (props: CalendarProps)=>{
 		<tbody>
 			{month_days.map((a, wx)=>(
 				<tr key={`cal-week-${wx}`}>
-					{a.map((b, i)=>(
-						<td key={`cal-day-${i}`} className={classNames({ 
+					{a.map((b, i)=>{
+						var active = b!==null && isDateActive(b, month, year);
+						return <td key={`cal-day-${i}`} className={classNames({ 
 							empty: b===null, 
 							last: last_day.getDate()===b && i<6,
 							today: b==today.getDate() && month==today.getMonth() && year==today.getFullYear(),
 						})}>
 							<div
-							 	onClick={onSelectedDate(b)}
-								className={classNames({
-									date: true,
+							 	onClick={active ? onSelectedDate(b) : null}
+								className={classNames('date', {
 									empty: b===null,
+									disabled: !active,
 									active: b==selected_day && month==selected_month && year==selected_year,
 								})}
 							>{b}</div>
 						</td>
-					))}
+					})}
 				</tr>
 			))}
 		</tbody>
@@ -255,18 +313,27 @@ var Calendar = (props: CalendarProps)=>{
 		<tbody>
 			{partition(new Array(12).fill(0), 3).map((a,i)=>(
 				<tr key={`cal-mnth-${i}`}>
-					{a.map((b, s)=>(
-						<td key={`cal-mnth-${i}-${s}`} colSpan={2} className={classNames({
-							today: today_month===s+(i*3) && today_year===year,
+					{a.map((b, s)=>{
+						var showing_month = s+(i*3);
+						var active = true;
+						if(min_date){
+							active = year>min_year || (year==min_year && showing_month>=min_month);
+						}
+						if(active && max_date){
+							active = year<max_year || (year==max_year && showing_month<=max_month);
+						}
+						return <td key={`cal-mnth-${i}-${s}`} colSpan={2} className={classNames({
+							today: today_month===showing_month && today_year===year,
 						})}>
 							<div className={classNames("time", {
-								active: selected_month===s+(i*3) && selected_year===year
+								active: selected_month===showing_month && selected_year===year,
+								disabled: !active
 							})} onClick={()=>{
-								setMonth(s+(i*3));
+								setMonth(showing_month);
 								setCurrentMode('date')
-							}}>{locale.months[s+(i*3)]}</div>
+							}}>{locale.months[showing_month]}</div>
 						</td>
-					))}
+					})}
 				</tr>
 			))}
 		</tbody>
