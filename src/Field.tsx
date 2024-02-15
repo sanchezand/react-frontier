@@ -1,6 +1,8 @@
 import React, { PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
 interface FieldProps extends PropsWithChildren{
+	className?: string,
 	label?: string,
 	comment?: string,
 	amount?: number,
@@ -18,7 +20,10 @@ var Field = (props: FieldProps)=>{
 				{props.required && <span style={{ marginLeft: 3, color: 'brown' }}>*</span>}
 			</div>
 		) : null}
-		<div className={`fr ${props.error ? 'error' : ''} ${fields_name} field${props.amount && props.amount>1 ? 's' : ''}`} style={props.style}>
+		<div className={classNames('fr field', fields_name, {
+			fields: props.amount && props.amount>1,
+			error: props.error,
+		}, props.className)} style={props.style}>
 			{props.label && (!props.amount || props.amount<1) && (
 				<label style={props.labelStyle}>
 					{props.label}
