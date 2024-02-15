@@ -9,6 +9,7 @@ interface PopupProps extends PropsWithChildren{
 	containerStyle?: React.CSSProperties,
 	className?: string,
 	containerClassName?: string,
+	direction?: 'top' | 'bottom',
 }
 
 export interface PopupElement{
@@ -55,7 +56,7 @@ var Popup = React.forwardRef((props: PopupProps, ref: Ref<PopupElement>)=>{
 	return <div onClick={showPopup} onFocus={showPopup} ref={containerRef} style={{ position: 'relative', width: 'inherit', ...props.containerStyle }} className={classNames('fr popup-container', props.containerClassName)}>
 		{props.trigger}
 		{shown && (
-			<div className={classNames('fr popup', {
+			<div className={classNames('fr popup', props.direction, {
 				basic: props.basic
 			}, props.className)} ref={popupRef} style={{
 				...(props.popupWidth ? { width: props.popupWidth } : {}),
