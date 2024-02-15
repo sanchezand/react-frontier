@@ -118,36 +118,35 @@ var Input = React.forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement
 			) : ''} 
 		/>
 	)
-	return <div className={props.as || "fr field"} style={props.style}>
+
+	return <div ref={containerRef} style={props.style} className={classNames('fr input', props.type, props.className, {
+		action: !!props.button,
+		error: !!props.error,
+		icon: props.icon,
+		loading,
+	})}>
 		{props.label && (
 			<label style={props.labelStyle}>
 				{props.label}
 				{props.required && <span style={{ marginLeft: 3, color: 'brown' }}>*</span>}
 			</label>
 		)}
-		<div ref={containerRef} className={classNames('fr input', props.type, props.className, {
-			action: !!props.button,
-			error: !!props.error,
-			icon: props.icon,
-			loading,
-		})}>
-			{props.comment && <div className="comment" style={props.commentStyle}>{props.comment}</div>}
-			{props.icon && <i className={classNames(props.icon, 'icon')}></i>}
-			{props.calendar ? (
-				<Popup trigger={InputElem} basic popupWidth={320} ref={popupRef}>
-					<Calendar date={parseInt(props.value as string)} {...props.calendar} onSelected={d=>{
-						if(props.calendar?.onSelected) props.calendar?.onSelected(d);
-						if(props.onChange) props.onChange(d);
-						if(popupRef.current){
-							popupRef.current.close();
-						}
-					}} />
-				</Popup>
-			) : (
-				InputElem
-			)}
-			{props.button}
-		</div>
+		{props.comment && <div className="comment" style={props.commentStyle}>{props.comment}</div>}
+		{props.icon && <i className={classNames(props.icon, 'icon')}></i>}
+		{props.calendar ? (
+			<Popup trigger={InputElem} basic popupWidth={320} ref={popupRef}>
+				<Calendar date={parseInt(props.value as string)} {...props.calendar} onSelected={d=>{
+					if(props.calendar?.onSelected) props.calendar?.onSelected(d);
+					if(props.onChange) props.onChange(d);
+					if(popupRef.current){
+						popupRef.current.close();
+					}
+				}} />
+			</Popup>
+		) : (
+			InputElem
+		)}
+		{props.button}
 	</div>
 });
 
