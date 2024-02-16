@@ -25,6 +25,7 @@ interface InputProps{
 	valueFormat?: (val: string)=>string,
 	onFocus?: (ev: React.FocusEvent<HTMLInputElement|HTMLTextAreaElement>)=>void,
 	onSubmit?: (setLoading: (loading: boolean)=>void, ...params: any)=>void,
+	loading: boolean,
 	submitOnEnter?: boolean,
 	button?: JSX.Element,
 	type?: 'error' | 'warning' | 'normal',
@@ -122,8 +123,9 @@ var Input = React.forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement
 	return <div ref={containerRef} style={props.style} className={classNames('fr input', props.type, props.className, {
 		action: !!props.button,
 		error: !!props.error,
-		icon: props.icon,
-		loading,
+		icon: !!props.icon,
+		loading: loading || props.loading,
+		labeled: !!props.label,
 	})}>
 		{props.label && (
 			<label style={props.labelStyle}>
