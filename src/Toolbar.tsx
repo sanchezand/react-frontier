@@ -61,6 +61,7 @@ interface ToolbarProps<E extends ElementType = typeof defaultItemElement> extend
 	className?: string,
 	divided?: boolean,
 	stretch?: boolean,
+	fitted?: boolean,
 	items?: (ToolbarItemProps<E> | 'space')[],
 }
 
@@ -68,6 +69,7 @@ const Toolbar : React.FC<ToolbarProps> & ToolbarSubComponents = (props: ToolbarP
 	return <div style={props.style} className={classNames('fr toolbar', {
 		divided: props.divided,
 		stretch: props.stretch,
+		fitted: props.fitted,
 	}, props.className)}>
 		{props.items && props.items.length>0 && props.items.map((a, i)=>(
 			a==='space' ? (

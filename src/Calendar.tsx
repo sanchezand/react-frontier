@@ -50,6 +50,7 @@ export interface CalendarProps{
 	maxDate?: number,
 	activeDays?: number[],
 	disabledDays?: number[],
+	style: React.CSSProperties,
 	onSelected?: (unix: number)=>void,
 }
 
@@ -373,7 +374,7 @@ var Calendar = (props: CalendarProps)=>{
 		</tbody>
 	</> : null;
 
-	return <table className={classNames('fr calendar table', currentMode, props.color)} style={{ borderRadius: 8 }}>
+	return <table className={classNames('fr calendar table', currentMode, props.color)} style={props.style}>
 		{currentMode==='date' ? (
 			CALENDAR_MONTH
 		) : currentMode==='hours' ? (
