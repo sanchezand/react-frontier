@@ -42,7 +42,7 @@ const Stat : React.FC<StatProps> & StatSubComponents = (props: StatProps)=>{
 		<div 
 			className={classNames({
 				fr: !props._inGroup
-			}, props.className, 'stat')} 
+			}, props.className, 'stat', props.size)} 
 			style={props.style}
 		>
 			<div className="value" style={props.valueStyle}>{props.value}</div>

@@ -161,6 +161,7 @@ interface TableProps extends PropsWithChildren{
 	button?: JSX.Element,
 	actions?: React.ReactNode,
 	actionsStyle?: React.CSSProperties,
+	nullIsDivider?: boolean,
 }
 
 const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
@@ -211,7 +212,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 			{props.data && props.data.length>0 ? props.data.map((a,i)=>{
 				return (
 					<tr key={`TR-${id}-${i}`} className={classNames({ 
-						divider: a===null || a.length==0,
+						divider: props.nullIsDivider!==false && (a===null || a.length==0),
 					})} onClick={clickRow(a, i)}>
 						{(a===null || a.length===0) ? (
 							new Array(props.headers ? props.headers.length : (props.details ? 2 : 1)).fill('a').map((d,bi)=>(

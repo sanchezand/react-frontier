@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 interface GroupperDividerProps{
 	type?: 'solid' | 'text' | 'dashed' | 'dotted',
-	text?: string,
+	text?: any,
 	top?: boolean,
 	style?: React.CSSProperties,
 	size?: 'small' | 'normal',
@@ -29,14 +29,14 @@ type GroupperSubComponents = {
 }
 
 interface GroupperProps extends PropsWithChildren{
-	title?: string,
+	title?: any,
 	titleRight?: string,
 	style?: CSSProperties,
 	width?: number,
 	actions?: ReactNode,
 	fitted?: boolean,
 	className?: string,
-	titleSize?: 'big' | 'normal',
+	titleSize?: 'small' | 'big' | 'normal',
 	titleCentered?: boolean,
 	titleStyle?: CSSProperties,
 	defaultStyle?: boolean,

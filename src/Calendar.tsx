@@ -50,7 +50,9 @@ export interface CalendarProps{
 	maxDate?: number,
 	activeDays?: number[],
 	disabledDays?: number[],
-	style: React.CSSProperties,
+	style?: React.CSSProperties,
+	activeDayStyle?: React.CSSProperties,
+	disabledDayStyle?: React.CSSProperties,
 	onSelected?: (unix: number)=>void,
 }
 
@@ -238,6 +240,7 @@ var Calendar = (props: CalendarProps)=>{
 						})}>
 							<div
 							 	onClick={active ? onSelectedDate(b) : null}
+								style={active ? props.activeDayStyle : props.disabledDayStyle}
 								className={classNames('date', {
 									empty: b===null,
 									disabled: !active,

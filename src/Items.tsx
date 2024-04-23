@@ -46,13 +46,13 @@ function Items<T>(props: ItemsProps<T>){
 	return <div style={props.style} className={classNames('fr items', props.className, {
 		selectable: props.selectable,
 		striped: props.striped,
-		interacted: props.single ? !!props.selected : (props.selected.length>0)
+		interacted: props.single ? !!props.selected : (props.selected?.length>0)
 	})}>
-		{props.data.map(a=>{
+		{props.data.map((a, i)=>{
 			var active = props.valueExtractor && (typeof props.selected!=='undefined') && (props.single ? (props.selected==props.valueExtractor(a)) : (props.selected.indexOf(props.valueExtractor(a))>-1));
 			return <div className={classNames("item", {
 				active,
-			})} style={props.itemStyle} key={`ITMS-I-${props.valueExtractor(a)}`} onClick={onClick(a)}>
+			})} style={props.itemStyle} key={`ITMS-I-${props.valueExtractor ? props.valueExtractor(a) : `K${i}`}`} onClick={onClick(a)}>
 				{props.toggle ? (
 					<i className={`circle ${active ? 'check' : 'outline'} icon`} style={props.toggleIconStyle}></i>
 				) : null}

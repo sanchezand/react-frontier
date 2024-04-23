@@ -30,9 +30,11 @@ var Header = (props: ComponentProps)=>{
 	}
 
 	return <div 
-		className={classNames('fr header', props.size, { centered: props.centered!==false }, props.className)} 
+		className={classNames('fr header', { 
+			centered: props.centered!==false,
+			loading: props.loading
+		}, props.size, props.className)} 
 		style={{ 
-			...(props.loading ? { fontWeight: 'bold', fontSize: 18, color: '#888' } : {}), 
 			...(props.horizontal ? { marginBottom: 8, marginLeft: 10 } : {}),
 			...style,
 			...props.style
