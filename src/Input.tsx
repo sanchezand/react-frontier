@@ -25,7 +25,7 @@ interface InputProps{
 	valueFormat?: (val: string)=>string,
 	onFocus?: (ev: React.FocusEvent<HTMLInputElement|HTMLTextAreaElement>)=>void,
 	onSubmit?: (setLoading: (loading: boolean)=>void, ...params: any)=>void,
-	loading: boolean,
+	loading?: boolean,
 	submitOnEnter?: boolean,
 	button?: JSX.Element,
 	type?: 'error' | 'warning' | 'normal',

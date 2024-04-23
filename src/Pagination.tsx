@@ -61,12 +61,12 @@ var Pagination = (props: Props)=>{
 		<div className={classNames("prev page", { disabled: props.page<=0 })} onClick={onPage(Math.max(props.page-1, 0))}>
 			<i className={`${props.leftIcon || 'chevron left'} icon`}></i>
 		</div>
-		{prev_pages.map(a=>(
-			<div className="page" key={`PGN-${a}`} style={props.pageStyle} onClick={onPage(a-1)}>{a}</div>
+		{prev_pages.map((a, i)=>(
+			<div className="page" key={`PGP-${a}-${i}`} style={props.pageStyle} onClick={onPage(a-1)}>{a}</div>
 		))}
 		<div className="page active" style={props.pageStyle} onClick={onPage(props.page)}>{props.page+1}</div>
-		{next_pages.map(a=>(
-			<div className="page" key={`PGN-${a}`} style={props.pageStyle} onClick={onPage(a-1)}>{a}</div>
+		{next_pages.map((a, i)=>(
+			<div className="page" key={`PGN-${a}-${i}`} style={props.pageStyle} onClick={onPage(a-1)}>{a}</div>
 		))}
 		<div className={classNames("right page", { 
 			disabled: !has_next
