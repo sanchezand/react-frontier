@@ -30,10 +30,10 @@ type GroupperSubComponents = {
 
 interface GroupperProps extends PropsWithChildren{
 	title?: any,
-	titleRight?: string,
+	titleRight?: any,
 	style?: CSSProperties,
 	width?: number,
-	actions?: ReactNode,
+	actions?: any,
 	fitted?: boolean,
 	className?: string,
 	titleSize?: 'small' | 'big' | 'normal',
