@@ -53,6 +53,8 @@ export interface CalendarProps{
 	style?: React.CSSProperties,
 	activeDayStyle?: React.CSSProperties,
 	disabledDayStyle?: React.CSSProperties,
+	initialDate?: number,
+	limitActiveMonths?: boolean,
 	onSelected?: (unix: number)=>void,
 }
 
@@ -62,13 +64,6 @@ function partition<T>(a: T[], n: number) : T[][]{
 }
 
 var Calendar = (props: CalendarProps)=>{
-	var valid_date = props.date && !Number.isNaN(props.date);
-	var mdate = valid_date ? moment.unix(props.date) : moment();
-	
-	var selected_year = valid_date ? mdate.get('year') : null;
-	var selected_month = valid_date ? mdate.get('month') : null;
-	var selected_day = valid_date ? mdate.get('D') : null;
-
 	var min_date = props.minDate ? moment.unix(props.minDate) : null;
 	var min_year = min_date ? min_date.get('year') : null;
 	var min_month = min_date ? min_date.get('month') : null;
@@ -86,7 +81,7 @@ var Calendar = (props: CalendarProps)=>{
 			month: mdate.get('month'),
 			year: mdate.get('year')
 		}
-	}) : []
+	}) : [];
 	var disabled_days = props.disabledDays ? props.disabledDays.map(a=>{
 		var mdate = moment.unix(a);
 		return {
@@ -94,10 +89,41 @@ var Calendar = (props: CalendarProps)=>{
 			month: mdate.get('month'),
 			year: mdate.get('year')
 		}
-	}) : []
+	}) : [];
 
-	var [month, setMonth] = useState(mdate.get('month'));
-	var [year, setYear] = useState(mdate.get('year'));
+	var active_min_month = [0, 0];
+	var active_max_month = [11, 2100];
+
+	if(active_days.length>0 && props.limitActiveMonths){
+		active_min_month = [11, 2100];
+		active_max_month = [0, 0];
+		for(let i of active_days){
+			let min_month = (active_min_month[1]*12)+active_min_month[0];
+			let max_month = (active_max_month[1]*12)+active_max_month[0];
+			let current_month = ((i.year*12)+i.month)
+			if(current_month<min_month){
+				active_min_month = [i.month, i.year];
+			}
+			if(current_month>max_month){
+				active_max_month = [i.month, i.year];
+			}
+		}
+	}
+
+	var valid_date = (props.date && !Number.isNaN(props.date)) || (props.initialDate && !Number.isNaN(props.initialDate));
+	var mdate = valid_date ? moment.unix(props.initialDate || props.date) : moment();
+	
+	var selected_year = valid_date ? mdate.get('year') : null;
+	var selected_month = valid_date ? mdate.get('month') : null;
+	var selected_day = valid_date ? mdate.get('D') : null;
+
+	if(((active_min_month[1]*12)+active_min_month[0])>((selected_year*12)+selected_month)){
+		selected_month = active_min_month[0];
+		selected_year = active_min_month[1];
+	}
+
+	var [month, setMonth] = useState(selected_month);
+	var [year, setYear] = useState(selected_year);
 	var [currentMode, setCurrentMode] = useState<CalendarInternalMode>('date');
 	var [selectedDay, setSelectedDay] = useState<number>(null);
 	var [selectedHours, setSelectedHours] = useState<number>(null);
@@ -126,6 +152,12 @@ var Calendar = (props: CalendarProps)=>{
 	}
 
 	var nextMonth = ()=>{
+		if(props.limitActiveMonths){
+			var max_month = (active_max_month[1]*12)+active_max_month[0];
+			if(max_month<((year*12)+month+1)){
+				return;
+			}
+		}
 		if(month>=11){
 			setMonth(0);
 			setYear(year+1);
@@ -133,6 +165,12 @@ var Calendar = (props: CalendarProps)=>{
 	}
 
 	var prevMonth = ()=>{
+		if(props.limitActiveMonths){
+			var min_month = (active_min_month[1]*12)+active_min_month[0];
+			if(min_month>((year*12)+month-1)){
+				return;
+			}
+		}
 		if(month<=0){
 			setMonth(11);
 			setYear(year-1);
@@ -245,6 +283,7 @@ var Calendar = (props: CalendarProps)=>{
 									empty: b===null,
 									disabled: !active,
 									active: b==selected_day && month==selected_month && year==selected_year,
+									available: active,
 								})}
 							>{b}</div>
 						</td>
@@ -331,7 +370,8 @@ var Calendar = (props: CalendarProps)=>{
 						})}>
 							<div className={classNames("time", {
 								active: selected_month===showing_month && selected_year===year,
-								disabled: !active
+								disabled: !active,
+								available: active,
 							})} onClick={()=>{
 								setMonth(showing_month);
 								setCurrentMode('date')
