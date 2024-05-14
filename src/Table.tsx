@@ -87,9 +87,10 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 	var childs = (Array.isArray(children) ? children : [children]).map((a,i)=>{
 		if(React.isValidElement(a)){
 			return React.cloneElement(a, { 
+				...restProps,
+				key: `TD-TC-${id}-${i}`,
 				...(a.props as any),
 				as: (a.props as any).as || props.as,
-				...restProps
 			} as unknown)
 		}
 	});
