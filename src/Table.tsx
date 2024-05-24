@@ -13,6 +13,7 @@ type TableCellProps<E extends ElementType=any> = {
 	compact?: boolean,
 	style?: React.CSSProperties,
 	empty?: boolean,
+	onClick?: ()=>void,
 } & React.ComponentPropsWithoutRef<E>;
 
 const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
@@ -25,6 +26,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 		row,
 		compact,
 		style,
+		onClick,
 		empty,
 		as,
 		...restProps
@@ -35,6 +37,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 		<td 
 			colSpan={colSpan} 
 			style={style} 
+			onClick={onClick}
 			className={classNames(className, {
 				collapsing: collapsing,
 				compact: compact || props.as==='a',
@@ -57,7 +60,7 @@ type TableRowProps<E extends ElementType = any> = {
 	selectable?: boolean,
 	collapsingIndexes?: number[],
 	centeredIndexes?: number[],
-	onClick?: (v: any, i: number)=>any,
+	onClick?: ()=>any,
 	data?: any[]
 	header?: boolean,
 	empty?: boolean,
@@ -104,7 +107,7 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		empty: empty,
 		header: header,
 		details: details,
-	}, className)}>
+	}, className)} onClick={onClick}>
 		{data && data.map((b, bi)=>{
 			var ComponentRender = Component ? <Component {...restProps}>{b}</Component> : b;
 			return (
