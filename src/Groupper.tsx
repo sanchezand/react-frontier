@@ -1,7 +1,8 @@
 import React, { PropsWithChildren, CSSProperties, ReactNode } from 'react';
 import classNames from 'classnames';
+import Input, { InputProps } from './Input';
 
-interface GroupperDividerProps{
+interface GroupperDividerProps extends PropsWithChildren{
 	type?: 'solid' | 'text' | 'dashed' | 'dotted',
 	text?: any,
 	top?: boolean,
@@ -11,11 +12,13 @@ interface GroupperDividerProps{
 	className?: string,
 }
 const GroupperDivider = (props: GroupperDividerProps)=>{
-	if(props.text || props.type==='text'){
+	if(props.text || props.type==='text' || props.children){
 		return <div className={classNames('section head', props.size, {
 			top: props.top,
 			centered: props.centered,
-		}, props.className)} style={props.style}>{props.text}</div>
+		}, props.className)} style={props.style}>
+			{props.children || props.text}
+		</div>
 	}
 	return <div className={classNames("divider", {
 		solid: !props.type || props.type==='solid',
@@ -24,8 +27,25 @@ const GroupperDivider = (props: GroupperDividerProps)=>{
 	}, props.className)} style={props.style}></div>
 }
 
+interface InputDividerProps extends InputProps{
+	top?: boolean,
+	dividerStyle?: React.CSSProperties,
+	dividerClassName?: string,
+}
+
+const GroupperInputDivider = (props: InputDividerProps)=>{
+	var { dividerClassName, top, dividerStyle, ...restProps } = props;
+	return <div className={classNames('section head', { top }, props.dividerClassName)} style={{
+		padding: 0,
+		...dividerStyle,
+	}}>
+		<Input {...restProps} style={{ margin: 0, width: '100%', ...props.style }} inputStyle={{ height: 45, borderRadius: 0, border: 0, backgroundColor: 'transparent', ...props.inputStyle }} />
+	</div>
+}
+
 type GroupperSubComponents = {
 	Divider: typeof GroupperDivider,
+	DividerInput: typeof GroupperInputDivider,
 }
 
 interface GroupperProps extends PropsWithChildren{
@@ -73,5 +93,6 @@ const Groupper : React.FC<GroupperProps> & GroupperSubComponents = (props: Group
 }
 
 Groupper.Divider = GroupperDivider;
+Groupper.DividerInput = GroupperInputDivider;
 
 export default Groupper;
