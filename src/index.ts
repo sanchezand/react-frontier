@@ -1,6 +1,7 @@
 import Accordion from './Accordion';
 import Button from './Button';
 import Calendar from './Calendar';
+import Checkbox from 'Checkbox';
 import Field from './Field';
 import Groupper from './Groupper';
 import Header from './Header';
@@ -20,6 +21,7 @@ export {
 	Accordion,
 	Button,
 	Calendar,
+	Checkbox,
 	Field,
 	Groupper,
 	Header,
