@@ -3,16 +3,18 @@ import classNames from 'classnames';
 import Input, { InputProps } from './Input';
 
 interface GroupperDividerProps extends PropsWithChildren{
-	type?: 'solid' | 'text' | 'dashed' | 'dotted',
+	type?: 'solid' | 'text' | 'dashed' | 'dotted' | 'line text',
 	text?: any,
 	top?: boolean,
 	style?: React.CSSProperties,
+	textStyle?: React.CSSProperties,
+	lineStyle?: React.CSSProperties
 	size?: 'small' | 'normal',
 	centered?: boolean,
 	className?: string,
 }
 const GroupperDivider = (props: GroupperDividerProps)=>{
-	if(props.text || props.type==='text' || props.children){
+	if((props.text || props.type==='text' || props.children) && props.type!=='line text'){
 		return <div className={classNames('section head', props.size, {
 			top: props.top,
 			centered: props.centered,
@@ -20,6 +22,15 @@ const GroupperDivider = (props: GroupperDividerProps)=>{
 			{props.children || props.text}
 		</div>
 	}
+
+	if(props.type==='line text'){
+		return <div className={classNames("divider text", props.className)} style={props.style}>
+			<div className="line" style={props.lineStyle}></div>
+			<div className="text" style={props.textStyle}>{props.text}</div>
+			<div className="line" style={props.lineStyle}></div>
+		</div>
+	}
+
 	return <div className={classNames("divider", {
 		solid: !props.type || props.type==='solid',
 		dashed: props.type==='dashed',
