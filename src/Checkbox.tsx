@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
 import classNames from 'classnames';
-import './checkbox.scss';
 
 interface CheckboxProps{
 	label: string,
 	checked: boolean,
 	onChange?: (val: boolean)=>void,
 	style?: React.CSSProperties,
+	labelStyle?: React.CSSProperties,
 	className?: string,
+	labelClassName?: string,
 	color?: 'green' | 'red' | 'purple' | 'black' | 'blue' | 'orange' | 'white' | 'yellow',
 }
 
@@ -24,7 +25,7 @@ var Checkbox = (props: CheckboxProps)=>{
 		checked: props.checked
 	}, props.color, props.className)} style={props.style}>
 		<input ref={inputRef} type="checkbox" checked={props.checked} onChange={toggleCheckbox} />
-		<label onClick={toggleCheckbox}>{props.label}</label>
+		<label onClick={toggleCheckbox} className={props.labelClassName} style={props.labelStyle}>{props.label}</label>
 	</div>
 }
 
