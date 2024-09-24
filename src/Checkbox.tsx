@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import classNames from 'classnames';
 
 interface CheckboxProps{
-	label: string,
-	checked: boolean,
+	label?: string,
+	checked?: boolean,
 	onChange?: (val: boolean)=>void,
 	style?: React.CSSProperties,
 	labelStyle?: React.CSSProperties,

@@ -4,8 +4,8 @@ import classNames from 'classnames';
 interface ComponentProps{
 	loading?: boolean,
 	iconName?: string,
-	text?: string,
-	subtext?: string
+	text?: any,
+	subtext?: any
 	size?: string
 	style?: React.CSSProperties,
 	iconStyle?: React.CSSProperties,
