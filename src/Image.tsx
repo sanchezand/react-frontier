@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 interface ImageProps extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>{
 	hideOnFail?: boolean,
+	onFallback?: ()=>void,
 	fallback?: string,
 	fallbackComponent?: any,
 }
@@ -20,6 +21,7 @@ var Image = (props: ImageProps)=>{
 				}
 			}
 		}
+		if(props.onFallback) props.onFallback();
 		setError(true);
 	}
 
