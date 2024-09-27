@@ -15,6 +15,7 @@ import Popup from './Popup';
 import Sidebar from './Sidebar';
 import Stat from './Stat';
 import Table from './Table';
+import Toast from 'Toast';
 import Toolbar from './Toolbar';
 
 export {
@@ -35,5 +36,6 @@ export {
 	Sidebar,
 	Stat,
 	Table,
+	Toast,
 	Toolbar,
 }
