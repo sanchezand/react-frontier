@@ -14,15 +14,15 @@
 </p>
 
 ## Installation
-Install with NPM or yarn. **_react-frontier requires [Sass](https://github.com/sass/dart-sass)_**
+Install with NPM or yarn, **_react-frontier requires [frontier-css](https://github.com/sanchezand/frontier)_**
 ```bash
-npm i react-frontier sass
+npm i react-frontier frontier-css
 # Or use yarn
-yarn add react-frontier sass
+yarn add react-frontier frontier-css
 ```
-Import Frontier's SCSS in your project entry file
+Import Frontier's CSS in your project entry file
 ```js
-import 'react-frontier/style/frontier.scss';
+import 'frontier-css/css/frontier.css'
 ```
 
 ## Usage
