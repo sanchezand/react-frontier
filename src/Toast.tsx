@@ -3,8 +3,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 
-import '../style/toast.scss';
-
 const TOAST_SHOW_EVENT = 'react-frontier-toast_show!';
 
 interface ToastProps extends PropsWithChildren{
