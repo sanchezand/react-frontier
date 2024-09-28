@@ -5,7 +5,7 @@ import Checkbox from './Checkbox';
 import Field from './Field';
 import Groupper from './Groupper';
 import Header from './Header';
-import Icon from './Icon';
+import Icon, { IconName } from './Icon';
 import Image from './Image';
 import Input from './Input';
 import Items from './Items';
@@ -28,6 +28,7 @@ export {
 	Groupper,
 	Header,
 	Icon,
+	IconName,
 	Image,
 	Input,
 	Items,
