@@ -8,6 +8,7 @@ interface IconProps{
 	loading?: boolean,
 	solid?: boolean,
 	size?: number,
+	color?: string,
 	// cornerIcon?: {
 	// 	name: IconType,
 	// 	loading?: boolean,
@@ -21,6 +22,7 @@ var Icon = (props: IconProps)=>{
 		solid: props.solid!==false,
 	}, props.className)} style={{
 		fontSize: props.size,
+		color: props.color,
 		...props.style
 	}}>
 		{/* {!!props.cornerIcon && (
