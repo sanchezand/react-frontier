@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
 
 interface ComponentProps{
 	loading?: boolean,
-	iconName?: string,
+	iconName?: IconName,
 	text?: any,
 	subtext?: any
 	size?: string
@@ -44,7 +45,8 @@ var Header = (props: ComponentProps)=>{
 			<div className={classNames('ui active loader inline', props.loaderSize || props.size || 'big')} style={{ margin: 'auto', display: 'block', marginBottom: 10, ...props.loadingStyle }}></div>
 		) : null}
 		{props.iconName ? (
-			<i className={classNames('icon', props.iconName)} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }}></i>
+			<Icon name={props.iconName} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }} />
+			// <i className={classNames('icon', props.iconName)} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }}></i>
 		) : null}
 		<div className="content" style={props.contentStyle}>
 			{props.text}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { IconName } from 'Icon';
 import classNames from 'classnames';
 
 export interface AccordionItemProps{
@@ -8,8 +9,8 @@ export interface AccordionItemProps{
 	children?: JSX.Element | string,
 	_active?: boolean,
 	_disabled?: boolean,
-	_iconActive?: string,
-	_iconInactive?: string,
+	_iconActive?: IconName,
+	_iconInactive?: IconName,
 	_toggle?: string,
 	value?: number,
 	bold?: boolean,

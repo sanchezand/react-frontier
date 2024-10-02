@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Icon from './Icon';
 
 export interface ItemsProps<T>{
 	data: Array<T>,
@@ -54,7 +55,7 @@ function Items<T>(props: ItemsProps<T>){
 				active,
 			})} style={props.itemStyle} key={`ITMS-I-${props.valueExtractor ? props.valueExtractor(a) : `K${i}`}`} onClick={onClick(a)}>
 				{props.toggle ? (
-					<i className={`circle ${active ? 'check' : 'outline'} icon`} style={props.toggleIconStyle}></i>
+					<Icon name={active ? 'circle-check' : 'circle'} solid={active} style={props.toggleIconStyle} />
 				) : null}
 				{props.render(a, active)}
 			</div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
 
 interface Props{
-	leftIcon?: string,
-	rightIcon?: string,
+	leftIcon?: IconName,
+	rightIcon?: IconName,
 	page: number,
 	previewCount?: number,
 	pageCount?: number,
@@ -59,7 +60,7 @@ var Pagination = (props: Props)=>{
 
 	return <div className="fr pagination" style={props.style}>
 		<div className={classNames("prev page", { disabled: props.page<=0 })} onClick={onPage(Math.max(props.page-1, 0))}>
-			<i className={`${props.leftIcon || 'chevron left'} icon`}></i>
+			<Icon name={props.leftIcon || 'chevron-left'} />
 		</div>
 		{prev_pages.map((a, i)=>(
 			<div className="page" key={`PGP-${a}-${i}`} style={props.pageStyle} onClick={onPage(a-1)}>{a}</div>
@@ -71,7 +72,7 @@ var Pagination = (props: Props)=>{
 		<div className={classNames("right page", { 
 			disabled: !has_next
 		})} onClick={has_next ? onPage(props.page+1) : null}>
-			<i className={`${props.leftIcon || 'chevron right'} icon`}></i>
+			<Icon name={props.rightIcon || 'chevron-right'} />
 		</div>
 	</div>
 }

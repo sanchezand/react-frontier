@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
+import Icon from './Icon';
 
 type CalendarMode = 'date' | 'datetime';
 type CalendarInternalMode = CalendarMode | 'hours' | 'minutes' | 'months' | 'years';
@@ -255,13 +256,13 @@ var Calendar = (props: CalendarProps)=>{
 		<thead>
 			<tr>
 				<th onClick={prevMonth} className='prev'>
-					<i className="arrow left icon"></i>
+					<Icon name='arrow-left' />
 				</th>
 				<th colSpan={5} style={{ textAlign: 'center', fontSize: 14 }} onClick={()=>setCurrentMode('months')}>
 					{locale.months[month]} {year}
 				</th>
 				<th onClick={nextMonth} className='next'>
-					<i className="arrow right icon"></i>
+					<Icon name='arrow-right' />
 				</th>
 			</tr>
 			<tr>{locale.weekdays.map((a, i)=><th key={`cal-wkd-${i}`}>{a.substring(0, 2)}</th>)}</tr>
@@ -343,13 +344,13 @@ var Calendar = (props: CalendarProps)=>{
 		<thead>
 			<tr>
 				<th onClick={yearMove(-1)} className='prev'>
-					<i className="arrow left icon"></i>
+					<Icon name='arrow-left' />
 				</th>
 				<th colSpan={4} style={{ textAlign: 'center', fontSize: 14 }} onClick={showSelectYear}>
 					{year}
 				</th>
 				<th onClick={yearMove(1)} className='next'>
-					<i className="arrow right icon"></i>
+					<Icon name='arrow-right' />
 				</th>
 			</tr>
 		</thead>
@@ -387,13 +388,13 @@ var Calendar = (props: CalendarProps)=>{
 		<thead>
 			<tr>
 				<th onClick={yearSectionMove(-1)} className='prev'>
-					<i className="arrow left icon"></i>
+					<Icon name='arrow-left' />
 				</th>
 				<th colSpan={3} style={{ textAlign: 'center', fontSize: 14 }}>
-					{yearSection} <i className="arrow right icon" style={{ fontSize: 12 }}></i> {yearSection+(YEAR_SECTION_SIZE-1)}
+					{yearSection} <Icon name='arrow-right' style={{ fontSize: 12 }} /> {yearSection+(YEAR_SECTION_SIZE-1)}
 				</th>
 				<th onClick={yearSectionMove(1)} className='next'>
-					<i className="arrow right icon"></i>
+					<Icon name='arrow-right' />
 				</th>
 			</tr>
 		</thead>

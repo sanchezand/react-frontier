@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Icon, { IconName } from 'Icon';
 import React, { ElementType, PropsWithChildren, useEffect, useState } from 'react';
 
 const defaultItemElement = 'div';
@@ -6,7 +7,8 @@ const defaultItemElement = 'div';
 type SidebarItemProps<E extends ElementType> = {
 	as?: E,
 	content?: any,
-	iconName?: string,
+	iconName?: IconName,
+	iconStyle?: React.CSSProperties,
 	active?: boolean,
 	className?: string,
 	text?: string,
@@ -17,7 +19,7 @@ const SidebarItem = <E extends ElementType>(props: SidebarItemProps<E>)=>{
 	const Component = as ?? defaultItemElement;
 	return <Component className={classNames("item", props.className)} {...restProps}>
 		{children || <>
-			{!!iconName && <i className={classNames(iconName, 'icon')}></i>}
+			{!!iconName && <Icon name={props.iconName} style={props.iconStyle} />}
 			{content}
 		</>}
 	</Component>
@@ -27,7 +29,8 @@ interface SidebarProps extends PropsWithChildren{
 	title: string,
 	fixed?: boolean,
 	header?: string,
-	headerIcon?: string,
+	headerIcon?: IconName,
+	headerIconStyle?: React.CSSProperties,
 	responsive?: boolean,
 	breakpoint?: number,
 	hideOnBreakpoint?: boolean,
@@ -74,7 +77,7 @@ const Sidebar : SidebarType = (props: SidebarProps) : JSX.Element=>{
 				<div className="sidebar">
 					{!!(props.header || props.headerIcon) && (
 						<div className="header item" onClick={toggleDrawer}>
-							{props.headerIcon && <i className={classNames(props.headerIcon, 'icon')}></i>}
+							{props.headerIcon && <Icon name={props.headerIcon} style={props.headerIconStyle} />}
 							{props.header}
 						</div>
 					)}
@@ -84,7 +87,7 @@ const Sidebar : SidebarType = (props: SidebarProps) : JSX.Element=>{
 				<div className={`drawer ${drawer ? 'active' : ''}`} style={props.drawerStyle}>
 					<div className="header" onClick={toggleDrawer}>
 						<div className="text">{props.title}</div>
-						<i className="caret down icon"></i>
+						<Icon name={'caret-down'} />
 					</div>
 					<div onClick={()=>{
 						if(props.closeDrawerOnClick) setDrawer(false);

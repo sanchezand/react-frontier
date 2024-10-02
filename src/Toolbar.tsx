@@ -1,6 +1,7 @@
 import React, { ElementType, PropsWithChildren } from 'react';
 import { Dropdown } from 'semantic-ui-react'
 import classNames from 'classnames';
+import Icon, { IconName } from './Icon';
 
 const defaultItemElement = 'div';
 
@@ -8,7 +9,7 @@ type ToolbarItemProps<E extends ElementType> = {
 	as?: E,
 	text?: string,
 	onClick?: ()=>void,
-	icon?: string,
+	icon?: IconName,
 	className?: string,
 	if?: boolean,
 	style?: React.CSSProperties,
@@ -28,7 +29,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 
 	if(typeof propIf!=='undefined' && !propIf) return null;
 	var contents = (children && !items) ? children : <>
-		{!!icon && <i className={`${icon} icon`} style={!text || text.length==0 ? { marginRight: 0 } : null}></i>}
+		{!!icon && <Icon name={props.icon} style={!text || text.length==0 ? { marginRight: 0 } : null} />}
 		{text}
 	</>
 

@@ -3,6 +3,7 @@ import moment from 'moment';
 import classNames from 'classnames';
 import Popup, { PopupElement } from './Popup';
 import Calendar, { CalendarProps } from './Calendar';
+import Icon, { IconName } from './Icon';
 
 export interface InputProps{
 	value?: string | number,
@@ -14,13 +15,13 @@ export interface InputProps{
 	className?: string,
 	comment?: string,
 	inputType?: React.HTMLInputTypeAttribute,
-	icon?: string,
+	icon?: IconName,
+	iconStyle?: React.CSSProperties,
 	autoFocus?: boolean,
 	style?: React.CSSProperties,
 	inputStyle?: React.CSSProperties,
 	labelStyle?: React.CSSProperties,
 	commentStyle?: React.CSSProperties,
-	iconStyle?: React.CSSProperties,
 	required?: boolean,
 	calendar?: CalendarProps,
 	valueFormat?: (val: string)=>string,
@@ -135,7 +136,7 @@ var Input = React.forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement
 			</label>
 		)}
 		{props.comment && <div className="comment" style={props.commentStyle}>{props.comment}</div>}
-		{props.icon && <i className={classNames(props.icon, 'icon')} style={props.iconStyle}></i>}
+		{props.icon && <Icon name={props.icon} style={props.iconStyle} />}
 		{props.calendar ? (
 			<Popup trigger={InputElem} basic popupWidth={320} ref={popupRef}>
 				<Calendar date={parseInt(props.value as string)} {...props.calendar} onSelected={d=>{

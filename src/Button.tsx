@@ -1,4 +1,5 @@
 import React, { ElementType, useEffect, useState } from 'react';
+import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
 
 type ButtonProps<E extends ElementType> = {
@@ -11,9 +12,9 @@ type ButtonProps<E extends ElementType> = {
 	loading?: boolean,
 	className?: string
 	icon?: boolean,
-	iconName?: string,
+	iconName?: IconName,
 	iconStyle?: React.CSSProperties,
-	iconRight?: string,
+	iconRight?: IconName,
 	iconRightStyle?: React.CSSProperties,
 	size?: 'small' | 'tiny' | 'big',
 	disabled?: boolean,
@@ -74,9 +75,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		onClick={onButtonClick} 
 		{...restProps}
 	>
-		{!!iconName && <i className={`${iconName} icon`} style={iconStyle}></i>}
+		{!!iconName && <Icon name={props.iconName} style={props.iconStyle} />}
 		{text}
-		{!!iconRight && <i className={`${iconRight} icon`} style={iconRightStyle}></i>}
+		{!!iconRight && <Icon name={props.iconRight} style={props.iconRightStyle} />}
 	</ComponentType>
 }
 

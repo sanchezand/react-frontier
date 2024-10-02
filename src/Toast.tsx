@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
+import Icon, { IconName } from './Icon';
 
 const TOAST_SHOW_EVENT = 'react-frontier-toast_show!';
 
@@ -14,7 +15,7 @@ interface ToastShowOptions{
 	header?: string,
 	duration?: number,
 	type?: 'success' | 'info' | 'error',
-	icon?: string,
+	icon?: IconName,
 }
 
 interface ToastState{
@@ -99,7 +100,7 @@ var ToastProvider = (props: ToastProps)=>{
 							<div className={classNames('fr toast', a.options.type)} onClick={deleteToast(a.id)}>
 								{!!a.options.icon && (
 									<div className="icon">
-										<i className={classNames('icon', a.options.icon)}></i>
+										<Icon name={a.options.icon} />
 									</div>
 								)}
 								<div className="text">{a.options.text}</div>
@@ -125,14 +126,14 @@ var show = (text: string, options?: ToastShowOptions)=>{
 var success = (text: string, options?: ToastShowOptions)=>{
 	return show(text, {
 		type: ToastType.SUCCESS,
-		icon: 'check circle',
+		icon: 'check-circle',
 		...options,
 	});
 }
 
 var error = (text: string, options?: ToastShowOptions)=>{
 	return show(text, {
-		icon: 'times circle',
+		icon: 'times-circle',
 		type: ToastType.ERROR,
 		...options,
 	});
