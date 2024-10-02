@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren } from 'react';
 import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
 
-interface ComponentProps{
+interface ComponentProps extends PropsWithChildren{
 	loading?: boolean,
 	iconName?: IconName,
 	text?: any,
@@ -49,6 +49,7 @@ var Header = (props: ComponentProps)=>{
 			// <i className={classNames('icon', props.iconName)} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }}></i>
 		) : null}
 		<div className="content" style={props.contentStyle}>
+			{props.children || props.text}
 			{props.text}
 			{props.subtext ? (
 				<div className="sub header" style={props.subheaderStyle}>
