@@ -50,7 +50,6 @@ var Header = (props: ComponentProps)=>{
 		) : null}
 		<div className="content" style={props.contentStyle}>
 			{props.children || props.text}
-			{props.text}
 			{props.subtext ? (
 				<div className="sub header" style={props.subheaderStyle}>
 					{props.subtext}
