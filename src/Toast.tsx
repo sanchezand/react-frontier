@@ -14,7 +14,7 @@ interface ToastShowOptions{
 	text?: string,
 	header?: string,
 	duration?: number,
-	type?: 'success' | 'info' | 'error',
+	type?: ToastType,
 	icon?: IconName,
 }
 
@@ -30,9 +30,9 @@ enum ToastEvent{
 }
 
 export enum ToastType{
-	SUCCESS = 'success',
-	ERROR = 'error',
-	INFO = 'info'
+	SUCCESS = 'green',
+	ERROR = 'red',
+	INFO = 'blue'
 }
 
 interface ToastDetail{

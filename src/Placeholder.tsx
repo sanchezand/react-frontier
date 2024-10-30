@@ -6,6 +6,7 @@ interface PlaceholderProps{
 	width?: number,
 	minWidth?: number,
 	height?: number,
+	block?: boolean,
 	value?: any,
 	random?: boolean,
 	check?: boolean,
@@ -34,11 +35,11 @@ var Placeholder = (props: PlaceholderProps)=>{
 		return value;
 	}else{
 		return <div className={classNames("fr placeholder", props.className)} style={{
-			display: 'inline-block',
+			display: props.block ? 'block' :  'inline-block',
 			backgroundColor: (props.color || 'rgb(234, 234, 234)'),
 			borderRadius: height,
 			width, height,
-			marginBottom: -4,
+			marginBottom: props.block ? undefined : -4,
 			...props.style,
 		}}></div>
 	}
