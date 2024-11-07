@@ -149,6 +149,7 @@ interface TableProps extends PropsWithChildren{
 	className?: string,
 	headers?: any[],
 	headersStyle?: React.CSSProperties,
+	empty?: boolean,
 	emptyText?: string,
 	emptyStyle?: React.CSSProperties,
 	title?: string,
@@ -213,7 +214,11 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 		</thead>
 		<tbody>
 			{props.children}
-			{props.data && props.data.length>0 ? props.data.map((a,i)=>{
+			{((props.data && props.data.length===0) || props.empty) ? (
+				<tr>
+					<td className='empty' style={props.emptyStyle} colSpan={colspan}>{props.emptyText}</td>
+				</tr>
+			) : props.data ? props.data.map((a,i)=>{
 				return (
 					<tr key={`TR-${id}-${i}`} className={classNames({ 
 						divider: props.nullIsDivider!==false && (a===null || a.length==0),
@@ -232,11 +237,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 						))}
 					</tr>
 				)
-			}) : props.emptyText ? (
-				<tr>
-					<td className='empty' style={props.emptyStyle} colSpan={colspan}>{props.emptyText}</td>
-				</tr>
-			) : null}
+			}) : null}
 		</tbody>
 		{(props.footer || props.actions) && (
 			<tfoot>
