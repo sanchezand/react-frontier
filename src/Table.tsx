@@ -9,6 +9,7 @@ type TableCellProps<E extends ElementType=any> = {
 	collapsing?: boolean,
 	centered?: boolean,
 	colSpan?: number,
+	rowSpan?: number,
 	row?: boolean,
 	compact?: boolean,
 	style?: React.CSSProperties,
@@ -23,6 +24,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 		collapsing,
 		centered,
 		colSpan,
+		rowSpan,
 		row,
 		compact,
 		style,
@@ -35,7 +37,8 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 
 	var Element = (
 		<td 
-			colSpan={colSpan} 
+			colSpan={colSpan}
+			rowSpan={rowSpan}
 			style={style} 
 			onClick={onClick}
 			className={classNames(className, {
