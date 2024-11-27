@@ -18,6 +18,7 @@ import Stat from './Stat';
 import Table from './Table';
 import Toast from './Toast';
 import Toolbar from './Toolbar';
+import Label from './Label';
 
 export {
 	Accordion,
@@ -32,6 +33,7 @@ export {
 	Image,
 	Input,
 	Items,
+	Label,
 	Message,
 	Pagination,
 	Placeholder,
