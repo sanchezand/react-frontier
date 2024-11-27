@@ -86,7 +86,9 @@ var ToastProvider = (props: ToastProps)=>{
 			setToasts(new_toasts);
 		}else if(e.detail.event===ToastEvent.DISMISS){
 			if(e.detail.data.id){
-				dismiss(e.detail.data.id)()
+				setTimeout(() => {
+					dismiss(e.detail.data.id)()
+				}, 20);
 			}
 		}
 	}
@@ -115,7 +117,7 @@ var ToastProvider = (props: ToastProps)=>{
 						}} enter key={`toast-${a.id}`}>
 							<div className={classNames('fr toast', a.options.type || 'black')} onClick={!a.options.loading || a.options.dismissable===true ? dismiss(a.id) : null}>
 								{a.options.loading ? (
-									<div className="fr inline loading" style={{ width: 120, marginLeft: -10 }}></div>
+									<div className="fr inline loading" style={{ width: 20, margin: '0 10px 0 2px' }}></div>
 								) : a.options.icon ? (
 									<div className="icon">
 										<Icon name={a.options.icon} />
