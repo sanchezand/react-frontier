@@ -28,7 +28,7 @@ const StatGroup : React.FC<StatGroupProps> = (props: StatGroupProps)=>{
 		}
 	});
 
-	return <div className={classNames('fr stats', props.size)}>
+	return <div className={classNames('fr stats', props.size, props.className)} style={props.style}>
 		{childs}
 	</div>
 }
