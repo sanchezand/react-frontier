@@ -9,6 +9,7 @@ interface IconProps{
 	solid?: boolean,
 	size?: number,
 	color?: string,
+	brand?: boolean,
 	// cornerIcon?: {
 	// 	name: IconType,
 	// 	loading?: boolean,
@@ -19,6 +20,7 @@ interface IconProps{
 var Icon = (props: IconProps)=>{
 	return <i className={classNames("fr icon", props.name, {
 		loading: props.loading,
+		brand: props.brand,
 		solid: props.solid!==false,
 	}, props.className)} style={{
 		fontSize: props.size,
