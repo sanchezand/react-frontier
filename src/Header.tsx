@@ -42,7 +42,7 @@ var Header = (props: ComponentProps)=>{
 		}}
 	>
 		{props.loading ? (
-			<div className={classNames('fr inline loading', (props.loaderSize || props.size || 'big'))} style={{ marginBottom: 15, ...props.loadingStyle }}></div>
+			<div className={classNames('fr inline loading', (props.loaderSize || props.size || 'big'))} style={{ marginBottom: 10, ...props.loadingStyle }}></div>
 		) : null}
 		{props.iconName ? (
 			<Icon name={props.iconName} style={{ marginRight: 0, textAlign: 'center', margin: 0, marginBottom: 5, ...props.iconStyle }} />

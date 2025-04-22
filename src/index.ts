@@ -19,6 +19,7 @@ import Table from './Table';
 import Toast from './Toast';
 import Toolbar from './Toolbar';
 import Label from './Label';
+import Modal from 'Modal';
 
 export {
 	Accordion,
@@ -35,6 +36,7 @@ export {
 	Items,
 	Label,
 	Message,
+	Modal,
 	Pagination,
 	Placeholder,
 	Popup,
