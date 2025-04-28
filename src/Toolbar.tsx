@@ -1,6 +1,6 @@
 import React, { ElementType, PropsWithChildren } from 'react';
-import { Dropdown } from 'semantic-ui-react'
 import classNames from 'classnames';
+import Dropdown from './Dropdown';
 import Icon, { IconName } from './Icon';
 
 const defaultItemElement = 'div';
@@ -9,52 +9,55 @@ type ToolbarItemProps<E extends ElementType> = {
 	as?: E,
 	text?: string,
 	onClick?: ()=>void,
-	icon?: IconName,
+	iconName?: IconName,
 	className?: string,
 	if?: boolean,
 	style?: React.CSSProperties,
-	items?: React.ComponentPropsWithoutRef<E> & {
-		as?: E
-		text: string,
-		className?: string,
-		if?: boolean,
-		icon?: string,
-		onClick?: ()=>void,
-		style?: React.CSSProperties,
-	}[]
 } & React.ComponentPropsWithoutRef<E>;
 
 function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: ToolbarItemProps<E>){
-	var { text, onClick, icon, className, if: propIf, as, items, children, style, ...restProps } = props;
+	var { text, onClick, iconName, className, if: propIf, as, items, children, style, ...restProps } = props;
 
 	if(typeof propIf!=='undefined' && !propIf) return null;
 	var contents = (children && !items) ? children : <>
-		{!!icon && <Icon name={props.icon} style={!text || text.length==0 ? { marginRight: 0 } : null} />}
-		{text}
+		{!!iconName && <Icon name={props.iconName} style={!text || text.length==0 ? { marginRight: 0 } : null} />}
+		<div className="text">
+			{text}
+		</div>
 	</>
 
 	var item_class = classNames("item", className);
 	var Component = as ?? 'div';
+	return <Component className={item_class} onClick={props.onClick} style={style} {...restProps}>
+		{contents}
+	</Component>
+}
 
-	if(items){
-		var renderItems = props.items.map(({
-			as, if: propIf, icon, text: itemText, className, onClick, style, ...restProps
-		}, i)=>(
-			(typeof propIf==='undefined' || !!propIf) ? (
-				<Dropdown.Item as={as} icon={icon} text={itemText} onClick={onClick} className={className} key={`drptl-${text}-${i}`} style={style} {...restProps} />
-			) : null
-		))
-		if(renderItems.length==0) return null;
-		return <Dropdown className={item_class} trigger={<div>{contents}</div>} as={as}>
-			<Dropdown.Menu>{renderItems}</Dropdown.Menu>
-		</Dropdown>
-	}else{
-		return <Component className={item_class} onClick={props.onClick} style={style} {...restProps}>{contents}</Component>
-	}
+interface ToolbarDropdownProps extends PropsWithChildren{
+	text?: string,
+	onClick?: ()=>void,
+	iconName?: IconName,
+	className?: string,
+	if?: boolean,
+	style?: React.CSSProperties,
+	iconRight?: IconName,
+	position?: 'auto' | 'top' | 'bottom'
+}
+var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
+	return <Dropdown className='item' contents={<>
+		{!!props.iconName && <Icon name={props.iconName} style={!props.text || props.text.length==0 ? { marginRight: 0 } : null} />}
+		<div className="text">
+			{props.text}
+		</div>
+		<Icon name={props.iconRight || 'caret-down'} style={{ marginLeft: 8, fontSize: 12, lineHeight: '11px' }} />
+	</>}>
+		{props.children}
+	</Dropdown>
 }
 
 type ToolbarSubComponents = {
-	Item: typeof ToolbarItem
+	Item: typeof ToolbarItem,
+	Dropdown: typeof ToolbarDropdown,
 }
 
 interface ToolbarProps<E extends ElementType = typeof defaultItemElement> extends PropsWithChildren{
@@ -84,5 +87,6 @@ const Toolbar : React.FC<ToolbarProps> & ToolbarSubComponents = (props: ToolbarP
 }
 
 Toolbar.Item = ToolbarItem;
+Toolbar.Dropdown = ToolbarDropdown;
 
 export default Toolbar;

@@ -1,8 +1,6 @@
 import React, { ElementType, PropsWithChildren, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
-import Icon, { IconName } from './Icon';
-
 const MODAL_CONTAINER_CLICK_EVENT = 'react-frontier-modal-container-click'
 
 interface ModalContentProps extends PropsWithChildren{
@@ -44,48 +42,10 @@ var ModalActions = (props: ModalActionsProps)=>{
 	</div>
 }
 
-interface ModalToolbarProps extends PropsWithChildren{
-	className?: string,
-	style?: React.CSSProperties,
-}
-var ModalToolbar = (props: ModalToolbarProps)=>{
-	return <div className={classNames('toolbar', props.className)} style={props.style}>
-		{props.children}
-	</div>
-}
-
-const defaultItemElement = 'div';
-type ModalToolbarItemProps<E extends ElementType> = {
-	as?: E,
-	text?: string,
-	onClick?: ()=>void,
-	disabled?: boolean,
-	icon?: IconName,
-	className?: string,
-	style?: React.CSSProperties,
-} & React.ComponentPropsWithoutRef<E> & PropsWithChildren;
-
-function ModalToolbarItem<E extends ElementType = typeof defaultItemElement>(props: ModalToolbarItemProps<E>){
-	var { text, onClick, icon, className, as, children, style, ...restProps } = props;
-
-	var contents = children ? children : <>
-		{!!icon && <Icon name={props.icon} style={!text || text.length==0 ? { marginRight: 0 } : null} />}
-		{text}
-	</>
-
-	var item_class = classNames("item", className, {
-		disabled: props.disabled
-	});
-	var Component = as ?? 'div';
-	return <Component className={item_class} onClick={props.onClick} style={style} {...restProps}>{contents}</Component>
-}
-
 type ModalSubComponents = {
 	Header: typeof ModalHeader,
 	Actions: typeof ModalActions,
 	Content: typeof ModalContent,
-	Toolbar: typeof ModalToolbar,
-	ToolbarItem: typeof ModalToolbarItem,
 }
 
 type ModalSize = 'large' | 'normal' | 'small' | 'tiny' | 'mini';
@@ -170,7 +130,5 @@ const Modal : React.FC<ModalProps> & ModalSubComponents = (props: ModalProps)=>{
 Modal.Actions = ModalActions;
 Modal.Header = ModalHeader;
 Modal.Content = ModalContent;
-Modal.Toolbar = ModalToolbar;
-Modal.ToolbarItem = ModalToolbarItem;
 
 export default Modal;

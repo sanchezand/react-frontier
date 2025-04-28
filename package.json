@@ -1,6 +1,6 @@
 {
 	"name": "react-frontier",
-	"version": "0.1.38",
+	"version": "0.1.39",
 	"description": "Frontier react component library",
 	"repository": "git@github.com:sanchezand/react-frontier.git",
 	"main": "dist/index.min.js",

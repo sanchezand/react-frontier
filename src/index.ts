@@ -20,12 +20,14 @@ import Toast from './Toast';
 import Toolbar from './Toolbar';
 import Label from './Label';
 import Modal from 'Modal';
+import Dropdown from 'Dropdown';
 
 export {
 	Accordion,
 	Button,
 	Calendar,
 	Checkbox,
+	Dropdown,
 	Field,
 	Groupper,
 	Header,
