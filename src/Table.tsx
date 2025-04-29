@@ -133,7 +133,7 @@ interface TableRowDividerProps extends PropsWithChildren{
 	text?: string,
 }
 
-const TableRowDivider : React.FC = (props: TableRowDividerProps)=>{
+const TableRowDivider : React.FC<TableRowDividerProps> = (props: TableRowDividerProps)=>{
 	return <tr className={classNames('divider', {
 		header: props.header
 	})} style={props.rowStyle}>
