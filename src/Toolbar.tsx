@@ -38,13 +38,16 @@ interface ToolbarDropdownProps extends PropsWithChildren{
 	onClick?: ()=>void,
 	iconName?: IconName,
 	className?: string,
+	disabled?: boolean,
 	if?: boolean,
 	style?: React.CSSProperties,
 	iconRight?: IconName,
 	position?: 'auto' | 'top' | 'bottom'
 }
 var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
-	return <Dropdown className='item' contents={<>
+	return <Dropdown className={classNames('item', {
+		disabled: props.disabled,
+	})} contents={<>
 		{!!props.iconName && <Icon name={props.iconName} style={!props.text || props.text.length==0 ? { marginRight: 0 } : null} />}
 		<div className="text">
 			{props.text}

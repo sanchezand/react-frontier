@@ -126,14 +126,18 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 	</tr>
 }
 
-interface TableRowDividerProps{
+interface TableRowDividerProps extends PropsWithChildren{
 	rowStyle?: React.CSSProperties,
 	cellStyle?: React.CSSProperties,
+	header?: boolean,
+	text?: string,
 }
 
 const TableRowDivider : React.FC = (props: TableRowDividerProps)=>{
-	return <tr className='divider' style={props.rowStyle}>
-		<td colSpan={999} style={props.cellStyle}></td>
+	return <tr className={classNames('divider', {
+		header: props.header
+	})} style={props.rowStyle}>
+		<td colSpan={999} style={props.cellStyle}>{props.children || props.text}</td>
 	</tr>
 }
 
