@@ -19,8 +19,8 @@ import Table from './Table';
 import Toast from './Toast';
 import Toolbar from './Toolbar';
 import Label from './Label';
-import Modal from 'Modal';
-import Dropdown from 'Dropdown';
+import Modal from './Modal';
+import Dropdown from './Dropdown';
 
 export {
 	Accordion,
