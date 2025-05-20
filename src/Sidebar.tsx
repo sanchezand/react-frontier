@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import Icon, { IconName } from 'Icon';
+import Icon, { IconName } from './Icon';
 import React, { ElementType, PropsWithChildren, useEffect, useState } from 'react';
 
 const defaultItemElement = 'div';

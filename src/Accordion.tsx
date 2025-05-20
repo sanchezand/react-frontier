@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IconName } from 'Icon';
+import { IconName } from './Icon';
 import classNames from 'classnames';
 
 export interface AccordionItemProps{
@@ -74,7 +74,7 @@ const Accordion : React.FC<AccordionProps> & AccordionSubComponents = (props)=>{
 		}
 	}
 
-	var childs = (Array.isArray(props.children) ? props.children : [props.children]).map((a,i)=>{
+	var childs = (Array.isArray(props.children) ? props.children : [props.children]).flat().map((a,i)=>{
 		if(React.isValidElement(a)){
 			var value = ((a.props as any)?.value || i);
 			return React.cloneElement(a, { 
