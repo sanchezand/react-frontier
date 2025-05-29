@@ -1,8 +1,9 @@
-import React, { PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
+import { PropsWithChilds } from 'Classes';
 
-interface DropdownItemProps extends PropsWithChildren{
+interface DropdownItemProps extends PropsWithChilds{
 	value?: any,
 	text: any,
 	iconName?: IconName,
@@ -27,7 +28,7 @@ const DropdownItem = (props: DropdownItemProps)=>{
 	</div>
 }
 
-interface DropdownProps extends PropsWithChildren{
+interface DropdownProps extends PropsWithChilds{
 	label?: string,
 	placeholder?: string,
 	selection?: boolean,
@@ -104,7 +105,7 @@ const Dropdown : React.FC<DropdownProps> & DropdownSubComponents = (props: Dropd
 				return React.cloneElement(a, { 
 					key: a.key || `DRP-IT-${a.props.value || i}`,
 					...a.props,
-					active: value && (value===a.props.value),
+					active: !!value && !!(value===a.props.value),
 					onClick: (v: any)=>{
 						setActive(false);
 						setValue(typeof a.props.value==='undefined' ? a.props.text : a.props.value);

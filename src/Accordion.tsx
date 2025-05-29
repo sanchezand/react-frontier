@@ -3,7 +3,7 @@ import { IconName } from './Icon';
 import classNames from 'classnames';
 
 export interface AccordionItemProps{
-	_onSelected?: (value: number)=>(()=>void),
+	onSelected?: (value: number)=>(()=>void),
 	title: string | JSX.Element,
 	rightTitle?: string | JSX.Element,
 	children?: JSX.Element | string,
@@ -21,7 +21,7 @@ var AccordionItem : React.FC<AccordionItemProps> = (props: AccordionItemProps)=>
 		active: props._active,
 		disabled: props._disabled,
 	})}>
-		<div className="header" onClick={props._onSelected(props.value)} style={{ fontWeight: props.bold ? 'bold' : 'normal' }}>
+		<div className="header" onClick={props.onSelected(props.value)} style={{ fontWeight: props.bold ? 'bold' : 'normal' }}>
 			<div className="left">{props.title}</div>
 			{props.rightTitle ? (
 				<div className="right">{props.rightTitle}</div>
@@ -80,7 +80,7 @@ const Accordion : React.FC<AccordionProps> & AccordionSubComponents = (props)=>{
 			return React.cloneElement(a, { 
 				value,
 				_toggle: props.toggle,
-				_onSelected: onSelected, 
+				onSelected: ((a.props as any)?.onSelected || onSelected),
 				_active: activeItem==value,
 				_disabled: props.greyout!==false && activeItem!=value && activeItem!==null,
 			} as unknown)
