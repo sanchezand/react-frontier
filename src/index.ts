@@ -21,6 +21,7 @@ import Toolbar from './Toolbar';
 import Label from './Label';
 import Modal from './Modal';
 import Dropdown from './Dropdown';
+import SegmentControl from './SegmentControl';
 
 export {
 	Accordion,
@@ -42,6 +43,7 @@ export {
 	Pagination,
 	Placeholder,
 	Popup,
+	SegmentControl,
 	Sidebar,
 	Stat,
 	Table,
