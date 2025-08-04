@@ -1,8 +1,7 @@
-import React, { ElementType } from 'react';
+import React, { ElementType, PropsWithChildren } from 'react';
 import classNames from 'classnames';
-import Dropdown from './Dropdown';
+import Dropdown, { DropdownItemProps } from './Dropdown';
 import Icon, { IconName } from './Icon';
-import { PropsWithChilds } from 'Classes';
 
 const defaultItemElement = 'div';
 
@@ -16,6 +15,7 @@ type ToolbarItemProps<E extends ElementType> = {
 	if?: boolean,
 	space?: boolean,
 	style?: React.CSSProperties,
+	active?: any,
 } & React.ComponentPropsWithoutRef<E>;
 
 function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: ToolbarItemProps<E>){
@@ -23,7 +23,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 
 	if(typeof propIf!=='undefined' && !propIf) return null;
 	if(space) return <div style={{ flexGrow: 1 }} />
-	
+
 	var contents = (children && !items) ? children : <>
 		{!!iconName && <Icon name={props.iconName} style={!text || text.length==0 ? { marginRight: 0 } : null} />}
 		<div className="text">
@@ -40,7 +40,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 	</Component>
 }
 
-interface ToolbarDropdownProps extends PropsWithChilds{
+interface ToolbarDropdownProps extends PropsWithChildren{
 	text?: string,
 	onClick?: ()=>void,
 	iconName?: IconName,
@@ -52,7 +52,7 @@ interface ToolbarDropdownProps extends PropsWithChilds{
 	position?: 'auto' | 'top' | 'bottom',
 }
 var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
-	return <Dropdown className={classNames('item', {
+	return <Dropdown _toolbar className={classNames('item', {
 		disabled: props.disabled,
 	})} contents={<>
 		{!!props.iconName && <Icon name={props.iconName} style={!props.text || props.text.length==0 ? { marginRight: 0 } : null} />}
@@ -67,12 +67,17 @@ var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
 	</Dropdown>
 }
 
+var ToolbarDropdownItem = (props: DropdownItemProps)=>{
+	return <Dropdown.Item {...props} />
+}
+
 type ToolbarSubComponents = {
 	Item: typeof ToolbarItem,
 	Dropdown: typeof ToolbarDropdown,
+	DropdownItem: typeof ToolbarDropdownItem,
 }
 
-interface ToolbarProps<E extends ElementType = typeof defaultItemElement> extends PropsWithChilds{
+interface ToolbarProps<E extends ElementType = typeof defaultItemElement> extends PropsWithChildren{
 	style?: React.CSSProperties,
 	className?: string,
 	divided?: boolean,
@@ -100,5 +105,6 @@ const Toolbar : React.FC<ToolbarProps> & ToolbarSubComponents = (props: ToolbarP
 
 Toolbar.Item = ToolbarItem;
 Toolbar.Dropdown = ToolbarDropdown;
+Toolbar.DropdownItem = Toolbar.DropdownItem;
 
 export default Toolbar;

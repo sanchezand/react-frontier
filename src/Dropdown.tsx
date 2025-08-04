@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react';
 import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
-import { PropsWithChilds } from 'Classes';
 
-interface DropdownItemProps extends PropsWithChilds{
+export interface DropdownItemProps extends PropsWithChildren{
 	value?: any,
 	text: any,
 	iconName?: IconName,
@@ -28,7 +27,7 @@ const DropdownItem = (props: DropdownItemProps)=>{
 	</div>
 }
 
-interface DropdownProps extends PropsWithChilds{
+interface DropdownProps extends PropsWithChildren{
 	label?: string,
 	placeholder?: string,
 	selection?: boolean,
@@ -38,6 +37,7 @@ interface DropdownProps extends PropsWithChilds{
 	className?: string,
 	contents?: JSX.Element,
 	onChange?: (v: any, i: DropdownItemProps)=>void,
+	_toolbar?: boolean,
 }
 
 type DropdownSubComponents = {
@@ -105,11 +105,11 @@ const Dropdown : React.FC<DropdownProps> & DropdownSubComponents = (props: Dropd
 				return React.cloneElement(a, { 
 					key: a.key || `DRP-IT-${a.props.value || i}`,
 					...a.props,
-					active: !!value && !!(value===a.props.value),
+					active: props._toolbar ? undefined : (value ? !!(value===a.props.value) : undefined),
 					onClick: (v: any)=>{
 						setActive(false);
 						setValue(typeof a.props.value==='undefined' ? a.props.text : a.props.value);
-						return a.props.onClick;
+						if(a.props.onClick) a.props.onClick(v);
 					}
 				} as unknown)
 			}
