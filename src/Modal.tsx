@@ -122,6 +122,7 @@ const Modal : React.FC<ModalProps> & ModalSubComponents = (props: ModalProps)=>{
 		<div ref={modalRef} className={classNames("fr modal", props.size, props.className, {
 			exceeds,
 		})}>
+			<div className="dimmer" onClick={closeModal}></div>
 			{props.children}
 		</div>
 	), rootElem);
