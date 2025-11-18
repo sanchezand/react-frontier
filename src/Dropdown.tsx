@@ -1,59 +1,52 @@
-import React, { PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react';
-import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import Icon, { IconName } from './Icon';
+import { bindClick } from 'Util';
 
-export interface DropdownItemProps extends PropsWithChildren{
-	value?: any,
-	text: any,
-	iconName?: IconName,
-	style?: React.CSSProperties,
-	className?: string,
-	meta?: any,
-	active?: boolean,
-	onClick?: (value: any)=>void,
-}
+export type DropdownValueChange = (v: any, d: DropdownItemProps)=>boolean | void;
 
-const DropdownItem = (props: DropdownItemProps)=>{
-	var onClick = ()=>{
-		if(!props.onClick) return;
-		props.onClick(props.value);
-	}
-	return <div className={classNames("item", { active: props.active }, props.className)} style={props.style} onClick={onClick}>
-		{props.iconName && <Icon name={props.iconName} />}
-		<div className="text">{props.children || props.text}</div>
-		{!!props.meta && (
-			<div className="meta">{props.meta}</div>
-		)}
-	</div>
-}
-
-interface DropdownProps extends PropsWithChildren{
+interface DropdownProps{
 	label?: string,
 	placeholder?: string,
-	selection?: boolean,
-	position?: 'auto' | 'top' | 'bottom',
-	style?: React.CSSProperties,
+	onSearchChange?: (v: string)=>void,
+	onSearchClear?: ()=>void,
+	minSearchLength?: number,
+	searchTimeout?: number,
+	items: DropdownItemProps[],
+	value: any,
+	loading?: boolean,
+	onValueChange?: DropdownValueChange,
+	iconName?: IconName,
 	menuStyle?: React.CSSProperties,
+	itemStyle?: React.CSSProperties,
+	style?: React.CSSProperties,
+	closeOnSelect?: boolean,
+	position?: 'auto' | 'top' | 'bottom',
+	emptyText?: string,
+}
+
+export interface DropdownItemProps{
+	value: any,
+	text: any,
+	meta?: any,
 	className?: string,
-	contents?: JSX.Element,
-	onChange?: (v: any, i: DropdownItemProps)=>void,
-	_toolbar?: boolean,
+	iconName?: IconName,
+	style?: React.CSSProperties,
 }
 
-type DropdownSubComponents = {
-	Item: typeof DropdownItem
-}
-
-const Dropdown : React.FC<DropdownProps> & DropdownSubComponents = (props: DropdownProps)=>{
+var Dropdown = (props: DropdownProps)=>{
 	var dropdownRef = useRef(null);
 	var menuRef = useRef<HTMLDivElement>(null);
 	var [active, setActive] = useState<boolean>(false);
-	var [value, setValue] = useState<any>(null);
-	var [position, setPosition] = useState<'top' | 'bottom'>('bottom');
+	var [autoPosition, setAutoPosition] = useState<DropdownProps["position"]>('bottom');
+	var [inputFocus, setInputFocus] = useState<boolean>(false);
+	var [searching, setSearching] = useState<boolean>(false);
+	var [searchValue, setSearchValue] = useState<string>('');
+	var [searchTimeout, setSearchTimeout] = useState<any>(null);
 
 	useEffect(()=>{
 		if(!active || props.position=='top' || props.position=='bottom'){
-			setPosition((props.position as any) || 'bottom');
+			setAutoPosition((props.position as any) || 'bottom');
 			return;
 		}
 
@@ -61,95 +54,115 @@ const Dropdown : React.FC<DropdownProps> & DropdownSubComponents = (props: Dropd
 		var dropdown_pos = dropdownRef.current.getBoundingClientRect();
 		var dropdown_bottom = dropdown_pos.y+dropdown_pos.height+menu_height+15;
 
-		setPosition(dropdown_bottom>=window.innerHeight ? 'top' : 'bottom');
-	}, [props.children, active, props.position]);
+		setAutoPosition(dropdown_bottom>=window.innerHeight ? 'top' : 'bottom');
+	}, [props.items, active, props.position]);
 
 	useEffect(()=>{
-		var evl = (ev: MouseEvent) : any=>{
-			setTimeout(()=>{
-				setActive(false);
-			}, 5);
-		};
-
-		if(active){
-			document.addEventListener('mouseup', evl as any);
-		}
 		return ()=>{
-			document.removeEventListener('mouseup', evl as any);
+			if(searchTimeout){
+				clearTimeout(searchTimeout);
+			}
 		}
-	}, [active]);
-
-	var getActiveValue = ()=>{
-		if(!value) return null;
-		var children_items : ({ props: DropdownItemProps })[] = (Array.isArray(props.children) ? props.children : [props.children]).flat();
-		for(var i of children_items){
-			if(!i || !i.props || !i.props.value) continue;
-			if(i.props.value===value) return i.props;
-		}
-	}
+	}, [searchTimeout]);
 
 	useEffect(()=>{
-		if(props.onChange){
-			var active_value = getActiveValue();
-			props.onChange(value || null, active_value);
-		}
-	}, [value]);
+		setSearchValue('');
+		// if(!inputFocus){
+		// 	// setActive(false);
+		// }
+	}, [inputFocus]);
 
 	var showActive = ()=>{
-		setActive(true);
+		setActive(!active);
 	}
 
-	var childs = useMemo(()=>{
-		return (Array.isArray(props.children) ? props.children : [props.children]).flat().map((a: { props: DropdownItemProps & { key: string } },i)=>{
-			if(React.isValidElement(a)){
-				return React.cloneElement(a, { 
-					key: a.key || `DRP-IT-${a.props.value || i}`,
-					...a.props,
-					active: props._toolbar ? undefined : (value ? !!(value===a.props.value) : undefined),
-					onClick: (v: any)=>{
-						setActive(false);
-						setValue(typeof a.props.value==='undefined' ? a.props.text : a.props.value);
-						if(a.props.onClick) a.props.onClick(v);
-					}
-				} as unknown)
+	var itemSelected = (val: any, dr: DropdownItemProps)=>{
+		return ()=>{
+			if(props.onValueChange){
+				setSearchValue('');
+				if(props.onSearchClear) props.onSearchClear();
+				var v = props.onValueChange(val, dr);
+				if(v!==false){
+					setActive(false);
+				}
+			}else if(props.closeOnSelect!==false){
+				setActive(false);
 			}
-		});
-	}, [value, props.children, active]);
+		}
+	}
 
 	var active_value = useMemo(()=>{
-		return getActiveValue();
-	}, [value, props.children]);
+		if(!props.items) return null;
+		return props.items.find(a=>a.value===props.value);
+	}, [props.value, props.items]);
 
-	return <div className={classNames("fr dropdown", { active, container: !!props.contents }, props.className)} style={props.style} ref={dropdownRef}> 
-		{props.contents ? (
-			<div className="container" onClick={showActive}>
-				{props.contents}
-			</div>
-		) : <>
-			{!!props.label && (
-				<div className="fr fieldlabel">{props.label}</div>
+	var shown_position = useMemo(()=>{
+		return props.position || autoPosition;
+	}, [props.position, autoPosition]);
+
+	var childs = !!props.items && props.items.map(a=>(
+		<div className={classNames("item", a.className)} style={{ ...a.style, ...props.itemStyle }} onClick={itemSelected(a.value, a)}>
+			{a.iconName && <Icon name={a.iconName} />}
+			<div className="text">{a.text}</div>
+			{!!a.meta && (
+				<div className="meta">{a.meta}</div>
 			)}
+		</div>
+	));
+
+	var onSearchChange = (v: string)=>{
+		setSearchValue(v);
+		if(!props.onSearchChange) return;
+		if(v && v.length>=(props.minSearchLength || 3)){
+			if(searchTimeout) clearTimeout(searchTimeout);
+			setSearchTimeout(setTimeout(()=>{
+				props.onSearchChange(v);
+			}, props.searchTimeout || 500));
+		}else{
+			if(props.onSearchClear) props.onSearchClear();
+		}
+	}
+
+	return <div className="fr field" style={props.style}>
+		{!!props.label && (
+			<div className="fr fieldlabel">{props.label}</div>
+		)}
+		<div className="fr dropdown" ref={dropdownRef}>
 			<div className={classNames("contents", { active })} onClick={showActive}>
-				{!!active_value?.iconName && <Icon name={active_value.iconName} className='value-icon' />}
-				<div className={classNames("text", { placeholder: !value })}>{active_value?.text || value || props.placeholder || props.label}</div>
-				{!!active_value?.meta && (
+				{!!props?.iconName && <Icon name={props.iconName} className='value-icon' />}
+				{props.onSearchChange ? (
+					<input type="text" onChange={v=>{
+						onSearchChange(v.target.value);
+					}} value={inputFocus ? searchValue : (active_value?.text || active_value?.value || searchValue)} placeholder={props.label || props.placeholder} onFocus={bindClick(setInputFocus, true)} onBlur={bindClick(setInputFocus, false)} />
+				) : (
+					<div className={classNames("text", { placeholder: !props.value })}>{active_value?.text || props.value || props.placeholder || props.label}</div>
+				)}
+				{/* {!!active_value?.meta && (
 					<div className="meta">
 						{active_value.meta}
 					</div>
+				)} */}
+				{!!(props.loading || searching) ? (
+					<div className="fr inline loader"></div>
+				) : (
+					<Icon name='caret-down' className='dropdown-icon' />
 				)}
-				<Icon name='caret-down' className='dropdown-icon' />
 			</div>
-		</>}
-		<div className={classNames("menu", {
-			active,
-			top: position==='top',
-			bottom: position==='bottom',
-		})} ref={menuRef} style={props.menuStyle}>
-			{childs}
+				<div className={classNames("menu", {
+					active: (active || inputFocus),
+					top: shown_position==='top',
+					bottom: shown_position==='bottom',
+				})} ref={menuRef} style={props.menuStyle}>
+					{(!!props.items && props.items.length>0) ? (
+						childs
+					) : (props.emptyText) ? (
+						<div className="empty header">
+							{props.emptyText}
+						</div>
+					) : null}	
+				</div>
 		</div>
 	</div>
 }
-
-Dropdown.Item = DropdownItem;
 
 export default Dropdown;
