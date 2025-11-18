@@ -44,7 +44,7 @@ const YEAR_SECTION_SIZE = 20;
 export interface CalendarProps{
 	mode?: CalendarMode
 	format?: string,
-	date: number,
+	date?: number,
 	color?: CalendarColors,
 	locale?: CalendarLocales,
 	minDate?: number,
@@ -112,7 +112,7 @@ var Calendar = (props: CalendarProps)=>{
 	}
 
 	var valid_date = (props.date && !Number.isNaN(props.date)) || (props.initialDate && !Number.isNaN(props.initialDate));
-	var mdate = valid_date ? moment.unix(props.initialDate || props.date) : moment();
+	var mdate = valid_date ? moment.unix(props.date || props.initialDate) : moment();
 	
 	var selected_year = valid_date ? mdate.get('year') : null;
 	var selected_month = valid_date ? mdate.get('month') : null;
