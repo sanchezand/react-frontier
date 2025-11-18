@@ -141,6 +141,7 @@ var Input = React.forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement
 			<Popup trigger={InputElem} basic popupWidth={320} ref={popupRef}>
 				<Calendar date={parseInt(props.value as string)} {...{
 					initialDate: moment().unix(),
+					date: props.value ? parseInt(props.value as string) : null,
 					...props.calendar,
 				}} onSelected={d=>{
 					if(props.calendar?.onSelected) props.calendar?.onSelected(d);
