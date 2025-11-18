@@ -5,7 +5,7 @@ import { bindClick } from './Util';
 
 export type DropdownValueChange = (v: any, d: DropdownItemProps)=>boolean | void;
 
-interface DropdownProps{
+export interface DropdownProps{
 	label?: string,
 	placeholder?: string,
 	className?: string,
@@ -120,9 +120,9 @@ var Dropdown = (props: DropdownProps)=>{
 		return props.position || autoPosition;
 	}, [props.position, autoPosition]);
 
-	var childs = !!props.items && props.items.map(a=>(
+	var childs = !!props.items && props.items.map((a, i)=>(
 		a.if===false ? null : (
-			<div className={classNames("item", a.className)} style={{ ...a.style, ...props.itemStyle }} onClick={itemSelected(a.value, a)}>
+			<div key={`DRPIT-${a.value || `ix-${i}`}`} className={classNames("item", a.className)} style={{ ...a.style, ...props.itemStyle }} onClick={itemSelected(a.value, a)}>
 				{a.iconName && <Icon name={a.iconName} />}
 				<div className="text">{a.text}</div>
 				{!!a.meta && (

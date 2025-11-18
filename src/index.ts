@@ -20,7 +20,7 @@ import Toast from './Toast';
 import Toolbar from './Toolbar';
 import Label from './Label';
 import Modal from './Modal';
-import Dropdown from './Dropdown';
+import Dropdown, { DropdownItemProps } from './Dropdown';
 import SegmentControl from './SegmentControl';
 
 export {
@@ -29,6 +29,7 @@ export {
 	Calendar,
 	Checkbox,
 	Dropdown,
+	DropdownItemProps,
 	Field,
 	Groupper,
 	Header,
