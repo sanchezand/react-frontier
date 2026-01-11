@@ -20,7 +20,7 @@ import Toast from './Toast';
 import Toolbar from './Toolbar';
 import Label from './Label';
 import Modal from './Modal';
-import Dropdown, { DropdownItemProps } from './Dropdown';
+import Dropdown, { DropdownItemProps, DropdownValueChange } from './Dropdown';
 import SegmentControl from './SegmentControl';
 
 export {
@@ -30,6 +30,7 @@ export {
 	Checkbox,
 	Dropdown,
 	DropdownItemProps,
+	DropdownValueChange,
 	Field,
 	Groupper,
 	Header,

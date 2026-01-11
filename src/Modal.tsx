@@ -42,10 +42,27 @@ var ModalActions = (props: ModalActionsProps)=>{
 	</div>
 }
 
+interface ModalDividerProps extends PropsWithChildren{
+	className?: string,
+	style?: React.CSSProperties,
+	centered?: boolean,
+	text?: string,
+}
+var ModalDivider = (props: ModalDividerProps)=>{
+	return <div className={classNames("modal-divider", {
+		centered: props.centered,
+	}, props.className)} style={props.style}>
+		{props.text}
+		{props.children}
+	</div>
+}
+
+
 type ModalSubComponents = {
 	Header: typeof ModalHeader,
 	Actions: typeof ModalActions,
 	Content: typeof ModalContent,
+	Divider: typeof ModalDivider,
 }
 
 type ModalSize = 'large' | 'normal' | 'small' | 'tiny' | 'mini';
@@ -131,5 +148,6 @@ const Modal : React.FC<ModalProps> & ModalSubComponents = (props: ModalProps)=>{
 Modal.Actions = ModalActions;
 Modal.Header = ModalHeader;
 Modal.Content = ModalContent;
+Modal.Divider = ModalDivider;
 
 export default Modal;
