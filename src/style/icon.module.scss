@@ -1,0 +1,63 @@
+@import "_fontawesome.scss";
+
+@font-face {
+	font-family: 'Font Awesome 6 Free';
+	font-style: normal;
+	font-weight: 400;
+	font-display: inline-block;
+	src: url('./icons/fa-regular-400.woff2') format('woff2'), url('./icons/fa-regular-400.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Font Awesome 6 Brands';
+	font-style: normal;
+	font-weight: 400;
+	font-display: inline-block;
+	src: url('./icons/fa-brands-400.woff2') format('woff2'), url('./icons/fa-brands-400.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Font Awesome 6 Free';
+	font-style: normal;
+	font-weight: 900;
+	font-display: inline-block;
+	src: url('./icons/fa-solid-900.woff2') format('woff2'), url('./icons/fa-solid-900.ttf') format('truetype');
+}
+
+.icon{
+	font-family: 'Font Awesome 6 Free';
+	font-weight: 400;
+	margin-right: 5px;
+	width: 1.18em;
+  	height: 1em;
+	position: relative;
+	font-style: normal;
+
+	font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	&[data-solid]{
+		font-weight: 900;
+	}
+
+	&[data-loading]{
+		-webkit-animation: rotation 2s linear infinite;
+		animation: rotation 2s linear infinite;
+	}
+
+	&[data-brand]{
+		font-family: 'Font Awesome 6 Brands';
+		font-weight: 400;
+	}
+
+	@each $name, $code in $fontawesome-icons{
+		&[data-icon="#{$name}"]{
+			&::before{
+				content: $code;
+			}
+		}
+	}
+}

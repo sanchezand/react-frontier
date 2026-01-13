@@ -1,0 +1,103 @@
+@import 'theme.scss';
+.button{
+	padding: 10px 20px;
+	background-color: #E5E7EB;
+	color: #4B5563;
+	border-radius: 200px;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	border: 0;
+	font-size: inherit;
+	font-family: inherit;
+	text-decoration: none;
+	min-width: 120px;
+	font-weight: 700;
+	&:hover{
+		background-color: #dadfe6
+	}
+	i{
+		margin-right: 10px;
+	}
+	&[data-size="tiny"]{
+		padding: 3px 15px;
+		font-size: 12px;
+		min-width: 60px;
+		&[data-loading]{
+			height: 26px;
+		}
+	}
+	&[data-size="small"]{
+		padding: 7px 15px;
+		font-size: 14px;
+		min-width: 90px;
+		&[data-loading]{
+			height: 34px;
+		}
+	}
+	&[data-size="big"]{
+		font-size: 16px;
+		padding: 12px 25px;
+		min-width: 150px;
+		&[data-loading]{
+			height: 44px;
+		}
+	}
+
+	&[data-loading],&[data-disabled]{
+		cursor: default;
+		opacity: 0.45 !important;
+		background-image: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		pointer-events: none !important;
+		user-select: none !important;
+	}
+
+	&[data-loading]{
+		color: transparent !important;
+		position: relative;
+		user-select: none !important;
+	}
+
+	&[data-checkmark]{
+		color: transparent !important;
+		position: relative;
+		&::before{
+			content: "\f00c";
+			font-family: Icons;
+			font-style: normal;
+			font-weight: 400;
+			color: white;
+			position: absolute;
+			left: calc(50% - 8px);
+			font-size: 16px;
+		}
+	}
+
+	&[data-fluid]{
+		display: block;
+	}
+
+	&[data-icon]{
+		min-width: 0 !important;
+		padding: 4px 5px 5px 5px;
+		i{
+			margin-right: 0 !important;
+		}
+	}
+
+	@each $name, $background, $color, $hover in $frontier-colors{
+		&[color="#{$name}"]{
+			color: $color;
+			background-color: $background;
+			&:hover{
+				background-color: $hover;
+			}
+		}
+	}
+
+	&[data-basic]:not(:hover){
+		background-color: transparent !important;
+	}
+}

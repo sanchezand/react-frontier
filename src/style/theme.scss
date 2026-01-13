@@ -1,0 +1,58 @@
+@use "sass:color";
+
+:root{
+	$COLOR_DEFAULT: #E5E7EB;
+	--color-default: #{$COLOR_DEFAULT};
+	--color-default-text: #4B5563;
+	--color-default-hover: #dadfe6;
+
+	$COLOR_GREEN: #1EAA6F;
+	--color-green: #{$COLOR_GREEN};
+	--color-green-text: white;
+	--color-green-hover: #{darken($COLOR_GREEN, 5%)};
+
+	$COLOR_RED: #EF4444;
+	--color-red: #{$COLOR_RED};
+	--color-red-text: white;
+	--color-red-hover:  #e64343;
+
+	$COLOR_PURPLE: #704FAF;
+	--color-purple: #{$COLOR_PURPLE};
+	--color-purple-text:  white;
+	--color-purple-hover: #{darken($COLOR_PURPLE, 5%)};
+
+	$COLOR_BLACK: #151717;
+	--color-black: #{$COLOR_BLACK};
+	--color-black-text:  white;
+	--color-black-hover: #{lighten($COLOR_BLACK, 10%)};
+
+	$COLOR_BLUE: #4d6adf;
+	--color-blue: #{$COLOR_BLUE};
+	--color-blue-text:  white;
+	--color-blue-hover: #{darken($COLOR_BLUE, 10%)};
+
+	$COLOR_ORANGE: #F37435;
+	--color-orange: #{$COLOR_ORANGE};
+	--color-orange-text:  white;
+	--color-orange-hover: #{darken($COLOR_ORANGE, 5%)};
+
+	$COLOR_WHITE: #f5f5f5;
+	--color-white: #{$COLOR_WHITE};
+	--color-white-text:  black;
+	--color-white-hover: #{darken($COLOR_WHITE, 5%)};
+
+	$COLOR_YELLOW: #FFEA03;
+	--color-yellow: #{$COLOR_YELLOW};
+	--color-yellow-text:  black;
+	--color-yellow-hover: #{lighten($COLOR_YELLOW, 15%)};
+}
+$frontier-colors:
+	"green" var(--color-green) var(--color-green-text) var(--color-green-hover),
+	"red" var(--color-red) var(--color-red-text) var(--color-red-hover),
+	"purple" var(--color-purple) var(--color-purple-text) var(--color-purple-hover),
+	"black" var(--color-black) var(--color-black-text) var(--color-black-hover),
+	"blue" var(--color-blue) var(--color-blue-text) var(--color-blue-hover),
+	"orange" var(--color-orange) var(--color-orange-text) var(--color-orange-hover),
+	"white" var(--color-white) var(--color-white-text) var(--color-white-hover),
+	"yellow" var(--color-yellow) var(--color-yellow-text) var(--color-yellow-hover),
+;

@@ -1,0 +1,67 @@
+.loader{
+	$DEFAULT_SIZE: 20;
+	$DEFAULT_BORDER_WIDTH: 2;
+	
+	height: 20px;
+	width: 20px;
+	&::before{
+		position: absolute;
+		content: '';
+		top: calc(50% - #{$DEFAULT_SIZE / 2});
+		left: calc(50% - #{$DEFAULT_SIZE / 2});
+		width: 20px;
+		height: 20px;
+		border-radius: 500rem;
+		border: #{$DEFAULT_BORDER_WIDTH}px solid rgba(0,0,0,.15);
+	}
+	&::after{
+		position: absolute;
+		content: '';
+		top: calc(50% - #{$DEFAULT_SIZE / 2});
+		left: calc(50% - #{$DEFAULT_SIZE / 2});
+		width: 20px;
+		height: 20px;
+		border-radius: 500rem;
+		-webkit-animation: loader .6s infinite linear;
+		animation: loader .6s infinite linear;
+		border-color: white;
+		border-top-color: transparent;
+		border-right-color: transparent;
+		border-bottom-color: transparent;
+		border-style: solid;
+		border-width: #{$DEFAULT_BORDER_WIDTH}px;
+		color: #fff;
+		-webkit-box-shadow: 0 0 0 1px transparent;
+		box-shadow: 0 0 0 1px transparent;
+		animation: rotation 500ms infinite linear;
+	}
+
+	&[data-inline]{
+		position: relative;
+		display: inline-block;
+	}
+
+	@for $size from 1 through 20{
+		&[data-size="#{$size * 5}"]{
+			width: #{$size * 5}px;
+			height: #{$size * 5}px;
+			&::before,&::after{
+				$BORDER_WIDTH: ceil(($size * $DEFAULT_BORDER_WIDTH * 5) / $DEFAULT_SIZE);
+				top: calc(50% - #{($size * 5) / 2}px);
+				left: calc(50% - #{($size * 5) / 2}px);
+				width: #{($size * 5) - $BORDER_WIDTH}px;
+				height: #{($size * 5) - $BORDER_WIDTH}px;
+				border-width: #{$BORDER_WIDTH}px;
+			}
+		}
+	}
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}
