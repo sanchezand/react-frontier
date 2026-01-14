@@ -2,8 +2,10 @@
 
 $CHECKBOX_SIZE: 25px;
 $CHECKBOX_WIDTH: 45px;
+$LABEL_MARGIN: 8px;
 
 .switch{
+	cursor: pointer;
 	position: relative;
 	display: flex;
 	appearance: none;
@@ -71,5 +73,22 @@ $CHECKBOX_WIDTH: 45px;
 @each $name, $background, $color, $hover in $frontier-colors{
 	.switch[data-color="#{$name}"]{
 		background-image: linear-gradient(to right, $background 30%, var(--color-default) 65%);
+		&:not([data-labeled]):hover{
+			background-image: linear-gradient(to right, $hover 30%, var(--color-default-hover) 65%);
+		}
 	}
+	.root:hover > .switch[data-labeled]{
+		&[data-color="#{$name}"]{
+			background-image: linear-gradient(to right, $hover 30%, var(--color-default-hover) 65%);
+		}
+	}
+}
+
+.root{
+	display: flex;
+	align-items: center;
+}
+.label{
+	cursor: pointer;
+	margin-left: $LABEL_MARGIN;
 }

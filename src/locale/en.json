@@ -1,0 +1,66 @@
+{
+	"common": {
+		"error": "Error",
+		"loading": "Loading"
+	},
+	"dropdown": {
+		"no_results": "No results found"
+	},
+	"calendar": {
+		"days_initial": {
+			"day_0": "S",
+			"day_1": "M",
+			"day_2": "T",
+			"day_3": "W",
+			"day_4": "T",
+			"day_5": "F",
+			"day_6": "S"
+		},
+		"days_short": {
+			"day_0": "Su",
+			"day_1": "Mo",
+			"day_2": "Tu",
+			"day_3": "We",
+			"day_4": "Th",
+			"day_5": "Fr",
+			"day_6": "Sa"
+		},
+		"days": {
+			"day_0": "Sunday",
+			"day_1": "Monday",
+			"day_2": "Tuesday",
+			"day_3": "Wednesday",
+			"day_4": "Thursday",
+			"day_5": "Friday",
+			"day_6": "Saturday"
+		},
+		"months": {
+			"month_0": "January",
+			"month_1": "February",
+			"month_2": "March",
+			"month_3": "April",
+			"month_4": "May",
+			"month_5": "June",
+			"month_6": "July",
+			"month_7": "August",
+			"month_8": "September",
+			"month_9": "October",
+			"month_10": "November",
+			"month_11": "December"
+		},
+		"months_short": {
+			"month_0": "Jan",
+			"month_1": "Feb",
+			"month_2": "Mar",
+			"month_3": "Apr",
+			"month_4": "May",
+			"month_5": "Jun",
+			"month_6": "Jul",
+			"month_7": "Aug",
+			"month_8": "Sep",
+			"month_9": "Oct",
+			"month_10": "Nov",
+			"month_11": "Dec"
+		}
+	}
+}

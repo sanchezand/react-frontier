@@ -38,7 +38,6 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 			style={{ marginTop: 15 }}
 			onAsyncSearch={v=>{
 				return new Promise(resolve=>{
-					console.log("SEARCHING", v);
 					setTimeout(()=>{
 						return resolve({
 							items: TEST_ITEMS.filter(a=>a.text.toLowerCase().indexOf(v.toLowerCase())>-1),

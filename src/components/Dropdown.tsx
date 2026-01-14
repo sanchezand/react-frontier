@@ -4,6 +4,7 @@ import Icon, { IconName } from './Icon';
 import style from '../style/dropdown.module.scss';
 import Loader from './Loader';
 import classNames from 'classnames';
+import { useLocale } from './useLocale';
 
 export type DropdownValueChange = (v: any, d: DropdownItemProps)=>boolean | void;
 
@@ -48,6 +49,7 @@ export interface DropdownItemProps{
 }
 
 var Dropdown = (props: DropdownProps)=>{
+	var { t } = useLocale()
 	var [searchValue, setSearchValue] = useState<string>('');
 	var [searchResults, setSearchResults] = useState<DropdownItemProps[]>(null);
 	var [searchError, setSearchError] = useState<string>(null);
@@ -96,9 +98,10 @@ var Dropdown = (props: DropdownProps)=>{
 
 	var getEmptyMessage = ()=>{
 		if(props.onAsyncSearch){
-
+			if(searching) return null;
+			return props.emptyText || t('dropdown.no_results');
 		}else{
-			return props.emptyText || 'No results found';
+			return props.emptyText || t('dropdown.no_results');
 		}
 	}
 
@@ -190,13 +193,13 @@ var Dropdown = (props: DropdownProps)=>{
 									!searchError ? (
 										<div className={style.searchLoading}>
 											<Loader inline size={15} />
-											{props.searchingText || 'Loading'}
+											{props.searchingText || t('common.loading')}
 										</div> 
 									) : (
 										<div>
 											<div className={style.searchLoading}>
 												<Icon className={style.searchErrorIcon} name='triangle-exclamation' />
-												Error
+												{t('common.error')}
 											</div>
 											<div className={style.searchErrorText}>
 												{searchError}

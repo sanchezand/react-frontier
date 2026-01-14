@@ -1,0 +1,108 @@
+@use "sass:color";
+
+.calendar{
+	border-spacing: 0;
+	width: 100%;
+	
+	thead tr th{
+		font-size: 12px;
+		padding-top: 6px;
+		padding-bottom: 6px;
+		text-align: center;
+		background-color: var(--color-gray-100);
+	}
+	thead tr:first-child th:hover{
+		cursor: pointer;
+		background-color: var(--color-gray-250);
+	}
+	.prevButton,.nextButton{
+		text-align: center;
+		width: 55px;
+		i{
+			font-size: 14px;
+			line-height: 14px;
+			margin-right: 0;
+		}
+	}
+	.headerButton{
+		text-transform: uppercase;
+		font-size: 14px;
+	}
+
+	tbody tr{
+		cursor: pointer;
+		font-size: 14px;
+		// background-color: blue;
+		&:last-child td{
+			border-bottom: none;
+		}
+		td{
+			border-color: var(--color-gray-100);
+			border-style: solid;
+			border-width: 1px;
+			border-top-width: 0;
+			border-right-width: 0;
+			
+			background-color: white;
+			padding: 1px !important;
+			text-align: center;
+			position: relative;
+			font-size: 14px;
+			font-weight: normal;
+			text-align: center;
+
+			&[data-empty]{
+				border: none;
+			}
+			&[data-today]{
+				font-weight: bold;
+				.date{
+					text-decoration: underline;
+					text-decoration-style: wavy;
+					text-decoration-color: var(--color-gray-300);
+					text-underline-offset: 3px;
+				}
+			}
+			.date,.time{
+				display: inline-flex;
+				border-radius: 8px;
+				aspect-ratio: 1 / 1;
+				height: 100%;
+				margin: 3px;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 14px;
+				&[data-adjacent]{
+					color: #CCC;
+				}
+				&[data-active]{
+					background-color: var(--color-gray-200);
+					font-weight: bold;
+				}
+			}
+			.time{
+				aspect-ratio: unset;
+			}
+			&:hover{
+				.date,.time{
+					&:not([data-empty]){
+						background-color: var(--color-gray-100);
+					}
+					&[data-active]{
+						background-color: var(--color-gray-250);
+					}
+				}
+			}
+			.time{
+				border-radius: 6px;
+				// width: 75px;
+				height: 35px;
+			}
+			&:first-child{
+				border-left-width: 0px;
+			}
+		}
+	}
+}

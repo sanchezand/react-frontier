@@ -138,7 +138,7 @@ var Dropdown = (props: DropdownProps)=>{
 		if(v && v.length>=(props.minSearchLength || 3)){
 			if(searchTimeout) clearTimeout(searchTimeout);
 			setSearchTimeout(setTimeout(()=>{
-				props.onSearchChange(v);
+				props.onSearchChange!(v);
 			}, props.searchTimeout || 500));
 		}else{
 			if(props.onSearchClear) props.onSearchClear();

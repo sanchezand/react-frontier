@@ -6,8 +6,12 @@
 	"dependencies": {
 		"@base-ui/react": "1.0.0",
 		"classnames": "^2.5.1",
-		"react": "19.2.3",
+		"i18next-resources-to-backend": "^1.2.1",
+		"i18next": "^23.16.4",
+		"moment": "^2.30.1",
 		"react-dom": "19.2.3",
+		"react-i18next": "^15.1.0",
+		"react": "19.2.3",
 		"typescript": "^4"
 	},
 	"devDependencies": {
@@ -19,7 +23,7 @@
 		"sass": "^1.97.2"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"dev": "react-scripts start",
 		"build": "react-scripts build"
 	},
 	"eslintConfig": {
@@ -39,5 +43,6 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	}
+	},
+	"packageManager": "yarn@1.22.22"
 }

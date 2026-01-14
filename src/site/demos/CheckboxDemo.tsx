@@ -12,6 +12,7 @@ var CheckboxDemo = (props: CheckboxDemoProps)=>{
 		padding: 20
 	}}>
 		<Checkbox color='orange' checked={checked} onChange={setChecked} />
+		<Checkbox color='orange' checked={checked} onChange={setChecked} label={'Test label'} />
 	</div>
 }
 
