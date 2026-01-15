@@ -53,6 +53,12 @@
 				height: #{($size * 5) - $BORDER_WIDTH}px;
 				border-width: #{$BORDER_WIDTH}px;
 			}
+			&[data-inline]{
+				&::before,&::after{
+					width: #{($size * 5)}px;
+					height: #{($size * 5)}px;
+				}
+			}
 		}
 	}
 }

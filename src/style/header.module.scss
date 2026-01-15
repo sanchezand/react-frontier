@@ -1,0 +1,85 @@
+@use "sass:color";
+@import 'theme.scss';
+
+$header-sizes:
+	"small" 24 12 3,
+	"normal" 32 14 1,
+	"big" 48 16 -1,
+	"huge" 64 18 -3,
+;
+
+.header{
+	position: relative;
+	margin-bottom: 10px;
+	margin-top: 5px;
+	
+	display: flex;
+	flex-direction: column;
+	
+	
+	.text{
+		color: black;
+		font-size: 32px;
+		line-height: 32px;
+		font-weight: bold;
+	}
+	.subtext{
+		color: gray;
+		font-size: 14px;
+		line-height: 14px;
+		font-weight: normal;
+	}
+	.icon{
+		font-size: 32px;
+		line-height: 32px;
+		margin-right: 0;
+		margin-bottom: 3px;
+	}
+	.actions{
+		margin-top: 10px;
+		text-align: center;
+	}
+	&[data-centered]{
+		align-items: center;
+	}
+	// &[data-loading]{
+	// 	.text{
+	// 		// margin-top: 10px;
+	// 	}
+	// }
+
+	@each $name, $size, $subsize, $margin in $header-sizes{
+		&[data-size="#{$name}"]{
+			.text{
+				font-size: #{$size}px;
+				line-height: #{$size - 2}px;
+			}
+			.subtext{
+				font-size: #{$subsize}px;
+				line-height: #{$subsize}px;
+			}
+			.icon{
+				margin-bottom: #{$margin}px;
+				line-height: #{$size - 2}px;
+				font-size: #{$size}px;
+				text-align: center;
+			}
+			&[data-loading]{
+				.text{
+					margin-top: #{$margin}px;
+				}
+			}
+		}
+	}
+
+	@each $name, $background, $color, $hover in $frontier-colors{
+		&[data-color="#{$name}"]{
+			.text{
+				color: $color;
+			}
+			.subtext{
+				color: $color;
+			}
+		}
+	}
+}

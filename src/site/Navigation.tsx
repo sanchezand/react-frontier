@@ -9,6 +9,7 @@ import AccordionDemo from './demos/AccordionDemo';
 import CalendarDemo from './demos/CalendarDemo';
 import { LocaleProvider } from '../components/useLocale';
 import { FrontierProvider } from '../components';
+import HeaderDemo from './demos/HeaderDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -47,6 +48,7 @@ var Navigation = ()=>{
 			{ path: '/checkbox', element: <CheckboxDemo /> }, 
 			{ path: '/accordion', element: <AccordionDemo /> }, 
 			{ path: '/calendar', element: <CalendarDemo /> }, 
+			{ path: '/header', element: <HeaderDemo /> }, 
 		]
 	}])
 

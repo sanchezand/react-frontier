@@ -11,6 +11,7 @@ import Dropdown, { DropdownItemProps as CompDrItPr, DropdownSearchResult as Comp
 import Loader from './components/Loader';
 import Icon, { IconName as CompIconName, IconsList } from "./components/Icon"
 import { FrontierProvider } from './components/useFrontier';
+import Header from './components/Header';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -35,6 +36,7 @@ export {
 	Checkbox,
 	Dropdown,
 	FrontierProvider,
+	Header,
 	Icon,
 	IconsList,
 	Loader,
