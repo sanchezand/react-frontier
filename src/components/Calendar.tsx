@@ -5,8 +5,14 @@ import Icon from './Icon';
 import style from '../style/calendar.module.scss';
 import { useLocale } from './useLocale';
 
-type CalendarMode = 'date' | 'datetime';
-const YEAR_SECTION_SIZE = 20;
+type CalendarMode = 'date' | 'datetime' | 'month' | 'year' | 'time';
+const YEAR_SECTION_COLUMNS = 5;
+const YEAR_SECTION_ROWS = 4;
+
+function partition<T>(a: T[], n: number) : T[][]{
+	var array : T[] = [...a];
+	return (array.length ? [array.splice(0, n)].concat(partition(array, n)) : []) as T[][];
+}
 
 interface MonthDay{
 	day: number,
@@ -87,6 +93,18 @@ var Calendar = (props: CalendarProps)=>{
 	var [mode, setMode] = useState<SelectMode>(SelectMode.DAY);
 	var [shownMonth, setShownMonth] = useState<MonthDay>(null);
 
+	var current_mode = useMemo(()=>{
+		if(!props.mode || props.mode==='date'){
+			if([SelectMode.HOUR, SelectMode.MINUTES].indexOf(mode)!==-1) return SelectMode.DAY;
+		}else if(props.mode==='month'){
+			if([SelectMode.DAY, SelectMode.HOUR, SelectMode.MINUTES].indexOf(mode)!==-1) return SelectMode.MONTHS;
+		}else if(props.mode==='year'){
+			return SelectMode.YEARS;
+		}
+
+		return mode;
+	}, [mode, props.mode]);
+
 	var selected_date = useMemo(()=>{
 		if(!props.date) return null;
 		return toMonthDay(props.date);
@@ -104,12 +122,12 @@ var Calendar = (props: CalendarProps)=>{
 	var min_date = useMemo(()=>{
 		if(!props.minDate) return null;
 		return toMonthDay(props.minDate);
-	}, []);
+	}, [props.minDate]);
 
 	var max_date = useMemo(()=>{
 		if(!props.minDate) return null;
 		return toMonthDay(props.maxDate);
-	}, []);
+	}, [props.maxDate]);
 
 	var active_days = useMemo(()=>{
 		if(!props.activeDays) return [];
@@ -182,15 +200,23 @@ var Calendar = (props: CalendarProps)=>{
 	}, [shown_month]);
 
 	var goPrev = ()=>{
-		if(mode===SelectMode.DAY){
+		if(current_mode===SelectMode.DAY){
 			setShownMonth(moveMonthDay(shown_month, 'month', -1));
+		}else if(current_mode===SelectMode.MONTHS){
+			setShownMonth(moveMonthDay(shown_month, 'year', -1));
+		}else if(current_mode===SelectMode.YEARS){
+			shown_month.year = shown_month.year-(shown_month.year%(YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS));
+			setShownMonth(moveMonthDay(shown_month, 'year', -(YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS)));
 		}
 	}
 	var goNext = ()=>{
-		if(mode===SelectMode.DAY){
+		if(current_mode===SelectMode.DAY){
 			setShownMonth(moveMonthDay(shown_month, 'month', 1));
-			// console.log(shown_month, moveMonthDay(shown_month, 1));
-			// setShownMonth(moveMonthDay(shown_month, 1));
+		}else if(current_mode===SelectMode.MONTHS){
+			setShownMonth(moveMonthDay(shown_month, 'year', 1));
+		}else if(current_mode===SelectMode.YEARS){
+			shown_month.year = shown_month.year-(shown_month.year%(YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS));
+			setShownMonth(moveMonthDay(shown_month, 'year', (YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS)));
 		}
 	}
 
@@ -223,7 +249,7 @@ var Calendar = (props: CalendarProps)=>{
 	}
 	
 	var changeMode = ()=>{
-		switch(mode){
+		switch(current_mode){
 			case SelectMode.MONTHS: return setMode(SelectMode.YEARS);
 			case SelectMode.DAY: return setMode(SelectMode.MONTHS);
 			case SelectMode.HOUR: return setMode(SelectMode.DAY);
@@ -238,15 +264,15 @@ var Calendar = (props: CalendarProps)=>{
 			if(!is_same_month){
 				setShownMonth(d);
 			}
-			if(props.mode==='date'){
+			setSelectedDate({
+				...d,
+				hour: null,
+				minute: null,
+				second: null
+			});
+			if(!props.mode || props.mode==='date'){
 				if(props.onSelected) props.onSelected(fromMonthDay(d));
 			}else{
-				setSelectedDate({
-					...d,
-					hour: null,
-					minute: null,
-					second: null
-				});
 				setMode(SelectMode.HOUR);
 			}
 		}
@@ -278,12 +304,52 @@ var Calendar = (props: CalendarProps)=>{
 			if(props.onSelected) props.onSelected(fromMonthDay(new_date));
 		}
 	}
+	
+	var onSelectedMonth = (month: number, year: number)=>{
+		return ()=>{
+			var md : MonthDay = {
+				month,
+				year,
+				day: 1,
+				hour: 12,
+				minute: 0,
+				second: 0,
+				weekday: 0
+			}
+			if(props.mode==='month'){
+				if(props.onSelected) return props.onSelected(fromMonthDay(md));
+			}else{
+				setMode(SelectMode.DAY);
+				return setShownMonth(md);
+			}
+		}
+	}
+
+	var onSelectedYear = (year: number)=>{
+		return ()=>{
+			var md : MonthDay = {
+				month: 1,
+				year,
+				day: 1,
+				hour: 12,
+				minute: 0,
+				second: 0,
+				weekday: 0,
+			}
+			if(props.mode==='year'){
+				if(props.onSelected) return props.onSelected(fromMonthDay(md));
+			}else{
+				setMode(SelectMode.MONTHS);
+				return setShownMonth(md);
+			}
+		}
+	}
 
 	var MonthDays = useMemo(()=>(
 		current_month.days.map((a,i)=>{
 			return <tr key={`cal-week${current_month.month}-${i}`}>
 				{a.map(d=>{
-					var disabled = d!==null && !isDateAvailable(d);
+					var disabled = d===null || !isDateAvailable(d);
 					var is_same_month = !!d && d.month==current_month.month && d.year==current_month.year;
 					
 					return <td 
@@ -291,12 +357,12 @@ var Calendar = (props: CalendarProps)=>{
 						key={`cal-day-${d.month}-${d.day}`}
 						data-today={isMonthDay(today, d) || undefined} 
 						data-empty={d===null || undefined}
+						data-disabled={disabled || undefined}
 					>
 						<div
 							className={style.date}
 							data-empty={d===null || undefined}
-							data-active={undefined}
-							data-disabled={disabled || undefined}
+							data-active={isMonthDay(d, selected_date) || undefined}
 							data-adjacent={!is_same_month || undefined}
 						>
 							{props.showAdjacentMonths===false && !is_same_month ? null : (
@@ -307,7 +373,8 @@ var Calendar = (props: CalendarProps)=>{
 				})}
 			</tr>
 		})
-	), [current_month, today, props.showAdjacentMonths, props.mode])
+	), [current_month, today, props.showAdjacentMonths, current_mode, props.date, props.minDate, props.maxDate])
+
 	var DayTimes = useMemo(()=>(
 		[0, 5, 9, 13, 17, 21].map(a=>(
 			<tr key={`cal-hr-${a}`}>
@@ -320,7 +387,8 @@ var Calendar = (props: CalendarProps)=>{
 				))}
 			</tr>
 		))
-	), [selectedDate, props.mode]);
+	), [selectedDate, current_mode, props.minDate, props.maxDate]);
+
 	var DayMinutes = useMemo(()=>{
 		if(!selectedDate || selectedDate?.hour===null) return null;
 		var formatted_hour = ('0'+selectedDate.hour).slice(-2);
@@ -328,23 +396,99 @@ var Calendar = (props: CalendarProps)=>{
 			{[0, 20, 30, 40].map(a=>(
 				<tr key={`cal-min-r${a}`}>
 					{Array.from(Array(4).keys()).map(b=>(
-						<td key={`cal-min-${a}${b}`}>
-							<div onClick={onSelectedMinutes(a+(b*5))} className={style.time}>{formatted_hour}:{('0'+(a+(b*5))).slice(-2)}</div>
+						<td key={`cal-min-${a}${b}`} onClick={onSelectedMinutes(a+(b*5))}>
+							<div className={style.time}>{formatted_hour}:{('0'+(a+(b*5))).slice(-2)}</div>
 						</td>
 					))}
 				</tr>
 			))}
 			<tr>
-				<td colSpan={4}>
-					<div className={style.time} onClick={onSelectedMinutes(59)}>
+				<td colSpan={4} onClick={onSelectedMinutes(59)}>
+					<div className={style.time}>
 						{formatted_hour}:59
 					</div>
 				</td>
 			</tr>
 		</>
-	}, [selectedDate, props.mode]);
+	}, [selectedDate, current_mode, props.minDate, props.maxDate]);
 
-	var show_move_buttons = mode===SelectMode.DAY || mode===SelectMode.MONTHS || mode==SelectMode.YEARS;
+	var YearMonths = useMemo(()=>(
+		partition(new Array(12).fill(0), 3).map((a,i)=>(
+			<tr key={`cal-mnth-${i}`}>
+				{a.map((b, s)=>{
+					var showing_month = s+(i*3);
+					var active = true;
+					if(min_date){
+						active = shown_month.year>min_date.year || (shown_month.year==min_date.year && (showing_month+1)>=min_date.month);
+					}
+					if(active && max_date){
+						active = shown_month.year<max_date.year || (shown_month.year==max_date.year && (showing_month+1)<=max_date.month);
+					}
+					return <td 
+						key={`cal-mnth-${i}-${s}`} 
+						colSpan={2} 
+						data-today={(today.month===showing_month+1 && today.year===shown_month.year) || undefined}
+						onClick={active ? onSelectedMonth(showing_month+1, shown_month.year) : null}
+						data-disabled={!active || undefined}
+					>
+						<div
+							className={style.time}
+							data-active={selected_date && selected_date.month===(showing_month+1) && selected_date.year===shown_month.year || undefined}
+						>
+							{t(`calendar.months.month_${showing_month}`)}
+						</div>
+					</td>
+				})}
+			</tr>
+		))
+	), [selectedDate, today, shown_month, props.date, props.minDate, props.maxDate]);
+
+	var YearList = useMemo(()=>{
+		var start_year = (shown_month.year-(shown_month.year%20))+1;
+		return new Array(YEAR_SECTION_ROWS).fill(0).map((a,i)=>(
+			<tr key={`cal-year-${start_year}-${i}`}>
+				{new Array(YEAR_SECTION_COLUMNS).fill(0).map((b, s)=>{
+					var shown_year = start_year+((i*YEAR_SECTION_COLUMNS)+s);
+					var active = true;
+					if(min_date){
+						active = shown_year>=min_date.year;
+					}
+					if(active && max_date){
+						active = shown_year<=max_date.year;
+					}
+					return (
+						<td 
+							colSpan={2}
+							key={`cal-year-${start_year}-${i}-${s}`} 
+							data-today={today.year===shown_year || undefined}
+							data-disabled={!active || undefined}
+							onClick={onSelectedYear(shown_year)}
+						>
+							<div
+								className={style.time}
+								data-active={selected_date?.year===shown_year || undefined}
+							>
+								{shown_year}
+							</div>
+						</td>
+					)
+				})}
+			</tr>
+		))
+	}, [selectedDate, shown_month, today, props.date, props.minDate, props.maxDate])
+
+
+	var middle_col_span = useMemo(()=>{
+		switch(current_mode){
+			case SelectMode.DAY: return 5;
+			case SelectMode.HOUR: return 4;
+			case SelectMode.MINUTES: return 4;
+			case SelectMode.MONTHS: return 4;
+			case SelectMode.YEARS: return (YEAR_SECTION_COLUMNS*2)-2;
+		}
+	}, [current_mode]);
+
+	var show_move_buttons = current_mode===SelectMode.DAY || current_mode===SelectMode.MONTHS || current_mode==SelectMode.YEARS;
 
 	return <table className={classNames(style.calendar, props.className)} style={props.style}>
 		<thead>
@@ -354,14 +498,20 @@ var Calendar = (props: CalendarProps)=>{
 						<Icon name='arrow-left' />
 					</th>
 				)}
-				<th colSpan={show_move_buttons ? 5 : 7} className={style.headerButton} onClick={changeMode}>
-					{mode===SelectMode.DAY ? (
+				<th colSpan={middle_col_span} className={style.headerButton} onClick={changeMode}>
+					{current_mode===SelectMode.DAY ? (
 						`${t(`calendar.months.month_${shown_month.month-1}`)} ${shown_month.year}`
-					) : (mode===SelectMode.HOUR || mode===SelectMode.MINUTES) && !!selectedDate ? <>
+					) : (current_mode===SelectMode.HOUR || current_mode===SelectMode.MINUTES) && !!selectedDate ? <>
 						{`00${selectedDate.day}`.slice(-2)}/{t(`calendar.months_short.month_${selectedDate.month-1}`)}/{selectedDate.year}
-						{mode===SelectMode.MINUTES && selectedDate?.hour!==null && (
+						{current_mode===SelectMode.MINUTES && selectedDate?.hour!==null && (
 							` ${`00${selectedDate.hour}`.slice(-2)}:00`
 						)}
+					</> : current_mode===SelectMode.MONTHS ? (
+						current_month.year
+					) : current_mode===SelectMode.YEARS ? <>
+						{shown_month.year-(shown_month.year%(YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS))+1}
+						<Icon name='arrow-right' style={{ marginLeft: 5 }} />
+						{(shown_month.year-(shown_month.year%(YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS))+1) + (YEAR_SECTION_COLUMNS*YEAR_SECTION_ROWS)-1}
 					</> : null}
 				</th>
 				{show_move_buttons && (
@@ -370,17 +520,21 @@ var Calendar = (props: CalendarProps)=>{
 					</th>
 				)}
 			</tr>
-			{mode===SelectMode.DAY && (
+			{current_mode===SelectMode.DAY && (
 				<tr>{new Array(7).fill(0).map((a, i)=><th key={`cal-wkd-${i}`}>{t(`calendar.days_short.day_${i}`)}</th>)}</tr>
 			)}
 		</thead>
 		<tbody>
-			{mode===SelectMode.DAY ? (
+			{current_mode===SelectMode.DAY ? (
 				MonthDays
-			) : mode===SelectMode.HOUR ? (
+			) : current_mode===SelectMode.HOUR ? (
 				DayTimes
-			) : mode===SelectMode.MINUTES ? (
+			) : current_mode===SelectMode.MINUTES ? (
 				DayMinutes
+			) : current_mode===SelectMode.MONTHS ? (
+				YearMonths
+			) : current_mode===SelectMode.YEARS ? (
+				YearList
 			) : null}
 		</tbody>
 	</table>

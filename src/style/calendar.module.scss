@@ -3,6 +3,7 @@
 .calendar{
 	border-spacing: 0;
 	width: 100%;
+	table-layout: fixed;
 	
 	thead tr th{
 		font-size: 12px;
@@ -11,13 +12,16 @@
 		text-align: center;
 		background-color: var(--color-gray-100);
 	}
-	thead tr:first-child th:hover{
+	thead tr:first-child th:not([data-disabled]):hover{
 		cursor: pointer;
 		background-color: var(--color-gray-250);
 	}
 	.prevButton,.nextButton{
 		text-align: center;
 		width: 55px;
+		&[data-disabled]{
+			color: #CCC;
+		}
 		i{
 			font-size: 14px;
 			line-height: 14px;
@@ -30,7 +34,6 @@
 	}
 
 	tbody tr{
-		cursor: pointer;
 		font-size: 14px;
 		// background-color: blue;
 		&:last-child td{
@@ -50,13 +53,14 @@
 			font-size: 14px;
 			font-weight: normal;
 			text-align: center;
+			cursor: default;
 
 			&[data-empty]{
 				border: none;
 			}
 			&[data-today]{
 				font-weight: bold;
-				.date{
+				.date,.time{
 					text-decoration: underline;
 					text-decoration-style: wavy;
 					text-decoration-color: var(--color-gray-300);
@@ -69,7 +73,6 @@
 				aspect-ratio: 1 / 1;
 				height: 100%;
 				margin: 3px;
-				cursor: pointer;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -82,16 +85,22 @@
 					font-weight: bold;
 				}
 			}
+			&[data-disabled]{
+				color: #CCC;
+			}
 			.time{
 				aspect-ratio: unset;
 			}
-			&:hover{
-				.date,.time{
-					&:not([data-empty]){
-						background-color: var(--color-gray-100);
-					}
-					&[data-active]{
-						background-color: var(--color-gray-250);
+			&:not([data-disabled]){
+				cursor: pointer;
+				&:hover{
+					.date,.time{
+						&:not([data-empty]){
+							background-color: var(--color-gray-100);
+						}
+						&[data-active]{
+							background-color: var(--color-gray-250);
+						}
 					}
 				}
 			}
