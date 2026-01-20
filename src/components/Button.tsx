@@ -47,6 +47,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		iconRightStyle,
 		onLoadingChanged,
 		as,
+		checkmark,
 		...restProps
 	} = props;
 	var [loading, setLoading] = useState(false);

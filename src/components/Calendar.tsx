@@ -88,6 +88,23 @@ export interface CalendarProps{
 }
 
 var Calendar = (props: CalendarProps)=>{
+	var {
+		activeDayStyle,
+		activeDays,
+		className,
+		date,
+		disabledDayStyle,
+		disabledDays,
+		format,
+		initialDate,
+		maxDate,
+		minDate,
+		mode: propsMode,
+		onSelected,
+		showAdjacentMonths,
+		style: propsStyle,
+		...restProps
+	} = props;
 	var { t } = useLocale();
 	var [selectedDate, setSelectedDate] = useState<MonthDay>(null);
 	var [mode, setMode] = useState<SelectMode>(SelectMode.DAY);
@@ -490,7 +507,7 @@ var Calendar = (props: CalendarProps)=>{
 
 	var show_move_buttons = current_mode===SelectMode.DAY || current_mode===SelectMode.MONTHS || current_mode==SelectMode.YEARS;
 
-	return <table className={classNames(style.calendar, props.className)} style={props.style}>
+	return <table className={classNames(style.calendar, props.className)} style={props.style} {...restProps}>
 		<thead>
 			<tr>
 				{show_move_buttons && (

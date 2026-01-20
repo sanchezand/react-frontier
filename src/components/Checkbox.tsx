@@ -15,17 +15,24 @@ interface CheckboxProps{
 }
 
 var Checkbox = (props: CheckboxProps)=>{
-	useEffect(()=>{
-		
-	}, []);
-	
+	var {
+		checked,
+		className,
+		color,
+		label,
+		labelClassName,
+		labelStyle,
+		onChange,
+		style: propsStyle,
+		...restProps
+	} = props;
 	const SwitchElem = (
 		<Switch.Root className={classNames(style.switch, props.className)} style={!props.label ? props.style : null} data-color={props.color || undefined} checked={props.checked} onCheckedChange={props.onChange} data-labeled={!!props.label || undefined}>
 			<Switch.Thumb className={style.thumb} />
 		</Switch.Root>
 	)
 	if(!props.label) return SwitchElem;
-	return <div className={style.root} style={props.style}>
+	return <div className={style.root} style={props.style} {...restProps}>
 		{SwitchElem}
 		<div className={classNames(style.label, props.labelClassName)} style={props.labelStyle} onClick={()=>{
 			if(props.onChange) props.onChange(!props.checked);

@@ -9,11 +9,18 @@ interface LoaderProps{
 }
 
 var Loader = (props: LoaderProps)=>{
+	var {
+		inline,
+		size,
+		style: propsStyle,
+		...restProps
+	} = props;
 	return <div 
 		className={style.loader}
 		style={props.style}
 		data-inline={props.inline || undefined} 
 		data-size={props.size ? Math.floor(props.size / 5) * 5 : 20}
+		{...restProps}
 	/>
 }
 

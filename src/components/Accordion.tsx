@@ -12,6 +12,15 @@ export interface AccordionItemProps extends PropsWithChildren{
 	style?: CSSProperties
 }
 var AccordionItem : React.FC<AccordionItemProps> = (props: AccordionItemProps)=>{
+	var {
+		onSelected,
+		title,
+		value,
+		children,
+		className,
+		style: propStyle,
+		...restProps
+	} = props;
 	return <BaseAccordion.Item 
 		data-childless={!props.children || undefined}
 		className={classNames(style.item, props.className)} 
@@ -20,6 +29,7 @@ var AccordionItem : React.FC<AccordionItemProps> = (props: AccordionItemProps)=>
 		onOpenChange={(!!props.value && !!props.onSelected) ? o=>{
 			props.onSelected(props.value, o);
 		} : null}
+		{...restProps}
 	>
 		<BaseAccordion.Header className={style.header}>
 			<BaseAccordion.Trigger className={style.trigger}>
@@ -54,6 +64,18 @@ interface AccordionProps extends PropsWithChildren{
 }
 
 const Accordion : React.FC<AccordionProps> & AccordionSubComponents = (props)=>{
+	var {
+		children,
+		className,
+		greyout,
+		multiple,
+		onSelected,
+		separate,
+		striped,
+		style: propsStyle,
+		value,
+		...restProps
+	} = props;
 	return <BaseAccordion.Root
 		multiple={props.multiple}
 		data-striped={props.striped || undefined}
@@ -64,6 +86,7 @@ const Accordion : React.FC<AccordionProps> & AccordionSubComponents = (props)=>{
 		onValueChange={!!props.onSelected ? v=>{
 			props.onSelected(v);
 		} : null}
+		{...restProps}
 	>
 		{props.children}
 	</BaseAccordion.Root>

@@ -50,6 +50,30 @@ export interface DropdownItemProps{
 
 var Dropdown = (props: DropdownProps)=>{
 	var { t } = useLocale()
+	var {
+		value,
+		className,
+		closeOnSelect,
+		contents,
+		disabled,
+		emptyText,
+		hasField,
+		iconName,
+		items,
+		itemStyle,
+		label,
+		loading,
+		menuStyle,
+		minSearchLength,
+		onAsyncSearch,
+		onValueChange,
+		placeholder,
+		search,
+		searchTimeout: propsSearchTimeout,
+		searchingText,
+		style: propsStyle,
+		...restProps
+	} = props;
 	var [searchValue, setSearchValue] = useState<string>('');
 	var [searchResults, setSearchResults] = useState<DropdownItemProps[]>(null);
 	var [searchError, setSearchError] = useState<string>(null);
@@ -105,7 +129,7 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 	}
 
-	return <div className="fr-dropdown" style={props.style}>
+	return <div className={classNames("fr-dropdown", props.className)} style={props.style} {...restProps}>
 		<Combobox.Root 
 			items={shown_items}
 			value={real_val || null}
@@ -152,7 +176,7 @@ var Dropdown = (props: DropdownProps)=>{
 			}}
 		>
 			{!!props.label && (
-				<div className={style.label}>{props.label}</div>
+				<label className={style.label}>{props.label}</label>
 			)}
 			{!!(props.search || props.onAsyncSearch) ? (
 				<div className={style.trigger} data-search data-disabled={props.disabled || undefined}>

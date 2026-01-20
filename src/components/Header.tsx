@@ -23,10 +23,25 @@ interface HeaderProps extends PropsWithChildren{
 }
 
 var Header = (props: HeaderProps)=>{
-	useEffect(()=>{
-		
-	}, []);
-
+	var {
+		actions,
+		actionsStyle,
+		centered,
+		children,
+		className,
+		iconName,
+		iconStyle,
+		loaderSize,
+		loaderStyle,
+		loading,
+		size,
+		style: propsStyle,
+		subtext,
+		subtextStyle,
+		text,
+		textStyle,
+		...restProps
+	} = props;
 	var loader_size = useMemo(()=>{
 		if(props.loaderSize) return props.loaderSize;
 		switch(props.size){
@@ -44,6 +59,7 @@ var Header = (props: HeaderProps)=>{
 		data-size={props.size || 'normal'}
 		data-centered={props.centered!==false || undefined}
 		style={props.style}
+		{...restProps}
 	>
 		{!!props.loading ? (
 			<Loader size={loader_size} inline style={props.loaderStyle} />
