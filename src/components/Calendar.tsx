@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 import Icon from './Icon';
@@ -63,11 +63,11 @@ var isMonthDay = (a: MonthDay, b: MonthDay)=>{
 }
 
 enum SelectMode{
-	DAY = 1,
-	MONTHS = 2,
-	YEARS = 3,
-	HOUR = 4,
-	MINUTES = 5
+	DAY = 'date',
+	MONTHS = 'months',
+	YEARS = 'years',
+	HOUR = 'hours',
+	MINUTES = 'minutes'
 }
 
 export interface CalendarProps{
@@ -106,9 +106,11 @@ var Calendar = (props: CalendarProps)=>{
 		...restProps
 	} = props;
 	var { t } = useLocale();
+	var ref = useRef<HTMLTableElement>(null);
 	var [selectedDate, setSelectedDate] = useState<MonthDay>(null);
 	var [mode, setMode] = useState<SelectMode>(SelectMode.DAY);
 	var [shownMonth, setShownMonth] = useState<MonthDay>(null);
+	var [calWidth, setCalWidth] = useState<number>(null);
 
 	var current_mode = useMemo(()=>{
 		if(!props.mode || props.mode==='date'){
@@ -121,6 +123,11 @@ var Calendar = (props: CalendarProps)=>{
 
 		return mode;
 	}, [mode, props.mode]);
+
+	useLayoutEffect(()=>{
+		if(!ref || !ref.current) return;
+		setCalWidth(ref.current.offsetWidth);
+	}, [ref]);
 
 	var selected_date = useMemo(()=>{
 		if(!props.date) return null;
@@ -507,7 +514,12 @@ var Calendar = (props: CalendarProps)=>{
 
 	var show_move_buttons = current_mode===SelectMode.DAY || current_mode===SelectMode.MONTHS || current_mode==SelectMode.YEARS;
 
-	return <table className={classNames(style.calendar, props.className)} style={props.style} {...restProps}>
+	return <table className={classNames(style.calendar, props.className)} data-mode={current_mode} style={{
+		...props.style,
+		...(calWidth ? {
+			'--calendar-width': `${calWidth}px`
+		} : null)
+	} as any} ref={ref} {...restProps}>
 		<thead>
 			<tr>
 				{show_move_buttons && (

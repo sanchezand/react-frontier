@@ -3,7 +3,10 @@
 .calendar{
 	border-spacing: 0;
 	width: 100%;
-	table-layout: fixed;
+
+	&:not([data-mode="date"],[data-mode="years"]){
+		table-layout: fixed;
+	}
 	
 	thead tr th{
 		font-size: 12px;
@@ -63,8 +66,9 @@
 				.date,.time{
 					text-decoration: underline;
 					text-decoration-style: wavy;
-					text-decoration-color: var(--color-gray-300);
+					text-decoration-color: var(--color-gray-400);
 					text-underline-offset: 3px;
+					text-decoration-thickness: 1px;
 				}
 			}
 			.date,.time{
@@ -84,6 +88,9 @@
 					background-color: var(--color-gray-200);
 					font-weight: bold;
 				}
+			}
+			.date{
+				width: calc((var(--calendar-width) / 7) - 9px);
 			}
 			&[data-disabled]{
 				color: #CCC;
@@ -113,5 +120,12 @@
 				border-left-width: 0px;
 			}
 		}
+	}
+
+
+	&[data-mode="years"]{
+		tbody tr td .time{
+			width: calc((var(--calendar-width) / 5) - 9px);
+		}	
 	}
 }

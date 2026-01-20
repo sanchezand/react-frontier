@@ -70,6 +70,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	border-radius: 8px;
 	transition: all 200ms;
 	padding-right: 34px;
+	transition: padding-left 150ms;
 
 	&[data-loading]{
 		padding-right: 10px;
@@ -114,6 +115,10 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	margin-bottom: 2px;
 }
 
+.required{
+	color: brown;
+}
+
 .trigger[data-popup-open],.trigger:has(.input[data-popup-open]),.popup{
 	background-color: white;
 	box-shadow: 0 0 5px 0px rgba(0,0,0,0.1);
@@ -153,7 +158,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 .item{
 	padding: 8px 10px;
 	margin: 4px;
-	border-radius: 8px;
+	border-radius: 7px;
 	cursor: pointer;
 
 	&[data-selected]{

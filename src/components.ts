@@ -13,6 +13,7 @@ import Icon, { IconName as CompIconName, IconsList } from "./components/Icon"
 import { FrontierProvider } from './components/useFrontier';
 import Header from './components/Header';
 import Groupper from './components/Groupper';
+import Input from './components/Input';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -41,5 +42,6 @@ export {
 	Header,
 	Icon,
 	IconsList,
+	Input,
 	Loader,
 }

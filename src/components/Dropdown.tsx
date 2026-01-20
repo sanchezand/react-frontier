@@ -23,6 +23,7 @@ export interface DropdownProps{
 	searchTimeout?: number,
 	items?: DropdownItemProps[],
 	value: any,
+	required?: boolean,
 	disabled?: boolean,
 	loading?: boolean,
 	onValueChange?: DropdownValueChange,
@@ -129,7 +130,7 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 	}
 
-	return <div className={classNames("fr-dropdown", props.className)} style={props.style} {...restProps}>
+	return <div className={classNames("fr dropdown", props.className)} style={props.style} {...restProps}>
 		<Combobox.Root 
 			items={shown_items}
 			value={real_val || null}
@@ -176,7 +177,12 @@ var Dropdown = (props: DropdownProps)=>{
 			}}
 		>
 			{!!props.label && (
-				<label className={style.label}>{props.label}</label>
+				<label className={style.label}>
+					{props.label}
+					{!!props.required && (
+						<span className={style.required}> *</span>
+					)}
+				</label>
 			)}
 			{!!(props.search || props.onAsyncSearch) ? (
 				<div className={style.trigger} data-search data-disabled={props.disabled || undefined}>

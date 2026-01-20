@@ -11,6 +11,7 @@ import { LocaleProvider } from '../components/useLocale';
 import { FrontierProvider } from '../components';
 import HeaderDemo from './demos/HeaderDemo';
 import GroupperDemo from './demos/GroupperDemo';
+import InputDemo from './demos/InputDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -50,7 +51,8 @@ var Navigation = ()=>{
 			{ path: '/accordion', element: <AccordionDemo /> }, 
 			{ path: '/calendar', element: <CalendarDemo /> }, 
 			{ path: '/header', element: <HeaderDemo /> }, 
-			{ path: '/groupper', element: <GroupperDemo /> }
+			{ path: '/groupper', element: <GroupperDemo /> },
+			{ path: '/input', element: <InputDemo /> }
 		]
 	}])
 

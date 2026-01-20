@@ -3,6 +3,7 @@ import style from '../style/loader.module.scss';
 import classNames from 'classnames';
 
 interface LoaderProps{
+	className?: string,
 	inline?: boolean,
 	size?: number,
 	style?: CSSProperties,
@@ -13,10 +14,11 @@ var Loader = (props: LoaderProps)=>{
 		inline,
 		size,
 		style: propsStyle,
+		className,
 		...restProps
 	} = props;
 	return <div 
-		className={style.loader}
+		className={classNames('fr loader', style.loader, props.className)}
 		style={props.style}
 		data-inline={props.inline || undefined} 
 		data-size={props.size ? Math.floor(props.size / 5) * 5 : 20}
