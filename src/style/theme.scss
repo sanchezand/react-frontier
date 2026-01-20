@@ -59,6 +59,20 @@
 	--color-gray-800: oklch(12% 5% 264deg / 85%);
 	--color-gray-900: oklch(12% 5% 264deg / 90%);
 	--color-gray-950: oklch(12% 5% 264deg / 95%);
+
+	--color-input-warning-background: #FFF9E2;
+	--color-input-warning-border: #E8DDA4;
+	--color-input-warning-border-hover: #{darken(#E8DDA4, 10%)};
+	--color-input-warning-text: #6c621b;
+	--color-input-warning-placeholder: #bdb15a;
+	--color-input-warning-label: #a4912b;
+
+	--color-input-error-background: #FEE2E2;
+	--color-input-error-border: #FECACA;
+	--color-input-error-border-hover: #{darken(#FECACA, 10%)};
+	--color-input-error-text: #af4242;
+	--color-input-error-placeholder: #e78989;
+	--color-input-error-label: #c96e6e;
 }
 $frontier-colors:
 	"green" var(--color-green) var(--color-green-text) var(--color-green-hover),

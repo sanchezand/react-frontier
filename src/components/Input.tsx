@@ -8,6 +8,8 @@ import Calendar, { CalendarProps } from './Calendar';
 import moment from 'moment';
 import Loader from './Loader';
 
+export type InputType = 'error' | 'warning' | 'normal';
+
 interface InputProps{
 	value?: string,
 	readonly?: boolean,
@@ -33,7 +35,7 @@ interface InputProps{
 	onLoadingChanged?: (v: boolean)=>void,
 	submitOnEnter?: boolean,
 	error?: boolean
-	type?: 'error' | 'warning' | 'normal',
+	type?: InputType,
 	calendar?: CalendarProps,
 	onKeyUp?: (ev: React.KeyboardEvent<HTMLInputElement|HTMLTextAreaElement>)=>void,
 	maxLength?: number,

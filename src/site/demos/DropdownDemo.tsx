@@ -47,6 +47,27 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 				})
 			}}
 		/>
+
+		<Dropdown search
+			style={{ marginTop: 15 }}
+			iconName='remove'
+			label='Error dropdown'
+			value={val2}
+			type='error'
+			comment={'Comment test'}
+			onValueChange={a=>setVal2(a)}
+			items={TEST_ITEMS}
+		/>
+
+		<Dropdown
+			style={{ marginTop: 15 }}
+			iconName='triangle-exclamation'
+			label='Warning dropdown!!'
+			type='warning'
+			value={val2}
+			onValueChange={a=>setVal2(a)}
+			items={TEST_ITEMS}
+		/>
 	</div>
 }
 

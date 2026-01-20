@@ -75,46 +75,46 @@
 	}
 	&[data-type="error"]{
 		.input{
-			background-color: #FEE2E2;
-			border: 1px solid #FECACA;
-			color: #af4242;
+			background-color: var(--color-input-error-background);
+			border: 1px solid var(--color-input-error-border);
+			color: var(--color-input-error-text);
 			&::placeholder{
-				color: #e78989;
+				color: var(--color-input-error-placeholder);
 			}
 		}
 		.icon{
-			color: #af4242;
+			color: var(--color-input-error-text);
 			&[data-placeholder]{
-				color: #e78989;
+				color: var(--color-input-error-placeholder);
 			}
 		}
 		.comment{
-			color: #e78989;
+			color: var(--color-input-error-placeholder);
 		}
 		.label{
-			color: #c96e6e;
+			color: var(--color-input-error-label);
 		}
 	}
 	&[data-type="warning"]{
 		.input{
-			background-color: #FFF9E2;
-			border: 1px solid #E8DDA4;
-			color: #6c621b;
+			background-color: var(--color-input-warning-background);
+			border: 1px solid var(--color-input-warning-border);
+			color: var(--color-input-warning-text);
 			&::placeholder{
-				color: #bdb15a;
+				color: var(--color-input-warning-placeholder);
 			}
 		}
 		.icon{
-			color: #6c621b;
+			color: var(--color-input-warning-text);
 			&[data-placeholder]{
-				color: #bdb15a;
+				color: var(--color-input-warning-placeholder);
 			}
 		}
 		.comment{
-			color: #bdb15a;
+			color: var(--color-input-warning-placeholder);
 		}
 		.label{
-			color: #a4912b
+			color: var(--color-input-warning-label);
 		}
 	}
 }

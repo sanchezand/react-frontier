@@ -5,6 +5,7 @@ import style from '../style/dropdown.module.scss';
 import Loader from './Loader';
 import classNames from 'classnames';
 import { useLocale } from './useLocale';
+import { InputType } from './Input';
 
 export type DropdownValueChange = (v: any, d: DropdownItemProps)=>boolean | void;
 
@@ -26,6 +27,7 @@ export interface DropdownProps{
 	required?: boolean,
 	disabled?: boolean,
 	loading?: boolean,
+	type?: InputType,
 	onValueChange?: DropdownValueChange,
 	iconName?: IconName,
 	menuStyle?: React.CSSProperties,
@@ -34,8 +36,8 @@ export interface DropdownProps{
 	closeOnSelect?: boolean,
 	emptyText?: string,
 	searchingText?: string,
-	contents?: any,
-	hasField?: boolean,
+	comment?: string,
+	commentStyle?: React.CSSProperties,
 }
 
 export interface DropdownItemProps{
@@ -55,10 +57,8 @@ var Dropdown = (props: DropdownProps)=>{
 		value,
 		className,
 		closeOnSelect,
-		contents,
 		disabled,
 		emptyText,
-		hasField,
 		iconName,
 		items,
 		itemStyle,
@@ -73,6 +73,10 @@ var Dropdown = (props: DropdownProps)=>{
 		searchTimeout: propsSearchTimeout,
 		searchingText,
 		style: propsStyle,
+		type: inputType,
+		required,
+		comment,
+		commentStyle,
 		...restProps
 	} = props;
 	var [searchValue, setSearchValue] = useState<string>('');
@@ -177,15 +181,18 @@ var Dropdown = (props: DropdownProps)=>{
 			}}
 		>
 			{!!props.label && (
-				<label className={style.label}>
+				<label className={style.label} data-type={props.type}>
 					{props.label}
 					{!!props.required && (
 						<span className={style.required}> *</span>
 					)}
 				</label>
 			)}
+			{!!props.comment && (
+				<div className={classNames("comment", style.comment)} style={props.commentStyle} data-type={props.type}>{props.comment}</div>
+			)}
 			{!!(props.search || props.onAsyncSearch) ? (
-				<div className={style.trigger} data-search data-disabled={props.disabled || undefined}>
+				<div className={style.trigger} data-search data-disabled={props.disabled || undefined} data-type={props.type}>
 					{!!props.iconName && (
 						<Combobox.Trigger className={style.iconLeft} nativeButton={false} render={<Icon name={props.iconName} />} data-absolute data-placeholder={is_placeholder || undefined} />
 					)}
@@ -199,7 +206,7 @@ var Dropdown = (props: DropdownProps)=>{
 					)}
 				</div>
 			) : (
-				<Combobox.Trigger className={style.trigger}>
+				<Combobox.Trigger className={style.trigger} data-type={props.type}>
 					{!!props.iconName && (
 						<Icon className={style.iconLeft} name={props.iconName} data-placeholder={is_placeholder || undefined} />
 					)}
