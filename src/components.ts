@@ -12,6 +12,7 @@ import Loader from './components/Loader';
 import Icon, { IconName as CompIconName, IconsList } from "./components/Icon"
 import { FrontierProvider } from './components/useFrontier';
 import Header from './components/Header';
+import Groupper from './components/Groupper';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -36,6 +37,7 @@ export {
 	Checkbox,
 	Dropdown,
 	FrontierProvider,
+	Groupper,
 	Header,
 	Icon,
 	IconsList,

@@ -10,6 +10,7 @@ import CalendarDemo from './demos/CalendarDemo';
 import { LocaleProvider } from '../components/useLocale';
 import { FrontierProvider } from '../components';
 import HeaderDemo from './demos/HeaderDemo';
+import GroupperDemo from './demos/GroupperDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -49,6 +50,7 @@ var Navigation = ()=>{
 			{ path: '/accordion', element: <AccordionDemo /> }, 
 			{ path: '/calendar', element: <CalendarDemo /> }, 
 			{ path: '/header', element: <HeaderDemo /> }, 
+			{ path: '/groupper', element: <GroupperDemo /> }
 		]
 	}])
 
