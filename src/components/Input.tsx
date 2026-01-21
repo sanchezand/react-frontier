@@ -46,6 +46,40 @@ interface InputProps{
 
 var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLTextAreaElement>)=>{
 	var { t } = useTranslation();
+	var {
+		autoFocus,
+		calendar,
+		className,
+		comment,
+		commentStyle,
+		error,
+		fluid,
+		iconName,
+		iconStyle,
+		inputStyle,
+		inputType,
+		label,
+		labelStyle,
+		loading,
+		maxLength,
+		onChange,
+		onClick,
+		onFocus,
+		onKeyUp,
+		onLoadingChanged,
+		onSubmit,
+		placeholder,
+		readonly,
+		required,
+		style: propStyle,
+		submitOnEnter,
+		textarea,
+		textareaRows,
+		type,
+		value,
+		valueFormat,
+		...restProps
+	} = props;
 	var [loading, setLoading] = useState<boolean>(false);
 	var [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 	var [handle, setHandle] = useState<Popover.Handle<unknown>>(Popover.createHandle());
@@ -143,6 +177,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			data-fluid={props.fluid || undefined} 
 			data-type={input_type || undefined}
 			style={props.style}
+			{...restProps}
 		>
 			{!!props.label && (
 				<Field.Label className={style.label} style={props.labelStyle}>

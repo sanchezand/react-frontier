@@ -61,6 +61,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		onLoadingChanged,
 		as,
 		checkmark,
+		menu,
 		...restProps
 	} = props;
 	var [loading, setLoading] = useState(false);

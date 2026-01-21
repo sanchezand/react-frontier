@@ -16,8 +16,21 @@ interface GroupperDividerProps extends PropsWithChildren{
 	className?: string,
 }
 const GroupperDivider = (props: GroupperDividerProps)=>{
+	var {
+		centered,
+		children,
+		className,
+		lineStyle,
+		size,
+		style: propStyle,
+		text,
+		textStyle,
+		top,
+		type,
+		...restProps
+	} = props;
 	var divider_type = props.type || (typeof props.type==='undefined' && (!!props.text || !!props.children) ? 'text' : 'solid');
-	return <div className={style.divider} data-top={!!props.top || undefined} data-centered={props.centered || undefined} data-type={divider_type}>
+	return <div className={style.divider} data-top={!!props.top || undefined} data-centered={props.centered || undefined} data-type={divider_type} {...restProps}>
 		{(divider_type==='text') ? (
 			props.children || props.text
 		) : divider_type==='line text' ? <>
