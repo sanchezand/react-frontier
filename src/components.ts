@@ -14,6 +14,7 @@ import { FrontierProvider } from './components/useFrontier';
 import Header from './components/Header';
 import Groupper from './components/Groupper';
 import Input from './components/Input';
+import Field from './components/Field';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -37,6 +38,7 @@ export {
 	Calendar,
 	Checkbox,
 	Dropdown,
+	Field,
 	FrontierProvider,
 	Groupper,
 	Header,

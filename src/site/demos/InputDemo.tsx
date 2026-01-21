@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dropdown, Input } from '../../components';
+import { Button, Dropdown, Field, Input } from '../../components';
 
 interface InputDemoProps{
 	
@@ -34,13 +34,35 @@ var InputDemo = (props: InputDemoProps)=>{
 		}} />
 		<Input label='Test' value={valTest} onChange={setValTest} iconName='ticket' comment='Comment test' style={{ marginTop: 15 }} />
 		<Input label='Test' required textarea style={{ marginTop: 15 }} />
-		<Dropdown value={1} label='lmao' required items={[
+		<Dropdown value={1} label='Test' required items={[
 			{ text: 'Test 1', value: 1 },
 			{ text: 'Test 2', value: 2 },
 			{ text: 'Test 3', value: 3 },
 		]} />
 		<Input label='Test' comment='test' type={test ? 'warning' : 'normal'} value={valTest2} onChange={setValTest2} iconName='ticket' fluid style={{ marginTop: 15 }} />
 		<Input iconName='search' label='Test' comment='test' type={test ? 'error' : 'normal'} value={valTest3} onChange={setValTest3} fluid style={{ marginTop: 15 }} />
+		<Field amount={2} label='Input' comment='Test input'>
+			<Input />
+			<Input />
+		</Field>
+		<Field amount={3}>
+			<Input label='Test' comment='Comment test' />
+			<Input label='Test' comment='Comment test' />
+			<Input label='Test' comment='Comment test' />
+		</Field>
+
+		<Input fluid iconName='calculator' label='Input actions test' comment='Testing with comment' buttons={<>
+			<Button text='Test' iconRight='caret-down' menu={[
+				{ text: 'test menu' },
+				{ text: 'test menu', items: [
+					{ text: 'Submenu test' },
+					{ text: 'Submenu test' },
+					{ text: 'Submenu test' },
+				] },
+				{ text: 'test menu' },
+			]} />
+			<Button text='Test ' />
+		</>} />
 	</div>
 }
 

@@ -1,4 +1,4 @@
-import React, { Ref, useEffect, useMemo, useState } from 'react';
+import React, { ReactNode, Ref, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
@@ -7,6 +7,7 @@ import { Field, Popover } from '@base-ui/react';
 import Calendar, { CalendarProps } from './Calendar';
 import moment from 'moment';
 import Loader from './Loader';
+import Button from './Button';
 
 export type InputType = 'error' | 'warning' | 'normal';
 
@@ -41,6 +42,7 @@ interface InputProps{
 	maxLength?: number,
 	textarea?: boolean,
 	textareaRows?: number,
+	buttons?: ReactNode,
 	onClick?: ()=>void,
 }
 
@@ -78,6 +80,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 		type,
 		value,
 		valueFormat,
+		buttons,
 		...restProps
 	} = props;
 	var [loading, setLoading] = useState<boolean>(false);
@@ -176,6 +179,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			data-loading={!!loading || undefined} 
 			data-fluid={props.fluid || undefined} 
 			data-type={input_type || undefined}
+			data-actions={!!props.buttons || undefined}
 			style={props.style}
 			{...restProps}
 		>
@@ -195,11 +199,16 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			) : !!props.iconName && (
 				<Icon name={props.iconName} style={props.iconStyle} className={style.icon} data-placeholder={(props.calendar ? !props.calendar.date : !props.value) || undefined} />
 			)}
-			{props.calendar ? (
-				<Popover.Trigger handle={handle} render={<div />}>
-					{InputElem}
-				</Popover.Trigger>
-			) : InputElem}
+			<div className={style.content}>
+				{props.calendar ? (
+					<Popover.Trigger handle={handle} render={<div />}>
+						{InputElem}
+					</Popover.Trigger>
+				) : InputElem}
+				<div className={style.actions}>
+					{props.buttons}
+				</div>
+			</div>
 		</Field.Root>
 		{!!props.calendar && (
 			<Popover.Root handle={handle}>

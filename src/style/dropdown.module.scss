@@ -202,6 +202,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	max-width: var(--available-width);
 	transition: opacity 0.1s, transform 0.1s;
 	transform-origin: var(--transform-origin);
+	min-width: 120px;
 
 	overflow-y: auto;
 	scroll-padding-block: 0.5rem;
