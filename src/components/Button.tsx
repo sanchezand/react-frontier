@@ -7,10 +7,12 @@ import DropdownStyle from '../style/dropdown.module.scss';
 import Loader from './Loader';
 
 interface ButtonMenuProps{
-	text: any,
+	text?: any,
+	items?: ButtonMenuProps[]
 	className?: string,
-	iconName?: string,
+	iconName?: IconName,
 	if?: boolean,
+	separator?: boolean,
 	onClick?: ()=>void,
 	style?: React.CSSProperties,
 }
@@ -117,10 +119,42 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 			<Menu.Portal>
 				<Menu.Positioner sideOffset={8} align='start'>
 					<Menu.Popup className={DropdownStyle.popup} data-fluid>
-						{props.menu.map((a, i)=>(
-							<Menu.Item key={`BTNMENU-${a.text}`} className={DropdownStyle.item}>
-								{a.text}
-							</Menu.Item>
+						{props.menu.filter(a=>a.if!==false).map((a, i)=>(
+							a.separator ? (
+								<Menu.Separator className={DropdownStyle.separator} />
+							) : a.items && a.items.length>0 ? (
+								<Menu.SubmenuRoot>
+									<Menu.SubmenuTrigger className={classNames(DropdownStyle.item, DropdownStyle.submenuItem)}>
+										<div className={DropdownStyle.text}>{a.text}</div>
+										<Icon name='caret-right' className={DropdownStyle.menuIcon} />
+									</Menu.SubmenuTrigger>
+									<Menu.Portal>
+										<Menu.Positioner>
+											<Menu.Popup className={DropdownStyle.popup}>
+												{a.items.map(b=>(
+													b.separator ? (
+														<Menu.Separator className={DropdownStyle.separator} />
+													) : (
+														<Menu.Item key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
+															{!!b.iconName && (
+																<Icon className={DropdownStyle.itemIcon} name={b.iconName} />
+															)}
+															{b.text}
+														</Menu.Item>
+													)
+												))}
+											</Menu.Popup>
+										</Menu.Positioner>
+									</Menu.Portal>
+								</Menu.SubmenuRoot>
+							) : (
+								<Menu.Item key={`BTNMENU-${a.text}`} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
+									{!!a.iconName && (
+										<Icon className={DropdownStyle.itemIcon} name={a.iconName} />
+									)}
+									{a.text}
+								</Menu.Item>
+							)
 						))}
 					</Menu.Popup>
 				</Menu.Positioner>

@@ -48,13 +48,19 @@ var ButtonDemo = ()=>{
 		<div className="section head">Button menu</div>
 		<div className="demo buttons">
 			<Button text='Options' iconRight='caret-down' menu={[
-				{ text: 'Test button' },
+				{ text: 'Test button', iconName: 'ticket' },
 				{ text: 'Test 2' },
-				{ text: 'Test 3' },
+				{ text: 'Test 3', items: [
+					{ text: 'Sub 1', iconName: 'address-card' },
+					{ text: 'Sub 2' },
+					{ separator: true },
+					{ text: 'Sub 3' },
+				]},
 				{ text: 'Test 4' },
 			]} />
 			<Button icon iconName='ellipsis-h' size='tiny' menu={[
 				{ text: 'Test button' },
+				{ separator: true },
 				{ text: 'Test 2' },
 				{ text: 'Test 3' },
 				{ text: 'Test 4' },
