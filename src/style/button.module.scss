@@ -13,6 +13,12 @@
 	text-decoration: none;
 	min-width: 120px;
 	font-weight: 700;
+
+	.iconRight{
+		margin-right: 0;
+		margin-left: 5px;
+	}
+
 	&:hover{
 		background-color: #dadfe6
 	}
@@ -80,9 +86,12 @@
 	}
 
 	&[data-icon]{
-		min-width: 0 !important;
-		padding: 4px 5px 5px 5px;
+		min-width: 40px !important;
+		&[data-size="tiny"]{
+			height: 26px;
+		}
 		i{
+			text-align: center;
 			margin-right: 0 !important;
 		}
 	}

@@ -1,9 +1,19 @@
 import React, { CSSProperties, ElementType, useEffect, useMemo, useState } from 'react';
-import { Button as BaseButton } from '@base-ui/react';
+import { Button as BaseButton, Menu } from '@base-ui/react';
 import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
 import styles from '../style/button.module.scss';
+import DropdownStyle from '../style/dropdown.module.scss';
 import Loader from './Loader';
+
+interface ButtonMenuProps{
+	text: any,
+	className?: string,
+	iconName?: string,
+	if?: boolean,
+	onClick?: ()=>void,
+	style?: React.CSSProperties,
+}
 
 type ButtonProps<E extends ElementType> = {
 	as?: E,
@@ -25,6 +35,7 @@ type ButtonProps<E extends ElementType> = {
 	fluid?: boolean,
 	style?: React.CSSProperties,
 	onLoadingChanged?: (v: boolean)=>void,
+	menu?: ButtonMenuProps[]
 } & React.ComponentPropsWithoutRef<E>;
 
 var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
@@ -77,7 +88,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 	}, [props.size]);
 	
 	const ComponentType = props.as ?? 'div';
-	return <ComponentType 
+	const ButtonComponent = <ComponentType 
 		className={classNames("fr button", styles.button, props.className)}
 		data-size={props.size || undefined}
 		data-disabled={props.disabled || undefined}
@@ -96,9 +107,28 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		) : <>
 			{!!iconName && <Icon name={props.iconName!} style={props.iconStyle} />}
 			{text}
-			{!!iconRight && <Icon name={props.iconRight!} style={props.iconRightStyle} />}
+			{!!iconRight && <Icon name={props.iconRight!} style={props.iconRightStyle} className={styles.iconRight} />}
 		</>}
 	</ComponentType>
+
+	if(props.menu && props.menu.length>0){
+		return <Menu.Root>
+			<Menu.Trigger render={ButtonComponent} />
+			<Menu.Portal>
+				<Menu.Positioner sideOffset={8} align='start'>
+					<Menu.Popup className={DropdownStyle.popup} data-fluid>
+						{props.menu.map((a, i)=>(
+							<Menu.Item key={`BTNMENU-${a.text}`} className={DropdownStyle.item}>
+								{a.text}
+							</Menu.Item>
+						))}
+					</Menu.Popup>
+				</Menu.Positioner>
+			</Menu.Portal>
+		</Menu.Root>
+	}
+
+	return ButtonComponent;
 }
 
 export default Button;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '../../components';
+import { Button, IconsList } from '../../components';
 
 var ButtonDemo = ()=>{
 	useEffect(()=>{
@@ -38,6 +38,27 @@ var ButtonDemo = ()=>{
 			<Button disabled color="black" size='small' text='Small' />
 			<Button disabled color="black" text='Normal' />
 			<Button disabled color="black" text='Big' />
+		</div>
+		<div className="section head">Icon</div>
+		<div className="demo buttons">
+			{[...IconsList].slice(Math.floor(Math.random()*50), Math.floor(Math.random()*50)+50).slice(0, 10).map((a, i)=>(
+				<Button icon iconName={a} size={['big', 'normal', 'small', 'tiny'][i%4] as any} />
+			))}
+		</div>
+		<div className="section head">Button menu</div>
+		<div className="demo buttons">
+			<Button text='Options' iconRight='caret-down' menu={[
+				{ text: 'Test button' },
+				{ text: 'Test 2' },
+				{ text: 'Test 3' },
+				{ text: 'Test 4' },
+			]} />
+			<Button icon iconName='ellipsis-h' size='tiny' menu={[
+				{ text: 'Test button' },
+				{ text: 'Test 2' },
+				{ text: 'Test 3' },
+				{ text: 'Test 4' },
+			]} />
 		</div>
 		{/* <Header text='Frontier' style={{ margin: 15 }} />
 		<Groupper title='Buttons' width={600}>
