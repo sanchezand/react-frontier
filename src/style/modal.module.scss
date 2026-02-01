@@ -1,0 +1,208 @@
+$MODAL_PADDING: 20px;
+$MODAL_BORDER_RADIUS: 12px;
+$modal-normal-size: 700px;
+$modal-sizes:
+	"large" 1000px,
+	"normal" 700px,
+	"small" 650px,
+	"tiny" 500px,
+	"mini" 350px,
+;
+
+.backdrop{
+	z-index: 99;
+	position: fixed;
+	min-height: 100dvh;
+	inset: 0;
+	background-color: rgba(0, 0, 0);
+	opacity: 0.8;
+	transition: opacity 500ms cubic-bezier(0.45, 1.005, 0, 1.005);
+	backdrop-filter: blur(30px);
+
+	/* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
+	@supports (-webkit-touch-callout: none) {
+		position: absolute;
+	}
+
+	&[data-starting-style],
+	&[data-ending-style] {
+		backdrop-filter: blur(0);
+		opacity: 0;
+	}
+}
+
+.modal{
+	z-index: 100;
+	background-color: white;
+	border-radius: $MODAL_BORDER_RADIUS;
+	box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
+	outline: none;
+	opacity: 1;
+	max-width: $modal-normal-size;
+	transition: transform 250ms ease;
+	transition: opacity 200ms ease;
+	will-change: transform;
+
+	&[data-starting-style], &[data-ending-style]{
+		opacity: 0;
+		transform: scale(0.99);
+	}
+
+	> .header{
+		background-color: #F9FAFB;
+		border-bottom: 1px solid #e5e7eb;
+		border-top-left-radius: $MODAL_BORDER_RADIUS;
+		border-top-right-radius: $MODAL_BORDER_RADIUS;
+		display: flex;
+		align-items: center;
+		padding: 0 $MODAL_PADDING;
+
+		> .text{
+			font-size: 20px;
+			font-weight: bold;
+			line-height: 20px;
+			padding: $MODAL_PADDING 0;
+			flex-grow: 100;
+		}
+		> .actions{
+			
+		}
+	}
+	> .actions{
+		padding: 10px;
+		background-color: #F9FAFB;
+		border-top: 1px solid #e5e7eb;
+		display: flex;
+		justify-content: flex-end;
+		gap: 10px;
+
+		.fr.button{
+			line-height: 14px;
+		}
+	}
+	> .content{
+		background-color: white;
+		padding: $MODAL_PADDING;
+	}
+
+	> :last-child:not(.header){
+		border-bottom-left-radius: $MODAL_BORDER_RADIUS;
+		border-bottom-right-radius: $MODAL_BORDER_RADIUS;
+	}
+	> :first-child{
+		border-top-left-radius: $MODAL_BORDER_RADIUS;
+		border-top-right-radius: $MODAL_BORDER_RADIUS;
+		:global(input){
+			border-top-left-radius: $MODAL_BORDER_RADIUS !important;
+			border-top-right-radius: $MODAL_BORDER_RADIUS !important;
+		}
+	}
+
+	@each $name, $size in $modal-sizes{
+		&[data-size="#{$name}"]{
+			max-width: $size;
+		}
+	}
+}
+
+.viewport{
+	z-index: 100;
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.scrollViewport{
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	overscroll-behavior: contain;
+	
+	[data-ending-style] & {
+		pointer-events: none;
+	}
+}
+
+.scrollContent{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100%;
+	padding: 50px 10px;
+	@media (min-height: 600px) {
+		padding: 60px 10px;
+	}
+}
+
+.scrollbar{
+	position: absolute;
+	display: flex;
+	width: 6px;
+	margin: 5px;
+	justify-content: center;
+	border-radius: 6px;
+	opacity: 0;
+	transition: opacity 250ms;
+	pointer-events: none;
+
+	&:hover,&[data-scrolling] {
+		opacity: 1;
+		transition-duration: 75ms;
+		transition-delay: 0ms;
+		pointer-events: auto;
+	}
+
+	[data-ending-style] & {
+		transition-duration: 250ms;
+		opacity: 0;
+	}
+
+	@media (min-width: 768px) {
+		width: 0.4375rem;
+	}
+}
+
+.scrollbarHandle{
+	width: 100%;
+	border-radius: inherit;
+	background-color: rgba(255, 255, 255, 0.3);
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: calc(100% + 6px);
+		height: calc(100% + 5px);
+	}
+}
+
+.input{
+	margin-bottom: 0;
+	:global(input){
+		border-top: 0 !important;
+		border-right: 0 !important;
+		border-left: 0 !important;
+		border-radius: 0 !important;
+		padding: 16px $MODAL_PADDING !important;
+		font-size: 16px !important;
+		&:focus{
+			box-shadow: none !important;
+		}
+	}
+	&[data-icon]{
+		i{
+			font-size: 16px;
+			height: 52px !important;
+			line-height: 50px !important;
+			margin-left: 3px;
+		}
+		:global(input){
+			padding-left: calc($MODAL_PADDING + 20px) !important;
+		}
+	}
+}

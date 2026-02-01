@@ -1,0 +1,61 @@
+$MESSAGE_COLORS:
+	"default" rgba(0,0,0,0.08) black transparent,
+	"error" #fadddd #783b3b #fadddd,
+	"orange" #faebdd #78583b #faebdd,
+	"warning" #fff0d4 #786c3b #fbe6c0,
+	"success" #D6F2AB #3F6212 #D6F2AB,
+	"info" #DFE4F2 #122262 #DFE4F2,
+;
+
+
+.message{
+	background-color: rgba(0,0,0,0.08);
+	border-radius: 8px;
+	padding: 15px;
+	font-size: 16px;
+
+	&[data-type="error"]:empty{
+		display: none;
+	}
+	
+	&[data-centered]{
+		.header, .text{
+			text-align: center;
+		}
+	}
+
+	.header{
+		font-size: 20px;
+		margin-bottom: 5px;
+		font-weight: bold;
+		&[data-margin]{
+			margin-bottom: 5px;
+		}
+	}
+
+	ul.list,ul,ol.list,ol{
+		margin: 0;
+		padding-left: 15px;
+		margin-bottom: 0;
+		li:last-child{
+			margin-bottom: 0;
+		}
+	}
+
+	&[data-size="small"]{
+		font-size: 14px;
+		line-height: 15px;
+		.header{
+			font-size: 18px;
+			margin-bottom: 5px;
+		}
+	}
+
+	@each $name, $background, $color, $border in $MESSAGE_COLORS{
+		&[data-color="#{$name}"]{
+			color: $color;
+			background-color: $background;
+			border: 1px solid $border;
+		}
+	}
+}

@@ -12,7 +12,8 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 
 	const TEST_ITEMS = new Array(30).fill(0).map((a, i)=>({
 		text: `Item ${i}`,
-		value: i
+		value: i,
+		meta: i==0 ? 'Test' : null
 	}))
 	
 	return <div style={{ margin: 'auto', maxWidth: 400, marginTop: 10 }}>

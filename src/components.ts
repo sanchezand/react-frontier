@@ -15,6 +15,9 @@ import Header from './components/Header';
 import Groupper from './components/Groupper';
 import Input from './components/Input';
 import Field from './components/Field';
+import Image from './components/Image';
+import Label from './components/Label';
+import Message from './components/Message';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -44,6 +47,9 @@ export {
 	Header,
 	Icon,
 	IconsList,
+	Image,
 	Input,
+	Label,
 	Loader,
+	Message,
 }

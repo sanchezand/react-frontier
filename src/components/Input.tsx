@@ -11,7 +11,7 @@ import Button from './Button';
 
 export type InputType = 'error' | 'warning' | 'normal';
 
-interface InputProps{
+export interface InputProps{
 	value?: string,
 	readonly?: boolean,
 	fluid?: boolean,

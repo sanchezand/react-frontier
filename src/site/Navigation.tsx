@@ -12,6 +12,9 @@ import { FrontierProvider } from '../components';
 import HeaderDemo from './demos/HeaderDemo';
 import GroupperDemo from './demos/GroupperDemo';
 import InputDemo from './demos/InputDemo';
+import LabelDemo from './demos/LabelDemo';
+import MessageDemo from './demos/MessageDemo';
+import ModalDemo from './demos/ModalDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -52,7 +55,10 @@ var Navigation = ()=>{
 			{ path: '/calendar', element: <CalendarDemo /> }, 
 			{ path: '/header', element: <HeaderDemo /> }, 
 			{ path: '/groupper', element: <GroupperDemo /> },
-			{ path: '/input', element: <InputDemo /> }
+			{ path: '/input', element: <InputDemo /> },
+			{ path: '/label', element: <LabelDemo /> },
+			{ path: '/message', element: <MessageDemo /> },
+			{ path: '/modal', element: <ModalDemo /> },
 		]
 	}])
 

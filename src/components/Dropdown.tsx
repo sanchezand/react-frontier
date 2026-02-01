@@ -100,7 +100,7 @@ var Dropdown = (props: DropdownProps)=>{
 	}, [props.items, searchResults, props.value]);
 
 	var shown_value = useMemo(()=>{
-		if(props.value && props.items){
+		if((props.value!==null && typeof props.value!=='undefined') && props.items){
 			var it = props.items.find(a=>a.value===props.value && a.if!==false);
 			if(it){
 				return it.text || it.value;
@@ -134,6 +134,7 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 	}
 
+	console.log(real_val || null);
 	return <div className={classNames("fr dropdown", props.className)} style={props.style} {...restProps}>
 		<Combobox.Root 
 			items={shown_items}
@@ -261,7 +262,12 @@ var Dropdown = (props: DropdownProps)=>{
 										<Combobox.ItemIndicator>
 											<Icon name='check' />
 										</Combobox.ItemIndicator>
-									{a.text || a.value}
+									<div className={style.text}>
+										{a.text || a.value}
+									</div>
+									{!!a.meta && (
+										<div className={style.meta}>lmao</div>
+									)}
 								</Combobox.Item>
 							)}
 						</Combobox.List>

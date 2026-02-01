@@ -234,6 +234,8 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	margin: 4px;
 	border-radius: 7px;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
 
 	&[data-selected]{
 		background-color: rgba(0,0,0,0.08);
@@ -245,8 +247,15 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 			background-color: rgba(0,0,0,0.1);
 		}
 	}
+	> .text{
+		flex-grow: 100;
+	}
+	.meta{
+		font-size: 12px;
+		color: gray;
+	}
 
-	.itemIcon{
+	> .itemIcon{
 		margin-right: 8px;
 	}
 }

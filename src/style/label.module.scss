@@ -1,0 +1,59 @@
+$LABEL_COLORS: 
+	"black" #151717 white,
+	"blue" #3B82F636 #1E3A8Ae6,
+	"yellow" #F59E0B36 #713F12e6,
+	"orange" #ffa50087 #5e410d,
+	"green" #97E1136B #335709,
+	"red" #F8717136 #7F1D1De6,
+	"transparent" transparent gray
+;
+
+.label{
+	padding: 3px 15px;
+	border-radius: 100px;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	background-color: #6B728036;
+	color: #0F172Ae6;
+	position: relative;
+	min-width: 55px;
+
+	&[data-circle]{
+		padding: 3px 3px;
+		min-width: 20px;
+	}
+
+	&[data-selectable]{
+		cursor: pointer;
+	}
+
+	&[data-loading]{
+		padding-top: 5px;
+		padding-bottom: 6px;
+		display: inline-flex;
+		align-items: center;
+		> :global(.fr.loader){
+			margin: auto;
+		}
+	}
+
+	&[data-size="small"]{
+		padding: 2px 10px;
+		font-size: 12px;
+		min-width: 40px;
+		&[data-loading]{
+			padding-top: 7px;
+			padding-bottom: 7px;
+		}
+	}
+
+	@each $name, $background, $color in $LABEL_COLORS{
+		&[data-color="#{$name}"]{
+			color: $color;
+			background-color: $background;
+		}
+	}
+}
