@@ -1,0 +1,69 @@
+@import 'theme.scss';
+
+$BORDER_RADIUS: 6px;
+
+.pagination{
+	padding: 3px;
+	display: flex;
+	align-items: center;
+	.move, .pages > .page{
+		text-align: center;
+		width: 45px;
+		height: 35px;
+		line-height: 25px;
+		padding: 5px;
+		font-size: 16px;
+		border-radius: $BORDER_RADIUS;
+		background-color: var(--color-gray-100);
+		cursor: pointer;
+		user-select: none;
+
+		> i{
+			margin-right: 0;
+			font-size: 14px;
+		}
+
+		&[data-disabled]{
+			background-color: var(--color-gray-50);
+			cursor: auto;
+			color: var(--color-gray-300);
+		}
+	}
+	.move{
+		width: 35px;
+		&:not([data-disabled]):hover{
+			background-color: var(--color-gray-200);
+		}
+	}
+	.pages{
+		display: flex;
+		align-items: center;
+		flex-grow: 100;
+		gap: 5px;
+		justify-content: center;
+		position: relative;
+		.page{
+			background-color: var(--color-gray-50);
+		}
+	}
+	&:not([data-disabled]) .pages .page:hover{
+		background-color: var(--color-gray-150);
+	}
+
+	&[data-disabled]{
+		.pages .page{
+			cursor: unset;
+			opacity: 0.4;
+		}
+	}
+	
+	@each $name, $background, $color, $hover in $frontier-colors{
+		&[data-color="#{$name}"] .pages .page[data-active]{
+			color: $color;
+			background-color: $background;
+		}
+		&[data-color="#{$name}"]:not([data-disabled]) .pages .page[data-active]:hover{
+			background-color: $hover;
+		}
+	}
+}

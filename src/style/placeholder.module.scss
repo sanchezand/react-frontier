@@ -1,0 +1,13 @@
+.placeholder{
+	display: inline-block;
+	background-color: var(--color-gray-200);
+	border-radius: var(--placeholder-height);
+	margin-bottom: -4px;
+	height: var(--placeholder-height);
+	width: var(--placeholder-width);
+	
+	&[data-block]{
+		display: block;
+		margin-bottom: 0,
+	}
+}

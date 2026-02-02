@@ -18,12 +18,16 @@ import Field from './components/Field';
 import Image from './components/Image';
 import Label from './components/Label';
 import Message from './components/Message';
+import Pagination from './components/Pagination';
+import Placeholder from './components/Placeholder';
+import { FrontierColors as CompFrontierColors } from './components/Classes';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
 export type DropdownSearchResult = CompDropdownSearchResult;
 export type DropdownProps = CompDropdownProps;
 export type DropdownValueChange = CompDropdownValueChange;
+export type FrontierColors = CompFrontierColors
 
 i18n.use(initReactI18next).use(resourcesToBackend(async (language: string)=>{
 	var lang = (await import(`./locale/${language}.json`)).default;
@@ -52,4 +56,6 @@ export {
 	Label,
 	Loader,
 	Message,
+	Pagination,
+	Placeholder,
 }

@@ -1,5 +1,6 @@
 import React, { CSSProperties, ElementType, useEffect, useMemo, useState } from 'react';
 import { Button as BaseButton, Menu } from '@base-ui/react';
+import { FrontierColors } from './Classes';
 import Icon, { IconName } from './Icon';
 import classNames from 'classnames';
 import styles from '../style/button.module.scss';
@@ -23,7 +24,7 @@ type ButtonProps<E extends ElementType> = {
 	onClick?: (setLoading: (loading: boolean)=>void)=>void,
 	nativeOnClick?: (ev?: React.MouseEvent)=>void,
 	basic?: boolean,
-	color?: 'green' | 'red' | 'purple' | 'black' | 'blue' | 'orange' | 'basic' | 'white' | 'yellow',
+	color?: FrontierColors,
 	loading?: boolean,
 	className?: string
 	icon?: boolean,

@@ -15,6 +15,8 @@ import InputDemo from './demos/InputDemo';
 import LabelDemo from './demos/LabelDemo';
 import MessageDemo from './demos/MessageDemo';
 import ModalDemo from './demos/ModalDemo';
+import PaginationDemo from './demos/PaginationDemo';
+import PlaceholderDemo from './demos/PlaceholderDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -59,6 +61,8 @@ var Navigation = ()=>{
 			{ path: '/label', element: <LabelDemo /> },
 			{ path: '/message', element: <MessageDemo /> },
 			{ path: '/modal', element: <ModalDemo /> },
+			{ path: '/pagination', element: <PaginationDemo /> },
+			{ path: '/placeholder', element: <PlaceholderDemo /> },
 		]
 	}])
 
