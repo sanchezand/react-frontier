@@ -20,6 +20,7 @@ import Label from './components/Label';
 import Message from './components/Message';
 import Pagination from './components/Pagination';
 import Placeholder from './components/Placeholder';
+import Popup from './components/Popup';
 import { FrontierColors as CompFrontierColors } from './components/Classes';
 
 export type IconName = CompIconName;
@@ -58,4 +59,5 @@ export {
 	Message,
 	Pagination,
 	Placeholder,
+	Popup,
 }

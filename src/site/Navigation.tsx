@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-// import { Accordion, Button, Groupper, Header, Sidebar } from 'react-frontier';
-import { createBrowserRouter, Link, Outlet, RouterProvider, useRouteError } from 'react-router-dom'
 import './style/demo.scss'
+import { createBrowserRouter, Link, Outlet, RouterProvider, useRouteError } from 'react-router-dom'
+import { LocaleProvider } from '../components/useLocale';
+import { FrontierProvider } from '../components';
 import ButtonDemo from './demos/ButtonDemo';
 import DropdownDemo from './demos/DropdownDemo';
 import CheckboxDemo from './demos/CheckboxDemo';
 import AccordionDemo from './demos/AccordionDemo';
 import CalendarDemo from './demos/CalendarDemo';
-import { LocaleProvider } from '../components/useLocale';
-import { FrontierProvider } from '../components';
 import HeaderDemo from './demos/HeaderDemo';
 import GroupperDemo from './demos/GroupperDemo';
 import InputDemo from './demos/InputDemo';
@@ -17,6 +16,7 @@ import MessageDemo from './demos/MessageDemo';
 import ModalDemo from './demos/ModalDemo';
 import PaginationDemo from './demos/PaginationDemo';
 import PlaceholderDemo from './demos/PlaceholderDemo';
+import PopupDemo from './demos/PopupDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -63,6 +63,7 @@ var Navigation = ()=>{
 			{ path: '/modal', element: <ModalDemo /> },
 			{ path: '/pagination', element: <PaginationDemo /> },
 			{ path: '/placeholder', element: <PlaceholderDemo /> },
+			{ path: '/popup', element: <PopupDemo /> },
 		]
 	}])
 

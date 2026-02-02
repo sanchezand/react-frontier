@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 $DEFAULT_COLOR: #fafafa;
 $BORDER_COLOR: #e0e0e0;
 $PLACEHOLDER_COLOR: #b4b4b4;
@@ -188,9 +190,9 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 }
 
 .trigger[data-popup-open],.trigger:has(.input[data-popup-open]),.popup{
-	background-color: white;
-	box-shadow: 0 0 5px 0px rgba(0,0,0,0.1);
-	border: 1px solid rgba(0,0,0,0.1);
+	background-color: $POPUP_BACKGROUND;
+	box-shadow: $POPUP_SHADOW;
+	border: $POPUP_BORDER;
 }
 
 .popup{

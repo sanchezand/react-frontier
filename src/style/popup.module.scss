@@ -1,0 +1,39 @@
+@import 'theme.scss';
+
+.popup{
+	box-sizing: border-box;
+	border-radius: 8px;
+
+	max-width: var(--available-width);
+	transition: opacity 0.1s, transform 0.1s;
+	transform-origin: var(--transform-origin);
+	min-width: 120px;
+
+	overflow-y: auto;
+	scroll-padding-block: 0.5rem;
+	overscroll-behavior: contain;
+
+	max-width: 400px;
+
+	&[data-contain-width]{
+		width: var(--anchor-width);
+	}
+	&[data-contain-height]{
+		max-height: 200px;
+	}
+
+	&:not([data-basic]){
+		background-color: $POPUP_BACKGROUND;
+		box-shadow: $POPUP_SHADOW;
+		border: $POPUP_BORDER;
+	}
+
+
+	padding: 20px;
+
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+}

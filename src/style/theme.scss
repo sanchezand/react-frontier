@@ -84,3 +84,7 @@ $frontier-colors:
 	"white" var(--color-white) var(--color-white-text) var(--color-white-hover),
 	"yellow" var(--color-yellow) var(--color-yellow-text) var(--color-yellow-hover),
 ;
+
+$POPUP_BACKGROUND: white;
+$POPUP_SHADOW: 0 0 5px 0px rgba(0,0,0,0.1);
+$POPUP_BORDER: 1px solid rgba(0,0,0,0.1);
