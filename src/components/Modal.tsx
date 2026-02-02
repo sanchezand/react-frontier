@@ -11,8 +11,9 @@ interface ModalContentProps extends PropsWithChildren{
 	style?: React.CSSProperties,
 }
 var ModalContent = (props: ModalContentProps)=>{
+	var { shown, className, style: propsStyle, ...restProps } = props;
 	if(props.shown===false) return null;
-	return <div className={classNames(style.content, props.className)} style={props.style}>
+	return <div className={classNames("content", style.content, props.className)} style={props.style} {...restProps}>
 		{props.children}
 	</div>
 }
@@ -26,10 +27,20 @@ interface ModalHeaderProps extends PropsWithChildren{
 	actionsStyle?: React.CSSProperties,
 }
 var ModalHeader = (props: ModalHeaderProps)=>{
-	return <div className={classNames(style.header, props.className)} style={props.style}>
-		<div className={style.text} style={props.textStyle}>{props.children || props.text}</div>
+	var {
+		className,
+		actions,
+		actionsStyle,
+		children,
+		style: propsStyle,
+		text,
+		textStyle,
+		...restProps
+	} = props;
+	return <div className={classNames("header", style.header, props.className)} style={props.style} {...restProps}>
+		<div className={classNames("test", style.text)} style={props.textStyle}>{props.children || props.text}</div>
 		{!!props.actions && (
-			<div className={style.actions} style={props.actionsStyle}>{props.actions}</div>
+			<div className={classNames("actions", style.actions)} style={props.actionsStyle}>{props.actions}</div>
 		)}
 	</div>
 }
@@ -39,7 +50,8 @@ interface ModalActionsProps extends PropsWithChildren{
 	style?: React.CSSProperties,
 }
 var ModalActions = (props: ModalActionsProps)=>{
-	return <div className={classNames(style.actions, props.className)} style={props.style}>
+	var { className, style: propsStyle, ...restProps } = props;
+	return <div className={classNames(style.actions, props.className)} style={props.style} {...restProps}>
 		{props.children}
 	</div>
 }
@@ -59,10 +71,7 @@ var ModalActions = (props: ModalActionsProps)=>{
 // 	</div>
 // }
 
-interface ModalInputProps extends InputProps{
-
-}
-var ModalInput = (props: ModalInputProps)=>{
+var ModalInput = (props: InputProps)=>{
 	return <Input fluid {...props} className={style.input} />
 }
 
@@ -83,6 +92,14 @@ interface ModalProps extends PropsWithChildren{
 }
 
 const Modal : React.FC<ModalProps> & ModalSubComponents = (props: ModalProps)=>{
+	var {
+		open,
+		children,
+		className,
+		onClose,
+		size,
+		...restProps
+	} = props;
 	return <Dialog.Root open={props.open} onOpenChange={(o, ev)=>{
 		if(!o && props.onClose) return props.onClose(o);
 	}}>
@@ -92,7 +109,7 @@ const Modal : React.FC<ModalProps> & ModalSubComponents = (props: ModalProps)=>{
 				<ScrollArea.Root style={{ position: undefined }} className={style.scrollViewport}>
 					<ScrollArea.Viewport className={style.scrollViewport}>
 						<ScrollArea.Content className={style.scrollContent}>
-							<Dialog.Popup className={style.modal} data-size={props.size}>
+							<Dialog.Popup className={classNames(style.modal, props.className)} data-size={props.size} {...restProps}>
 								{props.children}
 							</Dialog.Popup>
 						</ScrollArea.Content>

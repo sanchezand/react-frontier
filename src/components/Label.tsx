@@ -62,18 +62,6 @@ var Label = <E extends ElementType = typeof defaultElement>(props: LabelProps<E>
 			{children}
 		</>}
 	</Component>
-
-	// return <Component className={classNames('fr label', color, size, {
-	// 	circular: circle,
-	// 	selectable: selectable,
-	// 	loading: loading,
-	// }, className)} style={style} onClick={onClick} {...restProps}>
-	// 	{!!iconName && (
-	// 		<Icon name={iconName} style={iconStyle} />
-	// 	)}
-	// 	{value}
-	// 	{children}
-	// </Component>
 }
 
 export default Label;
