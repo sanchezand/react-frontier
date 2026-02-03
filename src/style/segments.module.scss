@@ -1,0 +1,80 @@
+@import 'theme.scss';
+
+.list{
+	position: relative;
+	display: flex;
+	background-color: rgba(0,0,0,0.05);
+	border-radius: 12px;
+	padding: 5px;
+	justify-content: space-evenly;
+
+	.segment{
+		padding: 10px 5px;
+		flex-grow: 100;
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.2);
+		cursor: pointer;
+
+		&[data-active]{
+			color: white;
+		}
+		
+		&:not([data-active]):hover{
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+	}
+	.indicator{
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		top: 50%;
+		translate: var(--active-tab-left) -50%;
+		width: var(--active-tab-width);
+		padding: 10px 5px;
+		height: var(--active-tab-height);
+		border-radius: 12px;
+		transition-property: translate, width;
+		transition-duration: 100ms;
+		transition-timing-function: ease-in-out;
+	}
+
+	&[data-divided]{
+		gap: 10px;
+		.segment{
+			border-radius: 12px;
+		}
+	}
+	&:not([data-divided]){
+		.segment{
+			border: 2px solid rgba(0, 0, 0, 0.05);
+			border-left-width: 1px;
+			border-right-width: 1px;
+			&:first-child{
+				border-left-width: 2px;
+				border-top-left-radius: 12px;
+				border-bottom-left-radius: 12px;
+			}
+			&:last-child{
+				// border-right-width: 2px;
+				border-top-right-radius: 12px;
+				border-bottom-right-radius: 12px;
+			}
+		}
+	}
+
+	@each $name, $background, $color, $hover in $frontier-colors{
+		&[data-color="#{$name}"]{
+			.segment[data-active]{
+				color: $color;
+				background-color: transparent;
+			}
+			.indicator{
+				background-color: $background;
+			}
+
+			&[data-multiple] .segment[data-active]{
+				background-color: $background;
+			}
+		}
+	}
+}

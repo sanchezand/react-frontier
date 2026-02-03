@@ -17,6 +17,7 @@ import ModalDemo from './demos/ModalDemo';
 import PaginationDemo from './demos/PaginationDemo';
 import PlaceholderDemo from './demos/PlaceholderDemo';
 import PopupDemo from './demos/PopupDemo';
+import SegmentControlDemo from './demos/SegmentControlDemo';
 
 
 var NavigationSidebar = (props: { outlet: any })=>{
@@ -64,6 +65,7 @@ var Navigation = ()=>{
 			{ path: '/pagination', element: <PaginationDemo /> },
 			{ path: '/placeholder', element: <PlaceholderDemo /> },
 			{ path: '/popup', element: <PopupDemo /> },
+			{ path: '/segmentcontrol', element: <SegmentControlDemo /> },
 		]
 	}])
 
