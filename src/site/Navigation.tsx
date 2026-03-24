@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style/demo.scss'
 import { createBrowserRouter, Link, Outlet, RouterProvider, useRouteError } from 'react-router-dom'
-import { LocaleProvider } from '../components/useLocale';
-import { FrontierProvider } from '../components';
+import { FrontierProvider, IconName } from '../components';
 import ButtonDemo from './demos/ButtonDemo';
 import DropdownDemo from './demos/DropdownDemo';
 import CheckboxDemo from './demos/CheckboxDemo';
@@ -18,18 +17,30 @@ import PaginationDemo from './demos/PaginationDemo';
 import PlaceholderDemo from './demos/PlaceholderDemo';
 import PopupDemo from './demos/PopupDemo';
 import SegmentControlDemo from './demos/SegmentControlDemo';
+import SiteContainer from './SiteContainer';
 
+const NavigationRoutes : {
+	path: string,
+	element: React.JSX.Element,
+	title: string,
+	iconName: IconName,
+}[] = [
+	{ path: '/dropdown', 			title: 'Dropdown',			iconName: null, 		element: <DropdownDemo /> 			}, 
+	{ path: '/checkbox', 			title: 'Checkbox',			iconName: null, 		element: <CheckboxDemo /> 			}, 
+	{ path: '/accordion', 			title: 'Accordion',			iconName: null, 		element: <AccordionDemo /> 		}, 
+	{ path: '/calendar', 			title: 'Calendar',			iconName: null, 		element: <CalendarDemo /> 			}, 
+	{ path: '/header', 				title: 'Header',				iconName: null, 		element: <HeaderDemo /> 			}, 
+	{ path: '/groupper', 			title: 'Groupper',			iconName: null, 		element: <GroupperDemo />			},
+	{ path: '/input', 				title: 'Input',				iconName: null, 		element: <InputDemo />				},
+	{ path: '/label', 				title: 'Label',				iconName: null, 		element: <LabelDemo />				},
+	{ path: '/message', 				title: 'Message',				iconName: null, 		element: <MessageDemo />			},
+	{ path: '/modal', 				title: 'Modal',				iconName: null, 		element: <ModalDemo />				},
+	{ path: '/pagination', 			title: 'Pagination',			iconName: null, 		element: <PaginationDemo />		},
+	{ path: '/placeholder', 		title: 'Placeholder',		iconName: null, 		element: <PlaceholderDemo />		},
+	{ path: '/popup', 				title: 'Popup',				iconName: null, 		element: <PopupDemo />				},
+	{ path: '/segmentcontrol', 	title: 'Segment Control',	iconName: null, 		element: <SegmentControlDemo />	},
+]
 
-var NavigationSidebar = (props: { outlet: any })=>{
-	return <div>
-		{/* <Sidebar title='Test'>
-			<Sidebar.Item text='Test' />
-			<Sidebar.Item text='Test' />
-			<Sidebar.Item text='Test' />
-		</Sidebar> */}
-		{props.outlet}
-	</div>
-}
 
 var Navigation = ()=>{
 	var ErrorElement = ()=>{
@@ -48,24 +59,14 @@ var Navigation = ()=>{
 
 	const Router = createBrowserRouter([{
 		path: '/',
-		errorElement: <NavigationSidebar outlet={<ErrorElement />} />,
-		element: <NavigationSidebar outlet={<Outlet />} />,
+		errorElement: <SiteContainer items={NavigationRoutes} outlet={<ErrorElement />} />,
+		element: <SiteContainer items={NavigationRoutes} outlet={<Outlet />} />,
 		children: [
 			{ path: '/', element: <ButtonDemo /> }, 
-			{ path: '/dropdown', element: <DropdownDemo /> }, 
-			{ path: '/checkbox', element: <CheckboxDemo /> }, 
-			{ path: '/accordion', element: <AccordionDemo /> }, 
-			{ path: '/calendar', element: <CalendarDemo /> }, 
-			{ path: '/header', element: <HeaderDemo /> }, 
-			{ path: '/groupper', element: <GroupperDemo /> },
-			{ path: '/input', element: <InputDemo /> },
-			{ path: '/label', element: <LabelDemo /> },
-			{ path: '/message', element: <MessageDemo /> },
-			{ path: '/modal', element: <ModalDemo /> },
-			{ path: '/pagination', element: <PaginationDemo /> },
-			{ path: '/placeholder', element: <PlaceholderDemo /> },
-			{ path: '/popup', element: <PopupDemo /> },
-			{ path: '/segmentcontrol', element: <SegmentControlDemo /> },
+			...NavigationRoutes.map(a=>({
+				path: a.path,
+				element: a.element
+			}))
 		]
 	}])
 

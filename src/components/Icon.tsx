@@ -26,7 +26,7 @@ var Icon = (props: IconProps)=>{
 		...restProps
 	} = props;
 	return <i 
-		className={classNames(style.icon, props.className)}
+		className={classNames("fr icon", style.icon, props.className)}
 		data-icon={props.name}
 		data-solid={props.solid===false ? undefined : true}
 		data-brand={props.brand || undefined}

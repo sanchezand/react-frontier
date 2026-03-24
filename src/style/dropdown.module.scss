@@ -92,10 +92,10 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	color: gray;
 
 	&[data-type="error"]{
-		color: var(--color-input-error-placeholder);
+		color: var(--color-input-error-comment);
 	}
 	&[data-type="warning"]{
-		color: var(--color-input-warning-placeholder);
+		color: var(--color-input-warning-comment);
 	}
 }
 

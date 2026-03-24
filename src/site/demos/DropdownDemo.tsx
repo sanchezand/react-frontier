@@ -64,6 +64,7 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 			style={{ marginTop: 15 }}
 			iconName='triangle-exclamation'
 			label='Warning dropdown!!'
+			comment='Test comment'
 			type='warning'
 			value={val2}
 			onValueChange={a=>setVal2(a)}
