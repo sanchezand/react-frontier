@@ -1,28 +1,9 @@
 import React, { ElementType, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { Icon, IconName } from '../components';
+import { Icon, IconName, Sidebar } from '../components';
 import style from './style/site.module.scss';
 import classNames from 'classnames';
-
-type SidebarItemProps<E extends ElementType=any> = {
-	text: string,
-	iconName: IconName,
-	className?: string,
-	active?: boolean,
-	as?: E
-} & React.PropsWithoutRef<E>;
-
-var SidebarItem = (props: SidebarItemProps)=>{
-	var { text, iconName, className, as, active, ...restProps } = props;
-	const Elem = as || 'div';
-	return <Elem className={classNames(style.item, className)} data-active={props.active || undefined} {...restProps}>
-		{!!iconName && (
-			<Icon name={iconName} />
-		)}
-		{text}
-	</Elem>
-}
 
 interface SiteContainerProps{
 	outlet: any,
@@ -53,30 +34,41 @@ var SiteContainer = (props: SiteContainerProps)=>{
 		}
 		return -1;
 	}, [items, location.pathname]);
+
+	return <Sidebar>
+		<Sidebar.Menu header={'Frontier'}>
+			{props.items.map((a, ix)=>(
+				<Sidebar.Item text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
+			))}
+		</Sidebar.Menu>
+		<Sidebar.Contents header={active_index!=-1 ? props.items[active_index]?.title : null}>
+			{props.outlet}
+		</Sidebar.Contents>
+	</Sidebar>
 	
-	return <div className={style.root}>
-		<div className={style.sidebar}>
-			<Link className={classNames(style.header, style.icon)} to={'/'}>
-				<div className={style.text}>Frontier</div>
-				{/* <img src={`${CDN_URL}/logo/LogoWH_Large.webp`} alt="Logo" /> */}
-			</Link>
-			<div className={style.contents}>
-				{props.items.map((a, ix)=>(
-					<SidebarItem text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
-				))}
-			</div>
-		</div>
-		<div className={style.contents}>
-			<div className={style.header}>
-				<div className={style.text}>
-					{active_index!=-1 ? props.items[active_index]?.title : null}
-				</div>
-			</div>
-			<div className={style.contents}>
-				{props.outlet}
-			</div>
-		</div>
-	</div>
+	// return <div className={style.root}>
+	// 	<div className={style.sidebar}>
+	// 		<Link className={classNames(style.header, style.icon)} to={'/'}>
+	// 			<div className={style.text}>Frontier</div>
+	// 			{/* <img src={`${CDN_URL}/logo/LogoWH_Large.webp`} alt="Logo" /> */}
+	// 		</Link>
+	// 		<div className={style.contents}>
+	// 			{props.items.map((a, ix)=>(
+	// 				<SidebarItem text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
+	// 			))}
+	// 		</div>
+	// 	</div>
+	// 	<div className={style.contents}>
+	// 		<div className={style.header}>
+	// 			<div className={style.text}>
+	// 				{active_index!=-1 ? props.items[active_index]?.title : null}
+	// 			</div>
+	// 		</div>
+	// 		<div className={style.contents}>
+	// 			{props.outlet}
+	// 		</div>
+	// 	</div>
+	// </div>
 }
 
 export default SiteContainer;

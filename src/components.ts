@@ -22,6 +22,7 @@ import Pagination from './components/Pagination';
 import Placeholder from './components/Placeholder';
 import Popup from './components/Popup';
 import SegmentControl from './components/SegmentControl';
+import Sidebar from './components/Sidebar';
 import { FrontierColors as CompFrontierColors } from './components/Classes';
 
 export type IconName = CompIconName;
@@ -62,4 +63,5 @@ export {
 	Placeholder,
 	Popup,
 	SegmentControl,
+	Sidebar,
 }

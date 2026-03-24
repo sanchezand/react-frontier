@@ -15,7 +15,7 @@ var SegmentControlDemo = (props: SegmentControlDemoProps)=>{
 			{ value: 2, text: 'Test2' },
 			{ value: 3, text: 'Test3' }
 		]} />
-		<SegmentControl selected={[]} onClick={setVal} divided={false} style={{ marginBottom: 10 }} segments={[
+		<SegmentControl selected={val} onClick={setVal} divided={false} style={{ marginBottom: 10 }} segments={[
 			{ value: 1, text: 'Test1' },
 			{ value: 2, text: 'Test2' },
 			{ value: 3, text: 'Test3' }
