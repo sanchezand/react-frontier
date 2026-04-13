@@ -134,7 +134,6 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 	}
 
-	console.log(real_val || null);
 	return <div className={classNames("fr dropdown", props.className)} style={props.style} {...restProps}>
 		<Combobox.Root 
 			items={shown_items}
@@ -247,27 +246,29 @@ var Dropdown = (props: DropdownProps)=>{
 								) : null}
 							</Combobox.Status>
 						)}
-						<Combobox.List>
+						<Combobox.List className={style.list}>
 							{(a: DropdownItemProps)=>(
 								<Combobox.Item key={a.value} value={a} className={classNames(style.item, a.className)} style={{...props.itemStyle, ...a.style}}>
-									{has_icons ? (
-										a.iconName ? (
-											<Icon name={a.iconName} className={style.itemIcon} />
+									<div className={style.contents}>
+										{has_icons ? (
+											a.iconName ? (
+												<Icon name={a.iconName} className={style.itemIcon} />
+											) : (
+												<span className={style.itemIcon} data-empty />
+											)
 										) : (
-											<span className={style.itemIcon} data-empty />
-										)
-									) : (
-										null
-									)}
+											null
+										)}
 										<Combobox.ItemIndicator>
 											<Icon name='check' />
 										</Combobox.ItemIndicator>
-									<div className={style.text}>
-										{a.text || a.value}
+										<div className={style.text}>
+											{a.text || a.value}
+										</div>
+										{!!a.meta && (
+											<div className={style.meta}>Frontier</div>
+										)}
 									</div>
-									{!!a.meta && (
-										<div className={style.meta}>lmao</div>
-									)}
 								</Combobox.Item>
 							)}
 						</Combobox.List>

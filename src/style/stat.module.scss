@@ -1,0 +1,29 @@
+.stat{
+	text-align: center;
+	.label{
+		color: rgba(0, 0, 0, 0.5);
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.value{
+		font-size: 38px;
+		line-height: 38px;
+		font-weight: 900;
+	}
+
+	&[data-size="big"]{
+		.value{
+			font-size: 60px;
+			line-height: 60px;
+		}
+	}
+}
+
+.group{
+	display: flex;
+	gap: 10px;
+	.stat{
+		flex-grow: 100;
+	}
+}

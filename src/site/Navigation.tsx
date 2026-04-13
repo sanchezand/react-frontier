@@ -18,6 +18,8 @@ import PlaceholderDemo from './demos/PlaceholderDemo';
 import PopupDemo from './demos/PopupDemo';
 import SegmentControlDemo from './demos/SegmentControlDemo';
 import SiteContainer from './SiteContainer';
+import StatDemo from './demos/StatDemo';
+import TableDemo from './demos/TableDemo';
 
 const NavigationRoutes : {
 	path: string,
@@ -26,6 +28,7 @@ const NavigationRoutes : {
 	iconName: IconName,
 }[] = [
 	{ path: '/dropdown', 			title: 'Dropdown',			iconName: null, 		element: <DropdownDemo /> 			}, 
+	{ path: '/button', 				title: 'Button',				iconName: null, 		element: <ButtonDemo /> 			}, 
 	{ path: '/checkbox', 			title: 'Checkbox',			iconName: null, 		element: <CheckboxDemo /> 			}, 
 	{ path: '/accordion', 			title: 'Accordion',			iconName: null, 		element: <AccordionDemo /> 		}, 
 	{ path: '/calendar', 			title: 'Calendar',			iconName: null, 		element: <CalendarDemo /> 			}, 
@@ -39,6 +42,8 @@ const NavigationRoutes : {
 	{ path: '/placeholder', 		title: 'Placeholder',		iconName: null, 		element: <PlaceholderDemo />		},
 	{ path: '/popup', 				title: 'Popup',				iconName: null, 		element: <PopupDemo />				},
 	{ path: '/segmentcontrol', 	title: 'Segment Control',	iconName: null, 		element: <SegmentControlDemo />	},
+	{ path: '/stat', 					title: 'Stats',				iconName: null, 		element: <StatDemo />				},
+	{ path: '/table', 				title: 'Table',				iconName: null, 		element: <TableDemo />				},
 ]
 
 

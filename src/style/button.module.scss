@@ -1,6 +1,7 @@
 @import 'theme.scss';
 .button{
 	padding: 10px 20px;
+	user-select: none;
 	background-color: #E5E7EB;
 	color: #4B5563;
 	border-radius: 200px;

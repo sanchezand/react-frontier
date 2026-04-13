@@ -23,7 +23,9 @@ import Placeholder from './components/Placeholder';
 import Popup from './components/Popup';
 import SegmentControl from './components/SegmentControl';
 import Sidebar from './components/Sidebar';
+import Stat from './components/Stat';
 import { FrontierColors as CompFrontierColors } from './components/Classes';
+import Table from './components/Table';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -64,4 +66,6 @@ export {
 	Popup,
 	SegmentControl,
 	Sidebar,
+	Stat,
+	Table,
 }

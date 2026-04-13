@@ -15,11 +15,12 @@ $HEADER_HEIGHT: 50px;
 		background-color: darken($SITE_COLOR, 1);
 		height: 100vh;
 		border-right: $BORDER;
+		display: flex;
+		flex-direction: column;
 
 		> .contents{
-			padding: 0 15px;
-			margin-top: 15px;
-			padding-bottom: 40px;
+			padding: 15px;
+			flex-grow: 100;
 
 			overflow-y: scroll;
 			overflow-x: hidden;

@@ -14,15 +14,16 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 	
 	return <div style={{ maxWidth: 800, margin: 'auto', marginTop: 15 }}>
 		<Groupper style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} actions={(
-			<Button text='lmao' />
+			<Button text='Frontier' />
 		)}>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
+			<Groupper.Divider />
 			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum architecto voluptatibus optio quaerat nobis obcaecati eaque commodi, suscipit, earum, nihil consectetur? Ipsa blanditiis rem beatae natus dolorem. Totam, fugit sunt. <br />
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum reiciendis dolore animi hic suscipit placeat voluptatem maiores sint. Ea similique dolore veritatis ad modi architecto aspernatur aperiam est illo impedit.
 		</Groupper>
 		<Groupper fitted titleSize='small' style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} actions={(
-			<Button text='lmao' />
+			<Button text='Frontier' />
 		)}>
 			<Groupper.Divider text={'test2'} top />
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, veritatis. Quaerat quod obcaecati eveniet porro suscipit dicta illum accusamus vel esse, expedita facere consectetur laudantium iusto fuga ipsa molestias mollitia!
@@ -36,7 +37,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure assumenda minus voluptates ipsam dolorum recusandae! Unde dolorem blanditiis, dicta iste animi ut eum fugiat. Aperiam hic magnam quod obcaecati placeat!
 		</Groupper>
 		<Groupper titleCentered titleSize='big' style={{ maxWidth: 400, margin: 'auto' }} title={'testing'}  actions={(
-			<Button text='lmao' />
+			<Button text='Frontier' />
 		)}>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
