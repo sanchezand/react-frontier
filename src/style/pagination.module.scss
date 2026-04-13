@@ -6,6 +6,7 @@ $BORDER_RADIUS: 6px;
 	padding: 3px;
 	display: flex;
 	align-items: center;
+
 	.move, .pages > .page{
 		text-align: center;
 		width: 45px;
@@ -45,6 +46,10 @@ $BORDER_RADIUS: 6px;
 		.page{
 			background-color: var(--color-gray-50);
 		}
+		&[data-pages="1"]{
+			margin-left: 5px;
+			margin-right: 5px
+		}
 	}
 	&:not([data-disabled]) .pages .page:hover{
 		background-color: var(--color-gray-150);
@@ -54,6 +59,13 @@ $BORDER_RADIUS: 6px;
 		.pages .page{
 			cursor: unset;
 			opacity: 0.4;
+		}
+	}
+
+	&[data-inline]{
+		display: inline-flex;
+		.pages{
+			flex-grow: unset;
 		}
 	}
 	

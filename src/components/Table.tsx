@@ -13,6 +13,7 @@ type TableCellProps<E extends React.ElementType=any> = {
 	colSpan?: number,
 	rowSpan?: number,
 	row?: boolean,
+	header?: boolean,
 	compact?: boolean,
 	value?: any,
 	style?: React.CSSProperties,
@@ -37,10 +38,11 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 		value,
 		...restProps
 	} = props
+	const CellElement = props.header ? 'th' : 'td';
 	const Component : React.ElementType = props.as || null;
 
 	var Element = (
-		<td 
+		<CellElement
 			colSpan={colSpan}
 			rowSpan={rowSpan}
 			style={props.style} 
@@ -61,7 +63,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 				{value}
 				{children}
 			</>}
-		</td>
+		</CellElement>
 	)
 	return row ? <tr>{Element}</tr> : Element
 }
@@ -197,9 +199,10 @@ const TableHeader = (props: TableSubComponentProps & TableHeaderProps)=>{
 				{a.map((b, i)=>(
 					<th 
 						key={`TH-${id}-${i}`} 
+						data-normal={(!!props.title && r==0 && i==0) || undefined}
 						data-collapsing={(!!props.collapsingIndexes && props.collapsingIndexes.indexOf(i)!=-1) || undefined}
 						data-centered={(!!props.centeredIndexes && props.centeredIndexes.indexOf(i)!=-1) || undefined}
-					>{a}</th>
+					>{b}</th>
 				))}
 			</tr>
 		))}

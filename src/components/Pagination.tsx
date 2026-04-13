@@ -9,6 +9,7 @@ interface PaginationProps{
 	leftIcon?: IconName,
 	rightIcon?: IconName,
 	page: number,
+	inline?: boolean,
 	pageCount?: number,
 	disabled?: boolean,
 	hasNext?: boolean,
@@ -36,6 +37,7 @@ var Pagination = (props: PaginationProps)=>{
 		onPageChange,
 		style: propsStyle,
 		pageStyle,
+		inline,
 		...restProps
 	} = props;
 	var ref = useRef<HTMLDivElement>(null);
@@ -54,6 +56,9 @@ var Pagination = (props: PaginationProps)=>{
 	}, [ref.current]);
 
 	var pages : number[] = useMemo(()=>{
+		if(typeof pageCount==='undefined' || pageCount<=0){
+			return [page];
+		}
 		if(!width) return [];
 		var effective_width = width - ((MOVE_WIDTH*2)+(BUTTON_GAP*2));
 		var button_count = Math.floor(effective_width/(BUTTON_WIDTH+BUTTON_GAP));
@@ -101,11 +106,11 @@ var Pagination = (props: PaginationProps)=>{
 	var next_disabled = !!props.disabled || props.hasNext===false || (props.pageCount && props.page>=(pageCount-1));
 	var prev_disabled = !!props.disabled || props.hasPrev===false || props.page===0;
 
-	return <div ref={ref} className={classNames("fr pagination", style.pagination, props.className)} style={props.style} data-color={props.color || 'black'} data-disabled={props.disabled || undefined} {...restProps}>
+	return <div ref={ref} className={classNames("fr pagination", style.pagination, props.className)} style={props.style} data-color={props.color || 'black'} data-disabled={props.disabled || undefined} data-inline={props.inline || undefined} {...restProps}>
 		<div className={classNames("prev page", style.move)} onClick={(prev_disabled || props.page<=0) ? null : pageChange(props.page-1)} data-disabled={prev_disabled || undefined}>
 			<Icon name={props.leftIcon || 'chevron-left'} />
 		</div>
-		<div className={style.pages}>
+		<div className={style.pages} data-pages={pages.length}>
 			{pages.map(a=>(
 				<div 
 					key={`PG-${a}`} 
