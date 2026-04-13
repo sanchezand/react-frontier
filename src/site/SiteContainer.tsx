@@ -38,7 +38,7 @@ var SiteContainer = (props: SiteContainerProps)=>{
 	return <Sidebar>
 		<Sidebar.Menu header={'Frontier'}>
 			{props.items.map((a, ix)=>(
-				<Sidebar.Item text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
+				<Sidebar.Item key={`SBR${ix}`} text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
 			))}
 		</Sidebar.Menu>
 		<Sidebar.Contents header={active_index!=-1 ? props.items[active_index]?.title : null}>

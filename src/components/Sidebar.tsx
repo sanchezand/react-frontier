@@ -45,7 +45,7 @@ var SidebarMenu = (props: SidebarMenuProps)=>{
 
 interface SidebarContentsProps extends PropsWithChildren{
 	header?: any,
-	style: React.CSSProperties,
+	style?: React.CSSProperties,
 }
 var SidebarContents = (props: SidebarContentsProps)=>{
 	var { header, children, style: compStyle, ...restProps } = props;
@@ -69,7 +69,7 @@ type SidebarSubComponents = {
 
 interface SidebarProps extends PropsWithChildren{
 	className?: string,
-	style: React.CSSProperties,
+	style?: React.CSSProperties,
 }
 
 const Sidebar : React.FC<SidebarProps> & SidebarSubComponents = (props: SidebarProps)=>{

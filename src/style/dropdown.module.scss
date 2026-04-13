@@ -239,6 +239,9 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	margin: 0 4px;
 	padding: 2px 0;
 	cursor: pointer;
+	display: block;
+	color: black;
+	text-decoration: none;
 
 	&[data-selected]{
 		> .contents{
@@ -246,7 +249,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 			font-weight: bold;
 		}
 	}
-	&:hover{
+	&:hover:not([data-disabled]){
 		> .contents{
 			background-color: rgba(0,0,0,0.05);
 			&[data-selected]{
@@ -272,6 +275,11 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 			margin-right: 8px;
 		}
 	}	
+	&[data-disabled]{
+		cursor: unset;
+		user-select: none;
+		color: gray;
+	}
 }
 
 .separator{
@@ -308,4 +316,79 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	height: 20px;
 	line-height: 20px;
 	margin-right: 0;
+}
+
+
+.toolbar{
+	$BORDER_RADIUS: 8px;
+	background-color: #F9FAFB;
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: $BORDER_RADIUS;
+	position: relative;
+	display: flex;
+
+	&[data-stretch]{
+		justify-content: stretch;
+		> .toolbarItem{
+			width: 100%;
+		}
+	}
+
+	> .toolbarItem{
+		margin: 0;
+		position: relative;
+		user-select: none;
+		padding: 10px 15px;
+		min-width: 100px;
+		text-align: center;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		text-decoration: none;
+		color: black;
+
+		&:hover:not([data-disabled]),&[data-active]{
+			background-color: darken(#F9FAFB, 3%);
+		}
+	}
+
+	&:not([data-divided]){
+		> .toolbarItem{
+			border-radius: $BORDER_RADIUS;
+		}
+	}
+	&[data-divided]{
+		> .toolbarItem{
+			border-right: 1px solid rgba(0,0,0,0.1);
+			&:first-child{
+				border-top-left-radius: $BORDER_RADIUS;
+				border-bottom-left-radius: $BORDER_RADIUS;
+			}
+			&:last-child{
+				border-right: 0;
+				border-top-right-radius: $BORDER_RADIUS;
+				border-bottom-right-radius: $BORDER_RADIUS;
+			}
+		}
+	}
+}
+
+.dropdownIcon{
+	line-height: 14px;
+	font-size: 14px;
+	height: auto;
+	margin-right: 0;
+	margin-left: 8px;
+}
+.toolbarIcon{
+	line-height: 14px;
+	font-size: 14px;
+	height: auto;
+	margin-right: 8px;
+	&[data-single]{
+		margin-right: 0;
+	}
 }

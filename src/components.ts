@@ -26,6 +26,7 @@ import Sidebar from './components/Sidebar';
 import Stat from './components/Stat';
 import { FrontierColors as CompFrontierColors } from './components/Classes';
 import Table from './components/Table';
+import Toolbar from './components/Toolbar';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -68,4 +69,5 @@ export {
 	Sidebar,
 	Stat,
 	Table,
+	Toolbar,
 }

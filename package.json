@@ -4,7 +4,7 @@
 	"private": true,
 	"main": "dist/index.min.js",
 	"dependencies": {
-		"@base-ui/react": "1.0.0",
+		"@base-ui/react": "1.4.0",
 		"classnames": "^2.5.1",
 		"i18next-resources-to-backend": "^1.2.1",
 		"i18next": "^23.16.4",

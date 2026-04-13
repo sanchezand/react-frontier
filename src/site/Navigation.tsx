@@ -20,6 +20,7 @@ import SegmentControlDemo from './demos/SegmentControlDemo';
 import SiteContainer from './SiteContainer';
 import StatDemo from './demos/StatDemo';
 import TableDemo from './demos/TableDemo';
+import ToolbarDemo from './demos/ToolbarDemo';
 
 const NavigationRoutes : {
 	path: string,
@@ -44,6 +45,7 @@ const NavigationRoutes : {
 	{ path: '/segmentcontrol', 	title: 'Segment Control',	iconName: null, 		element: <SegmentControlDemo />	},
 	{ path: '/stat', 					title: 'Stats',				iconName: null, 		element: <StatDemo />				},
 	{ path: '/table', 				title: 'Table',				iconName: null, 		element: <TableDemo />				},
+	{ path: '/toolbar', 				title: 'Toolbar',				iconName: null, 		element: <ToolbarDemo />			},
 ]
 
 
