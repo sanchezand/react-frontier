@@ -21,6 +21,7 @@ import SiteContainer from './SiteContainer';
 import StatDemo from './demos/StatDemo';
 import TableDemo from './demos/TableDemo';
 import ToolbarDemo from './demos/ToolbarDemo';
+import ToastDemo from './demos/ToastDemo';
 
 const NavigationRoutes : {
 	path: string,
@@ -46,6 +47,7 @@ const NavigationRoutes : {
 	{ path: '/stat', 					title: 'Stats',				iconName: null, 		element: <StatDemo />				},
 	{ path: '/table', 				title: 'Table',				iconName: null, 		element: <TableDemo />				},
 	{ path: '/toolbar', 				title: 'Toolbar',				iconName: null, 		element: <ToolbarDemo />			},
+	{ path: '/toast', 				title: 'Toast',				iconName: null, 		element: <ToastDemo />				},
 ]
 
 
