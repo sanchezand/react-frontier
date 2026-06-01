@@ -27,6 +27,7 @@ import Stat from './components/Stat';
 import { FrontierColors as CompFrontierColors } from './components/Classes';
 import Table from './components/Table';
 import Toolbar from './components/Toolbar';
+import Modal from './components/Modal';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -40,6 +41,9 @@ i18n.use(initReactI18next).use(resourcesToBackend(async (language: string)=>{
 	return lang;
 })).init({
 	fallbackLng: 'en',
+	react: {
+		useSuspense: false,
+	},
 	interpolation: {
 		escapeValue: false,
 	}
@@ -70,4 +74,5 @@ export {
 	Stat,
 	Table,
 	Toolbar,
+	Modal,
 }

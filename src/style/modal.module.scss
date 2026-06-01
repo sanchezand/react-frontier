@@ -16,7 +16,7 @@ $modal-sizes:
 	inset: 0;
 	background-color: rgba(0, 0, 0);
 	opacity: 0.8;
-	transition: opacity 500ms cubic-bezier(0.45, 1.005, 0, 1.005);
+	transition: opacity 220ms ease, backdrop-filter 280ms ease;
 	backdrop-filter: blur(30px);
 
 	/* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
@@ -39,13 +39,13 @@ $modal-sizes:
 	outline: none;
 	opacity: 1;
 	max-width: $modal-normal-size;
-	transition: transform 250ms ease;
-	transition: opacity 200ms ease;
-	will-change: transform;
+	transform: translateY(0);
+	transition: opacity 220ms ease, transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+	will-change: opacity, transform;
 
 	&[data-starting-style], &[data-ending-style]{
 		opacity: 0;
-		transform: scale(0.99);
+		transform: translateY(14px);
 	}
 
 	> .header{

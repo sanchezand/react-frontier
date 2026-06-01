@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useMemo } from 'react';
 import { LocaleProvider } from './useLocale';
 import { Toast as BaseToast } from '@base-ui/react';
 import { ToastShowOptions, ToastType } from './Classes';
@@ -21,7 +21,7 @@ interface FrontierProviderProps extends PropsWithChildren{
 }
 
 var FrontierProvider = (props: FrontierProviderProps)=>{
-	var tm = BaseToast.createToastManager();
+	var tm = useMemo(()=>BaseToast.createToastManager(), []);
 
 	var showToast = (text: string, options?: ToastShowOptions)=>{
 		return tm.add({
