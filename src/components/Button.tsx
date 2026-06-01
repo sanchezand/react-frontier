@@ -127,8 +127,10 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 							) : a.items && a.items.length>0 ? (
 								<Menu.SubmenuRoot>
 									<Menu.SubmenuTrigger className={classNames(DropdownStyle.item, DropdownStyle.submenuItem)}>
-										<div className={DropdownStyle.text}>{a.text}</div>
-										<Icon name='caret-right' className={DropdownStyle.menuIcon} />
+										<div className={DropdownStyle.contents}>
+											<div className={DropdownStyle.text}>{a.text}</div>
+											<Icon name='caret-right' className={DropdownStyle.menuIcon} />
+										</div>
 									</Menu.SubmenuTrigger>
 									<Menu.Portal>
 										<Menu.Positioner>
@@ -138,10 +140,12 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 														<Menu.Separator className={DropdownStyle.separator} />
 													) : (
 														<Menu.Item key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
-															{!!b.iconName && (
-																<Icon className={DropdownStyle.itemIcon} name={b.iconName} />
-															)}
-															{b.text}
+															<div className={DropdownStyle.contents}>
+																{!!b.iconName && (
+																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} />
+																)}
+																{b.text}
+															</div>
 														</Menu.Item>
 													)
 												))}
@@ -151,10 +155,12 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 								</Menu.SubmenuRoot>
 							) : (
 								<Menu.Item key={`BTNMENU-${a.text}`} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
-									{!!a.iconName && (
-										<Icon className={DropdownStyle.itemIcon} name={a.iconName} />
-									)}
-									{a.text}
+									<div className={DropdownStyle.contents}>
+										{!!a.iconName && (
+											<Icon className={DropdownStyle.itemIcon} name={a.iconName} />
+										)}
+										{a.text}
+									</div>
 								</Menu.Item>
 							)
 						))}
