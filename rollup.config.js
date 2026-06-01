@@ -47,6 +47,12 @@ module.exports = {
 			useTsconfigDeclarationDir: true,
 			exclude: ['**/__tests__/**', '*.spec.*', '*.test.*'],
 			clean: true,
+			tsconfigOverride: {
+				compilerOptions: {
+					module: "ESNext",
+					moduleResolution: "Bundler",
+				}
+			},
 		}),
 		// Allow node_modules resolution, so you can use 'external' to control
 		// which external modules to include in the bundle

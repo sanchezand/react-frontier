@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
-		"target": "ES2022", // Or ES2020+
-		"module": "ESNext",
-		"moduleResolution": "Bundler", // Or "NodeNext" / "Node16"
+		"target": "ES2022",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"lib": [
