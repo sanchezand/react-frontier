@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const commonjs = require('@rollup/plugin-commonjs');
 const json = require('@rollup/plugin-json');
 const resolve = require('@rollup/plugin-node-resolve');
@@ -9,6 +11,37 @@ const typescript = require('rollup-plugin-typescript2');
 const pkg = require('./package.json');
 const copy = require('rollup-plugin-copy');
 const dts = require('rollup-plugin-dts').default;
+
+const iconFonts = [
+	['fa-regular-400', 'Font Awesome 6 Free'],
+	['fa-brands-400', 'Font Awesome 6 Brands'],
+	['fa-solid-900', 'Font Awesome 6 Free'],
+].map(([basename])=>{
+	const filepath = path.join(__dirname, 'src/style/icons', `${basename}.woff2`);
+	const base64 = fs.readFileSync(filepath).toString('base64');
+	return {
+		basename,
+		replacement: `url("data:font/woff2;base64,${base64}") format("woff2")`,
+	};
+});
+
+function inlineIconFonts() {
+	return {
+		name: 'inline-icon-fonts',
+		generateBundle(_, bundle) {
+			for (const file of Object.values(bundle)) {
+				if (file.type !== 'chunk') continue;
+				for (const font of iconFonts) {
+					const pattern = new RegExp(
+						`url\\("\\./icons/${font.basename}\\.woff2"\\) format\\("woff2"\\), url\\("\\./icons/${font.basename}\\.ttf"\\) format\\("truetype"\\)`,
+						'g'
+					);
+					file.code = file.code.replace(pattern, font.replacement);
+				}
+			}
+		},
+	}
+}
 
 module.exports = [
 	{
@@ -36,8 +69,7 @@ module.exports = [
 			copy({
 				targets: [
 					{ src: 'src/locale', dest: 'dist/' },
-					{ src: 'src/style/icons', dest: 'dist/style' },
-				]
+				],
 			}),
 			external(),
 			postcss({
@@ -57,11 +89,12 @@ module.exports = [
 						moduleResolution: "node",
 						jsx: 'react-jsx',
 					}
-				},
+				}
 			}),
 			resolve(),
 			commonjs(),
 			sourceMaps(),
+			inlineIconFonts(),
 		],
 	},
 	{

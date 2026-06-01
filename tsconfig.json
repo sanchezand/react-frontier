@@ -19,8 +19,8 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"outDir": "./dist"
-		// "types": ["./types.d.ts"]
+		"outDir": "./dist",
+		"types": ["node", "react", "react-dom"]
 	},
 	"include": [
 		"src",
