@@ -295,7 +295,7 @@ interface TableProps extends PropsWithChildren{
 const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 	return <table 
 		style={props.style}
-		className={classNames(style.table, props.className)} 
+		className={classNames('fr2 table', style.table, props.className)} 
 		data-striped={props.striped!==false || undefined}
 		data-divided={props.divided || undefined}
 		data-celled={props.celled || undefined}
@@ -315,7 +315,7 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 
 	// var colspan = props.headers ? props.headers.length : (props.data && props.data.length>0 ? props.data[0].length : 999);
 	
-	// return <table className={classNames("fr table", props.className, {
+	// return <table className={classNames("fr2 table", props.className, {
 	// 	striped: props.striped,
 	// 	divided: props.divided,
 	// 	details: props.details,

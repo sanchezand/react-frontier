@@ -105,7 +105,7 @@
 		&[data-loading]{
 			padding-left: 20px;
 		}
-		:global(.fr.loader){
+		:global(.fr2.loader){
 			position: absolute;
 			top: calc((var(--toast-height) / 2) - 10px);
 			left: 10px;
