@@ -11,7 +11,7 @@ interface StatGroupProps extends PropsWithChildren{
 
 const StatGroup : React.FC<StatGroupProps> = (props: StatGroupProps)=>{
 	var { className, children, style: compStyle, ...restProps } = props;
-	return <div className={classNames('fr stats', style.group, props.className)} style={props.style} {...restProps}>
+	return <div className={classNames('fr2 stats', style.group, props.className)} style={props.style} {...restProps}>
 		{props.children}
 	</div>
 }
@@ -53,7 +53,7 @@ interface StatProps extends PropsWithChildren{
 }
 const Stat : React.FC<StatProps> & StatSubComponents = (props: StatProps)=>{
 	var { children, className, size, style: compStyle, ...restProps } = props;
-	return <div className={classNames('fr stat', style.stat, className)} style={props.style} data-size={props.size} {...restProps}>
+	return <div className={classNames('fr2 stat', style.stat, className)} style={props.style} data-size={props.size} {...restProps}>
 		{props.children}
 	</div>
 }

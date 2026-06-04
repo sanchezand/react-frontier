@@ -29,7 +29,7 @@ var Field = (props: FieldProps)=>{
 		...restProps
 	} = props;
 
-	return <div className={classNames("fr fields", style.field, props.className)} data-type={props.type} style={propStyle} {...restProps}>
+	return <div className={classNames("fr2 fields", style.field, props.className)} data-type={props.type} style={propStyle} {...restProps}>
 		{props.label && (
 			<label className={style.label} style={props.labelStyle}>
 				{props.label}

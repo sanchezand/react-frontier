@@ -18,7 +18,7 @@ var Loader = (props: LoaderProps)=>{
 		...restProps
 	} = props;
 	return <div 
-		className={classNames('fr loader', style.loader, props.className)}
+		className={classNames('fr2 loader', style.loader, props.className)}
 		style={props.style}
 		data-inline={props.inline || undefined} 
 		data-size={props.size ? Math.floor(props.size / 5) * 5 : 20}

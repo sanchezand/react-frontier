@@ -174,7 +174,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 	
 	return <>
 		<Field.Root 
-			className={classNames("fr input", style.root, props.className)} 
+			className={classNames("fr2 input", style.root, props.className)} 
 			data-icon={!!props.iconName || !!loading || undefined} 
 			data-loading={!!loading || undefined} 
 			data-fluid={props.fluid || undefined} 

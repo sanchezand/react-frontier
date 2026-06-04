@@ -48,7 +48,7 @@ var Placeholder = (props: PlaceholderProps)=>{
 		return value;
 	}else{
 		return <div
-			className={classNames('fr placeholder', props.className, style.placeholder)}
+			className={classNames('fr2 placeholder', props.className, style.placeholder)}
 			style={{
 				'--placeholder-height': `${placeholder_height}px`,
 				'--placeholder-width': `${placeholder_width}px`,

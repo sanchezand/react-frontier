@@ -36,7 +36,7 @@ $BORDER_RADIUS: 8px;
 			> * {
 				border-radius: 0 !important;
 				border-right: 1px solid #e0e0e0;
-				&:global(.fr.button){
+				&:global(.fr2.button){
 					min-width: 80px;
 				}
 				&:last-child{

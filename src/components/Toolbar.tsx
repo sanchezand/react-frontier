@@ -151,7 +151,7 @@ interface ToolbarProps<E extends ElementType = typeof defaultItemElement> extend
 const Toolbar : React.FC<ToolbarProps> & ToolbarSubComponents = (props: ToolbarProps)=>{
 	var { children, className, divided, fitted, items, stretch, style: propStyle, ...restProps } = props;
 	return <Menubar 
-		className={classNames('fr toolbar', style.toolbar, props.className)}
+		className={classNames('fr2 toolbar', style.toolbar, props.className)}
 		style={props.style}
 		data-divided={props.divided || undefined}
 		data-fitted={props.fitted || undefined}

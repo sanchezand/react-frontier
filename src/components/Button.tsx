@@ -93,7 +93,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 	
 	const ComponentType = props.as ?? 'div';
 	const ButtonComponent = <ComponentType 
-		className={classNames("fr button", styles.button, props.className)}
+		className={classNames("fr2 button", styles.button, props.className)}
 		data-size={props.size || undefined}
 		data-disabled={props.disabled || undefined}
 		data-loading={loading || undefined}

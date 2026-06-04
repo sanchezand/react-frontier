@@ -106,7 +106,7 @@ var Pagination = (props: PaginationProps)=>{
 	var next_disabled = !!props.disabled || props.hasNext===false || (props.pageCount && props.page>=(pageCount-1));
 	var prev_disabled = !!props.disabled || props.hasPrev===false || props.page===0;
 
-	return <div ref={ref} className={classNames("fr pagination", style.pagination, props.className)} style={props.style} data-color={props.color || 'black'} data-disabled={props.disabled || undefined} data-inline={props.inline || undefined} {...restProps}>
+	return <div ref={ref} className={classNames("fr2 pagination", style.pagination, props.className)} style={props.style} data-color={props.color || 'black'} data-disabled={props.disabled || undefined} data-inline={props.inline || undefined} {...restProps}>
 		<div className={classNames("prev page", style.move)} onClick={(prev_disabled || props.page<=0) ? null : pageChange(props.page-1)} data-disabled={prev_disabled || undefined}>
 			<Icon name={props.leftIcon || 'chevron-left'} />
 		</div>
