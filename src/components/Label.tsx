@@ -42,7 +42,7 @@ var Label = <E extends ElementType = typeof defaultElement>(props: LabelProps<E>
 
 	const Component = as ?? 'div';
 	return <Component 
-		className={classNames('fr label', style.label, props.className)}
+		className={classNames('fr2 label', style.label, props.className)}
 		onClick={props.onClick}
 		style={props.style}
 		data-loading={loading || undefined}

@@ -55,7 +55,7 @@ var Navigation = ()=>{
 	var ErrorElement = ()=>{
 		const error = (useRouteError() as any);
 		return <div>
-			<div className="fr centered header" style={{ fontSize: 100 }}>
+			<div className="fr2 centered header" style={{ fontSize: 100 }}>
 				{error.status}
 				<div className="sub header" style={{ fontSize: 20 }}>
 					{error.status===404 ? 'Page not found' : (

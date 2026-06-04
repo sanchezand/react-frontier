@@ -40,7 +40,7 @@ var Message = (props: MessageProps)=>{
 	}
 
 	return <div 
-		className={classNames('fr message', style.message, props.className)}
+		className={classNames('fr2 message', style.message, props.className)}
 		style={props.style}
 		data-color={props.type || 'default'}
 		data-centered={!!props.centered || undefined}
