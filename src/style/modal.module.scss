@@ -32,6 +32,7 @@ $modal-sizes:
 }
 
 .modal{
+	width: 100%;
 	z-index: 100;
 	background-color: white;
 	border-radius: $MODAL_BORDER_RADIUS;

@@ -88,16 +88,16 @@ var Dropdown = (props: DropdownProps)=>{
 
 	var shown_items = useMemo(()=>{
 		if(!props.onAsyncSearch) return props.items;
-		if(!props.value || (!!searchResults && searchResults.findIndex(a=>a.value===props.value)>-1)){
+		if(props.value == null || (!!searchResults && searchResults.findIndex(a=>a.value===props.value)>-1)){
 			return searchResults;
 		}
 		var result = [];
 		if(searchResults) result.push(...searchResults);
-		if(props.value && !!selectedSearch && selectedSearch.value===props.value){
+		if(props.value != null && !!selectedSearch && selectedSearch.value===props.value){
 			result.push(selectedSearch);
 		}
 		return result;
-	}, [props.items, searchResults, props.value]);
+	}, [props.items, searchResults, props.value, selectedSearch]);
 
 	var shown_value = useMemo(()=>{
 		if((props.value!==null && typeof props.value!=='undefined') && props.items){
@@ -110,9 +110,19 @@ var Dropdown = (props: DropdownProps)=>{
 	}, [props.placeholder, props.label, props.value, props.items]);
 
 	var real_val = useMemo(()=>{
-		if(!shown_items) return null;
-		return shown_items.find(a=>a.value===props.value);
-	}, [props.items, searchResults, props.value]);
+		if(props.items){
+			var found = props.items.find(a=>a.value===props.value);
+			if(found) return found;
+		}
+		if(shown_items){
+			var found = shown_items.find(a=>a.value===props.value);
+			if(found) return found;
+		}
+		if(props.value != null && selectedSearch?.value===props.value){
+			return selectedSearch;
+		}
+		return null;
+	}, [props.items, shown_items, props.value, selectedSearch]);
 
 	var has_icons = useMemo(()=>{
 		if(!props.items) return false;
@@ -122,7 +132,7 @@ var Dropdown = (props: DropdownProps)=>{
 		return false;
 	}, [props.items]);
 
-	var is_placeholder = (props.value===null && !!(props.placeholder || props.label));
+	var is_placeholder = (props.value == null && !!(props.placeholder || props.label));
 	var search_length = (props.minSearchLength || 3);
 
 	var getEmptyMessage = ()=>{
@@ -141,8 +151,9 @@ var Dropdown = (props: DropdownProps)=>{
 			disabled={props.disabled}
 			filter={props.onAsyncSearch ? null : undefined}
 			isItemEqualToValue={(a, v)=>{
-				if(!a && !v) return false;
-				return a?.value===v?.value
+				if(a === v) return true;
+				if(!a || !v) return false;
+				return a.value === v.value || a.value === v;
 			}}
 			itemToStringLabel={(a: DropdownItemProps)=>(a.text || a.value)}
 			itemToStringValue={(a: DropdownItemProps)=>(a.value || a.text)}
@@ -222,7 +233,7 @@ var Dropdown = (props: DropdownProps)=>{
 			)}
 			<Combobox.Portal>
 				<Combobox.Positioner sideOffset={5}>
-					<Combobox.Popup className={style.popup} style={props.menuStyle} hidden={!!props.onAsyncSearch && !(searchValue && searchValue.length>=search_length) && !searchResults && !searchError && !props.value}>
+					<Combobox.Popup className={style.popup} style={props.menuStyle} hidden={!!props.onAsyncSearch && !(searchValue && searchValue.length>=search_length) && !searchResults && !searchError && props.value == null}>
 						<Combobox.Empty className={style.empty}>{getEmptyMessage()}</Combobox.Empty>
 						{!!props.onAsyncSearch && ((!!searchValue && searchValue.length>=search_length) || searchError) && (
 							<Combobox.Status className={style.empty}>
