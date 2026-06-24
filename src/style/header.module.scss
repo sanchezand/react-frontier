@@ -2,31 +2,33 @@
 @import 'theme.scss';
 
 $header-sizes:
-	"small" 24 12 3,
-	"normal" 32 14 1,
-	"big" 48 16 -1,
-	"huge" 64 18 -3,
+	"small" 21 0.7em 24 3,
+	"normal" 28 0.5em 32 1,
+	"big" 56 16px 48 -1,
+	"huge" 70 20px 64 -3,
 ;
 
 .header{
 	position: relative;
 	margin-bottom: 10px;
 	margin-top: 5px;
-	
+	font-size: 28px;
+
 	display: flex;
 	flex-direction: column;
 	
 	
 	.text{
 		color: black;
-		font-size: 32px;
-		line-height: 32px;
+		font-size: 1em;
+		line-height: 1em;
 		font-weight: bold;
 	}
 	.subtext{
 		color: gray;
-		font-size: 14px;
-		line-height: 14px;
+		font-size: 0.5em;
+		line-height: 1em;
+		margin-top: 3px;
 		font-weight: normal;
 	}
 	.icon{
@@ -38,6 +40,7 @@ $header-sizes:
 	.actions{
 		margin-top: 10px;
 		text-align: center;
+		font-size: 1rem;
 	}
 	&[data-centered]{
 		align-items: center;
@@ -48,20 +51,17 @@ $header-sizes:
 	// 	}
 	// }
 
-	@each $name, $size, $subsize, $margin in $header-sizes{
+	@each $name, $size, $subsize, $iconsize, $margin in $header-sizes{
 		&[data-size="#{$name}"]{
-			.text{
-				font-size: #{$size}px;
-				line-height: #{$size - 2}px;
-			}
+			font-size: #{$size}px;
 			.subtext{
-				font-size: #{$subsize}px;
-				line-height: #{$subsize}px;
+				font-size: $subsize;
+				line-height: $subsize;
 			}
 			.icon{
 				margin-bottom: #{$margin}px;
-				line-height: #{$size - 2}px;
-				font-size: #{$size}px;
+				line-height: #{$iconsize - 2}px;
+				font-size: #{$iconsize}px;
 				text-align: center;
 			}
 			&[data-loading]{
