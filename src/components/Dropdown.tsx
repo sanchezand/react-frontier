@@ -231,8 +231,8 @@ var Dropdown = (props: DropdownProps)=>{
 					)}
 				</Combobox.Trigger>
 			)}
-			<Combobox.Portal>
-				<Combobox.Positioner sideOffset={5}>
+			<Combobox.Portal style={{ zIndex: 1000 }}>
+				<Combobox.Positioner sideOffset={5} style={{ zIndex: 1000 }}>
 					<Combobox.Popup className={style.popup} style={props.menuStyle} hidden={!!props.onAsyncSearch && !(searchValue && searchValue.length>=search_length) && !searchResults && !searchError && props.value == null}>
 						<Combobox.Empty className={style.empty}>{getEmptyMessage()}</Combobox.Empty>
 						{!!props.onAsyncSearch && ((!!searchValue && searchValue.length>=search_length) || searchError) && (
