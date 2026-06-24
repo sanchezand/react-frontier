@@ -322,7 +322,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 
 
 .toolbar{
-	$BORDER_RADIUS: 8px;
+	$BORDER_RADIUS: 12px;
 	background-color: #F9FAFB;
 	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
 	border: 1px solid rgba(0,0,0,0.1);
@@ -355,25 +355,20 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 		&:hover:not([data-disabled]),&[data-active]{
 			background-color: darken(#F9FAFB, 3%);
 		}
-	}
 
-	&:not([data-divided]){
-		> .toolbarItem{
-			border-radius: $BORDER_RADIUS;
+		&:first-of-type{
+			border-top-left-radius: $BORDER_RADIUS;
+			border-bottom-left-radius: $BORDER_RADIUS;
+		}
+		&:last-of-type{
+			border-top-right-radius: $BORDER_RADIUS;
+			border-bottom-right-radius: $BORDER_RADIUS;
 		}
 	}
+
 	&[data-divided]{
 		> .toolbarItem{
 			border-right: 1px solid rgba(0,0,0,0.1);
-			&:first-child{
-				border-top-left-radius: $BORDER_RADIUS;
-				border-bottom-left-radius: $BORDER_RADIUS;
-			}
-			&:last-child{
-				border-right: 0;
-				border-top-right-radius: $BORDER_RADIUS;
-				border-bottom-right-radius: $BORDER_RADIUS;
-			}
 		}
 	}
 }

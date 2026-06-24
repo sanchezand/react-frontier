@@ -13,7 +13,14 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 	}, []);
 	
 	return <div style={{ maxWidth: 800, margin: 'auto', marginTop: 15 }}>
-		<Groupper style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} actions={(
+		<Groupper style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} titleRight={(
+			<Button text='Testing' menu={[
+				{ text: 'test' },
+				{ text: 'test' },
+				{ text: 'test' },
+				{ text: 'test' },
+			]} />
+		)} actions={(
 			<Button text='Frontier' />
 		)}>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />

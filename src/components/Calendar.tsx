@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import moment from 'moment';
 import classNames from 'classnames';
 import Icon from './Icon';
 import style from '../style/calendar.module.scss';

@@ -86,6 +86,17 @@ $modal-sizes:
 		padding: $MODAL_PADDING;
 	}
 
+	> :global(.toolbar){
+		border-radius: 0;
+		box-shadow: none;
+		border-left: 0;
+		border-right: 0;
+		border-top: 0;
+		> :global(.item){
+			border-radius: 0;
+		}
+	}
+
 	> :last-child:not(.header){
 		border-bottom-left-radius: $MODAL_BORDER_RADIUS;
 		border-bottom-right-radius: $MODAL_BORDER_RADIUS;

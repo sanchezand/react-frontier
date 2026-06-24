@@ -65,8 +65,8 @@ function ToolbarDropdownItem<E extends ElementType = typeof defaultItemElement, 
 					<Icon name={'caret-right'} className={style.menuIcon} />
 				</div>
 			</Menu.SubmenuTrigger>
-			<Menu.Portal>
-				<Menu.Positioner alignOffset={-4}>
+			<Menu.Portal style={{ zIndex: 1000 }}>
+				<Menu.Positioner alignOffset={-4} style={{ zIndex: 1000 }}>
 					<Menu.Popup className={classNames(style.popup, style.list)}>
 						{props.items.filter(a=>a.if!==false).map((a, ix)=>(
 							<ToolbarDropdownItem key={`TBDSRPI-${ix}`} {...a} />
@@ -109,7 +109,7 @@ type ToolbarDropdownProps<E extends ElementType = typeof defaultItemElement, K e
 }
 var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
 	return <Menu.Root>
-		<Menu.Trigger className={style.toolbarItem} render={<div />} nativeButton={false}>
+		<Menu.Trigger className={classNames(style.toolbarItem, 'item')} render={<div />} nativeButton={false}>
 			{!!props.iconName && (
 				<Icon name={props.iconName} className={style.toolbarIcon} />
 			)}
@@ -119,8 +119,8 @@ var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
 			<Icon name={'caret-down'} className={style.dropdownIcon} />
 		</Menu.Trigger>
 		{!!props.items && (
-			<Menu.Portal>
-				<Menu.Positioner>
+			<Menu.Portal style={{ zIndex: 1000 }}>
+				<Menu.Positioner sideOffset={5} style={{ zIndex: 1000 }}>
 					<Menu.Popup className={classNames(style.popup, style.list)}>
 						{props.items.filter(a=>a.if!==false).map((a, ix)=>(
 							<ToolbarDropdownItem key={`TBDRPI-${ix}`} {...a} />

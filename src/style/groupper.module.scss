@@ -1,23 +1,21 @@
 @use "sass:color";
 
 $GROUPPER_PADDING: 20px;
+$GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 
 .groupper{
 	background-color: darken(white, 2%);
 	// background-color: white;
-	padding: 3px 0;
+	// padding: 3px 0;
 	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
 	border: 1px solid rgba(0,0,0,0.1);
 	border-radius: 12px;
 	position: relative;
+	overflow: hidden;
 	
 	.contents{
 		background-color: white;
-		border-radius: 12px;
 		padding: $GROUPPER_PADDING;
-		border: 1px solid var(--color-gray-200);
-		border-left: 0;
-		border-right: 0;
 		box-shadow:
 			0px 0px 0px 1px rgba(0, 0, 0, 0.02),
 			0px 1px 2px -1px rgba(0, 0, 0, 0.02),
@@ -71,6 +69,21 @@ $GROUPPER_PADDING: 20px;
 			}
 		}
 
+		:global(.toolbar){
+			border-radius: 0;	
+			box-shadow: none;
+			border-left: 0;
+			border-right: 0;
+			border-top: 0;
+
+			margin: -$GROUPPER_PADDING;
+			margin-bottom: $GROUPPER_PADDING;
+
+			> :global(.item){
+				border-radius: 0;
+			}
+		}
+
 		&[data-fitted]{
 			padding: 0;
 			> .divider{
@@ -80,15 +93,17 @@ $GROUPPER_PADDING: 20px;
 					margin-top: 0;
 				}
 			}
+
+			:global(.toolbar){
+				margin: 0;
+			}
 		}
 	}
-
-
-
 
 	.actions{
 		text-align: right;
 		padding: 8px 6px;
+		border-top: $GROUPPER_SECTION_BORDER;
 		> * {
 			line-height: 12px;
 		}
@@ -99,6 +114,7 @@ $GROUPPER_PADDING: 20px;
 		padding: 8px 10px;
 		display: flex;
 		align-items: center;
+		border-bottom: $GROUPPER_SECTION_BORDER;
 
 		> .text{
 			text-transform: uppercase;
@@ -111,6 +127,13 @@ $GROUPPER_PADDING: 20px;
 
 		> :first-child{
 			flex-grow: 100;
+		}
+
+		:global(.button){
+			line-height: 12px;
+			font-size: 12px;
+			padding: 6px;
+			min-width: 80px;
 		}
 
 		&[data-size="small"] > .text{

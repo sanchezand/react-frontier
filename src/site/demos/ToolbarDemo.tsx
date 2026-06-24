@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Toolbar } from '../../components';
+import { Groupper, Toolbar } from '../../components';
 import { Link } from 'react-router-dom';
 
 interface ToolbarDemoProps{
@@ -36,6 +36,21 @@ var ToolbarDemo = (props: ToolbarDemoProps)=>{
 			{ text: 'Item 2' },
 			{ text: 'Item 4' },
 		]} />
+		<Groupper title={'Frontier'}>
+			<Toolbar fitted>
+				<Toolbar.Item text='Frontier' iconName='wrench' />
+				<Toolbar.Dropdown text='Dropdown' iconName='pen' items={[
+					{ text: 'Frontier' },
+					{ text: 'Frontier', disabled: true },
+					{ text: 'Link', as: Link, to: '/dropdown' }
+				]} />
+				<Toolbar.Item text='Frontier' iconName='wrench' />
+			</Toolbar>
+
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Non aliquid, ex enim accusamus, consequuntur dolorem expedita incidunt ipsa id nulla, dolore impedit sed possimus! Vitae facilis laudantium natus! Quaerat, dolor?
+			<Groupper.Divider />
+			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae libero modi eaque ipsum eius a dolor eum sed. Accusamus, commodi minus! Dolorem, explicabo eveniet! Iusto quidem provident ea nisi deleniti.
+		</Groupper>
 	</div>
 }
 

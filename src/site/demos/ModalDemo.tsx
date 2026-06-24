@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '../../components';
+import { Button, Toolbar } from '../../components';
 import Modal from '../../components/Modal';
 
 interface ModalDemoProps{
@@ -22,6 +22,14 @@ var ModalDemo = (props: ModalDemoProps)=>{
 				<Button text='Test button' />
 			)} />
 			<Modal.Input placeholder='Search' />
+			<Toolbar>
+				<Toolbar.Item text='Frontier' iconName='wrench' />
+				<Toolbar.Dropdown text='Dropdown' iconName='pen' items={[
+					{ text: 'Frontier' },
+					{ text: 'Frontier', disabled: true },
+				]} />
+				<Toolbar.Item text='Frontier' iconName='wrench' />
+			</Toolbar>
 			<Modal.Content>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
 				<br />

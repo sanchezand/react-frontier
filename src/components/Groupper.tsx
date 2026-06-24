@@ -1,7 +1,5 @@
 import React, { CSSProperties, PropsWithChildren, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import style from '../style/groupper.module.scss'
-import Button from './Button';
 import classNames from 'classnames';
 
 interface GroupperDividerProps extends PropsWithChildren{

@@ -5,9 +5,8 @@ import classNames from 'classnames';
 import style from '../style/input.module.scss';
 import { Field, Popover } from '@base-ui/react';
 import Calendar, { CalendarProps } from './Calendar';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import Loader from './Loader';
-import Button from './Button';
 
 export type InputType = 'error' | 'warning' | 'normal';
 
@@ -132,7 +131,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			onKeyUp={(props.onKeyUp || props.submitOnEnter) ? onInputKeyUp : null}
 			value={!!props.calendar ? (
 				props.calendar.date ? (
-					moment(props.calendar.date).format(props.calendar.format || 'DD/MM/YY'+(props.calendar?.mode && props.calendar.mode=='date' ? '' : ' HH:mm'))
+					DateTime.fromJSDate(props.calendar.date).toFormat(props.calendar.format || 'dd/MM/yy'+(props.calendar?.mode && props.calendar.mode=='date' ? '' : ' HH:mm'))
 				) : ''
 			) : (
 				props.value!==null ? (

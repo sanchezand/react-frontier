@@ -30,6 +30,9 @@ $LABEL_MARGIN: 8px;
 		background-color: var(--color-default);
 	}
 	
+	&[data-disabled]{
+		opacity: 0.8;
+	}
 	&[data-checked] {
 		background-position-x: 0%;
 	}
@@ -68,6 +71,10 @@ $LABEL_MARGIN: 8px;
 		0 0 1px 1px oklch(12% 9.5% 264deg / 5%), 
 		0 1px 1px oklch(12% 9.5% 264deg / 5%), 
 		1px 2px 4px -1px oklch(12% 9.5% 264deg / 5%);
+}
+
+.switch[data-disabled] .thumb{
+	background-color: darken(white, 5%);
 }
 
 @each $name, $background, $color, $hover in $frontier-colors{

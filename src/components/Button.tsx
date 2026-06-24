@@ -12,6 +12,7 @@ interface ButtonMenuProps{
 	items?: ButtonMenuProps[]
 	className?: string,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	if?: boolean,
 	separator?: boolean,
 	onClick?: ()=>void,
@@ -142,7 +143,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 														<Menu.Item key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
 															<div className={DropdownStyle.contents}>
 																{!!b.iconName && (
-																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} />
+																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} solid={!!b.iconSolid} />
 																)}
 																{b.text}
 															</div>
@@ -157,7 +158,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 								<Menu.Item key={`BTNMENU-${a.text}`} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
 									<div className={DropdownStyle.contents}>
 										{!!a.iconName && (
-											<Icon className={DropdownStyle.itemIcon} name={a.iconName} />
+											<Icon className={DropdownStyle.itemIcon} name={a.iconName} solid={!!a.iconSolid} />
 										)}
 										{a.text}
 									</div>

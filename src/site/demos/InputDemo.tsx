@@ -47,7 +47,7 @@ var InputDemo = (props: InputDemoProps)=>{
 		</Field>
 		<Field amount={3}>
 			<Input label='Test' comment='Comment test' />
-			<Input label='Test' comment='Comment test' />
+			<Dropdown label='lmao' comment='test?' value={null} />
 			<Input label='Test' comment='Comment test' />
 		</Field>
 

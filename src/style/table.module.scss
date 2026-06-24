@@ -134,8 +134,9 @@ $BORDER_RADIUS: 12px;
 				}
 			}
 			:global(.fr2.button){
-				font-size: 12x;
+				font-size: 12px;
 				line-height: 18px;
+				text-transform: none;
 				// padding-top: 0;
 				// padding-bottom: 0;
 			}

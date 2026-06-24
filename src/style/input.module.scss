@@ -188,10 +188,14 @@ $BORDER_RADIUS: 8px;
 	> .content{
 		display: flex;
 		gap: 5px;
+		:global(.dropdown){
+			position: relative;
+			margin: 0;
+		}
 		.root{
 			position: relative;
 			margin-bottom: 0;
-			.input{
+			.input,:global(.dropdown){
 				width: 100%;
 			}
 		}
@@ -199,6 +203,9 @@ $BORDER_RADIUS: 8px;
 		@for $count from 1 through 10{
 			&[data-amount="#{$count}"]{
 				.root{
+					width: #{100% / $count};
+				}
+				:global(.dropdown){
 					width: #{100% / $count};
 				}
 			}
