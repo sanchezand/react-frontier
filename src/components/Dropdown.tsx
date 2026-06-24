@@ -44,6 +44,7 @@ export interface DropdownItemProps{
 	value?: any,
 	text: any,
 	meta?: any,
+	disabled?: boolean,
 	className?: string,
 	iconName?: IconName,
 	if?: boolean,
@@ -259,8 +260,8 @@ var Dropdown = (props: DropdownProps)=>{
 						)}
 						<Combobox.List className={style.list}>
 							{(a: DropdownItemProps)=>(
-								<Combobox.Item key={a.value} value={a} className={classNames(style.item, a.className)} style={{...props.itemStyle, ...a.style}}>
-									<div className={style.contents}>
+								<Combobox.Item disabled={a.disabled || false} key={a.value} value={a} className={classNames(style.item, a.className)} style={{...props.itemStyle, ...a.style}}>
+									<div className={style.contents} onClick={a.onClick || null} >
 										{has_icons ? (
 											a.iconName ? (
 												<Icon name={a.iconName} className={style.itemIcon} />
@@ -277,7 +278,7 @@ var Dropdown = (props: DropdownProps)=>{
 											{a.text || a.value}
 										</div>
 										{!!a.meta && (
-											<div className={style.meta}>Frontier</div>
+											<div className={style.meta}>{a.meta}</div>
 										)}
 									</div>
 								</Combobox.Item>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Dropdown, Toolbar } from '../../components';
+import { Button, Dropdown, Input, Toolbar } from '../../components';
 import Modal from '../../components/Modal';
 
 interface ModalDemoProps{
@@ -19,7 +19,15 @@ var ModalDemo = (props: ModalDemoProps)=>{
 		<Button text='Open modal' onClick={()=>setSimpleModal(true)} />
 		<Modal open={simpleModal} onClose={setSimpleModal}>
 			<Modal.Header text='Test' actions={(
-				<Button text='Test button' />
+				<Button text='Test button' menu={[
+					{ text: 'Frontier' },
+					{ text: 'frontier', disabled: true },
+					{ text: 'menu', items: [
+						{ text: 'Frontier' },
+						{ text: 'Frontier', disabled: true },
+						{ text: 'Frontier' },
+					] }
+				]} />
 			)} />
 			<Modal.Input placeholder='Search' />
 			<Toolbar>
@@ -32,7 +40,7 @@ var ModalDemo = (props: ModalDemoProps)=>{
 			</Toolbar>
 			<Modal.Content>
 				<Dropdown search
-					style={{ marginTop: 15 }}
+					style={{ marginBottom: 15 }}
 					iconName='search-dollar'
 					label='Search'
 					value={null}
@@ -42,6 +50,10 @@ var ModalDemo = (props: ModalDemoProps)=>{
 						{ text: 'TEst' },
 					]}
 				/>
+
+				<Input label='Calendar' calendar={{
+					
+				}} />
 
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
 				<br />

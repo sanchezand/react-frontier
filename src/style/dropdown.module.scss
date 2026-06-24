@@ -247,6 +247,9 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 		> .contents{
 			background-color: rgba(0,0,0,0.08);
 			font-weight: bold;
+			.meta{
+				font-weight: normal;
+			}
 		}
 	}
 	&:hover:not([data-disabled]){

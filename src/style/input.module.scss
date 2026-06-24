@@ -109,6 +109,7 @@ $BORDER_RADIUS: 8px;
 	width: var(--positioner-width);
 	height: var(--positioner-height);
 	max-width: var(--available-width);
+	z-index: 1000;
 }
 
 .popup{

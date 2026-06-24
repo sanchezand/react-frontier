@@ -14,6 +14,7 @@ interface ButtonMenuProps{
 	iconName?: IconName,
 	iconSolid?: boolean,
 	if?: boolean,
+	disabled?: boolean,
 	separator?: boolean,
 	onClick?: ()=>void,
 	style?: React.CSSProperties,
@@ -120,7 +121,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		return <Menu.Root>
 			<Menu.Trigger render={ButtonComponent} />
 			<Menu.Portal>
-				<Menu.Positioner sideOffset={8} align='start'>
+				<Menu.Positioner sideOffset={8} align='start' style={{ zIndex: 1001 }}>
 					<Menu.Popup className={DropdownStyle.popup} data-fluid>
 						{props.menu.filter(a=>a.if!==false).map((a, i)=>(
 							a.separator ? (
@@ -134,13 +135,13 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 										</div>
 									</Menu.SubmenuTrigger>
 									<Menu.Portal>
-										<Menu.Positioner>
+										<Menu.Positioner style={{ zIndex: 1001 }}>
 											<Menu.Popup className={DropdownStyle.popup}>
 												{a.items.map(b=>(
 													b.separator ? (
 														<Menu.Separator className={DropdownStyle.separator} />
 													) : (
-														<Menu.Item key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
+														<Menu.Item disabled={b.disabled} key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
 															<div className={DropdownStyle.contents}>
 																{!!b.iconName && (
 																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} solid={!!b.iconSolid} />
@@ -155,7 +156,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 									</Menu.Portal>
 								</Menu.SubmenuRoot>
 							) : (
-								<Menu.Item key={`BTNMENU-${a.text}`} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
+								<Menu.Item key={`BTNMENU-${a.text}`} disabled={a.disabled} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
 									<div className={DropdownStyle.contents}>
 										{!!a.iconName && (
 											<Icon className={DropdownStyle.itemIcon} name={a.iconName} solid={!!a.iconSolid} />

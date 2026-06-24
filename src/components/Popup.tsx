@@ -9,7 +9,8 @@ interface PopupProps extends PropsWithChildren{
 	basic?: boolean,
 	containWidth?: boolean,
 	containHeight?: boolean,
-	className?: string,	
+	className?: string,
+	zIndex?: number
 }
 
 var Popup = (props: PopupProps)=>{
@@ -20,7 +21,7 @@ var Popup = (props: PopupProps)=>{
 	return <Popover.Root>
 		<Popover.Trigger render={props.trigger} />
 		<Popover.Portal>
-			<Popover.Positioner sideOffset={8}>
+			<Popover.Positioner sideOffset={8} style={{ zIndex: props.zIndex || 1000 }}>
 				<Popover.Popup 
 					className={classNames(style.popup, props.className)} 
 					style={props.style} 

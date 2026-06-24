@@ -176,7 +176,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			className={classNames("fr2 input", style.root, props.className)} 
 			data-icon={!!props.iconName || !!loading || undefined} 
 			data-loading={!!loading || undefined} 
-			data-fluid={props.fluid || undefined} 
+			data-fluid={props.fluid!==false} 
 			data-type={input_type || undefined}
 			data-actions={!!props.buttons || undefined}
 			style={props.style}
