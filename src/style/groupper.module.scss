@@ -7,7 +7,7 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 	background-color: darken(white, 2%);
 	// background-color: white;
 	// padding: 3px 0;
-	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
 	border: 1px solid rgba(0,0,0,0.1);
 	border-radius: 12px;
 	position: relative;
@@ -69,6 +69,13 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 			}
 		}
 
+		&:not([data-fitted]){
+			:global(table){
+				margin: 0 -20px;
+				width: calc(100% + calc($GROUPPER_PADDING * 2));
+			}
+		}
+
 		:global(.toolbar){
 			border-radius: 0;	
 			box-shadow: none;
@@ -111,7 +118,7 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 	.title{
 		// width: calc(100% + 6px);
 		width: 100%;
-		padding: 8px 10px;
+		padding: 10px 14px;
 		display: flex;
 		align-items: center;
 		border-bottom: $GROUPPER_SECTION_BORDER;
@@ -119,8 +126,8 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 		> .text{
 			text-transform: uppercase;
 			text-align: left;
-			font-size: 20px;
-			line-height: 24px;
+			font-size: 18px;
+			line-height: 18px;
 			color: rgba(0, 0, 0, 0.8);
 			font-weight: bold;
 		}

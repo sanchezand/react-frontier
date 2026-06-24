@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Groupper } from '../../components';
+import { Button, Groupper, Table } from '../../components';
 
 interface GroupperDemoProps{
 	
@@ -43,13 +43,29 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			<Groupper.Divider type='dotted' />
 			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure assumenda minus voluptates ipsam dolorum recusandae! Unde dolorem blanditiis, dicta iste animi ut eum fugiat. Aperiam hic magnam quod obcaecati placeat!
 		</Groupper>
-		<Groupper titleCentered titleSize='big' style={{ maxWidth: 400, margin: 'auto' }} title={'testing'}  actions={(
+		<Groupper titleCentered titleSize='big' style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'}  actions={(
 			<Button text='Frontier' />
 		)}>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
 			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum architecto voluptatibus optio quaerat nobis obcaecati eaque commodi, suscipit, earum, nihil consectetur? Ipsa blanditiis rem beatae natus dolorem. Totam, fugit sunt. <br />
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum reiciendis dolore animi hic suscipit placeat voluptatem maiores sint. Ea similique dolore veritatis ad modi architecto aspernatur aperiam est illo impedit.
+		</Groupper>
+
+		<Groupper title={"test"} style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }}>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim vero soluta dignissimos voluptas necessitatibus illum rem reiciendis fugit veritatis, eum cum quos repudiandae adipisci aliquid? Nostrum saepe tenetur libero modi?
+
+			<Table details fitted>
+				<Table.Head title='frontierO' titleRight={(
+					<Button text='button' size='tiny' iconName='wrench' color='blue' />
+				)} />
+				<Table.Body>
+					<Table.Row data={[ 'ID', 'ROW' ]} />
+					<Table.Row data={[ 'ID', 'ROW' ]} />
+					<Table.Row data={[ 'ID', 'ROW' ]} />
+					<Table.Row data={[ 'ID', 'ROW' ]} />
+				</Table.Body>
+			</Table>
 		</Groupper>
 	</div>
 }

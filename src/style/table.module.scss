@@ -5,7 +5,7 @@ $BORDER_RADIUS: 12px;
 .table{
 	width: 100%;
 	background-color: white;
-	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
 	
 	border-collapse: collapse;
 	border-radius: $BORDER_RADIUS;
@@ -35,6 +35,11 @@ $BORDER_RADIUS: 12px;
 			}
 		}
 	}
+	&[data-fitted]{
+		border-radius: 0;
+		box-shadow: none;
+	}
+
 	&[data-compact] tr td{
 		height: 100%;
 	}
@@ -102,13 +107,17 @@ $BORDER_RADIUS: 12px;
 			white-space: nowrap;
 		}
 	}
+	&:not([data-fitted]){
+		thead th{
+			&:not([data-normal]):first-child{
+				border-top-left-radius: $BORDER_RADIUS;
+			}
+			&:last-child{
+				border-top-right-radius: $BORDER_RADIUS;
+			}
+		}
+	}
 	thead th{
-		&:not([data-normal]):first-child{
-			border-top-left-radius: $BORDER_RADIUS;
-		}
-		&:last-child{
-			border-top-right-radius: $BORDER_RADIUS;
-		}
 		&.title{
 			color: rgba(0, 0, 0, 0.8);
 			font-size: 18px;
@@ -214,11 +223,13 @@ $BORDER_RADIUS: 12px;
 				display: none;
 			}
 		}
-		&:first-child{
-			border-bottom-left-radius: 12px;
-		}
-		&:last-child{
-			border-bottom-right-radius: 12px;
+		&:not([data-fitted]){
+			&:first-child{
+				border-bottom-left-radius: 12px;
+			}
+			&:last-child{
+				border-bottom-right-radius: 12px;
+			}
 		}
 	}
 }

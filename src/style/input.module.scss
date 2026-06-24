@@ -203,7 +203,7 @@ $BORDER_RADIUS: 8px;
 
 		@for $count from 1 through 10{
 			&[data-amount="#{$count}"]{
-				.root{
+				.root, .field{
 					width: #{100% / $count};
 				}
 				:global(.dropdown){

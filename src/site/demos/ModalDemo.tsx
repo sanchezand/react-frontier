@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Dropdown, Input, Toolbar } from '../../components';
+import { Button, Dropdown, Input, Table, Toolbar } from '../../components';
 import Modal from '../../components/Modal';
 
 interface ModalDemoProps{
@@ -54,27 +54,19 @@ var ModalDemo = (props: ModalDemoProps)=>{
 				<Input label='Calendar' calendar={{
 					
 				}} />
-
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
-				<br />
+				
+				<Table details fitted>
+					<Table.Head title='frontierO' titleRight={(
+						<Button text='button' size='tiny' iconName='wrench' color='blue' />
+					)} />
+					<Table.Body>
+						<Table.Row data={[ 'ID', 'ROW' ]} />
+						<Table.Row data={[ 'ID', 'ROW' ]} />
+						<Table.Row data={[ 'ID', 'ROW' ]} />
+						<Table.Row data={[ 'ID', 'ROW' ]} />
+					</Table.Body>
+				</Table>
+				
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eius amet tempore sit explicabo omnis soluta iusto numquam reprehenderit similique, saepe doloremque nihil et sapiente ab magni ex adipisci temporibus!
 				<br />
 			</Modal.Content>

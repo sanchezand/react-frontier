@@ -10,7 +10,7 @@ import Calendar from './components/Calendar';
 import Dropdown, { DropdownItemProps as CompDrItPr, DropdownSearchResult as CompDropdownSearchResult, DropdownProps as CompDropdownProps, DropdownValueChange as CompDropdownValueChange } from './components/Dropdown';
 import Loader from './components/Loader';
 import Icon, { IconName as CompIconName, IconsList } from "./components/Icon"
-import { FrontierProvider } from './components/useFrontier';
+import { FrontierProvider, useFrontier } from './components/useFrontier';
 import Header from './components/Header';
 import Groupper from './components/Groupper';
 import Input from './components/Input';
@@ -66,6 +66,7 @@ export {
 	Label,
 	Loader,
 	Message,
+	Modal,
 	Pagination,
 	Placeholder,
 	Popup,
@@ -74,5 +75,5 @@ export {
 	Stat,
 	Table,
 	Toolbar,
-	Modal,
+	useFrontier,
 }

@@ -36,7 +36,7 @@ var SegmentControl = (props: SegmentControlProps)=>{
 		return <div className={classNames(style.list, props.className)} data-multiple data-color={props.color || 'black'} style={props.style} data-divided={props.divided!==false || undefined} {...restProps}>
 			{props.segments && props.segments.map(a=>(
 				<div className={style.segment} style={props.segmentStyle} data-active={(props.selected as number[]).indexOf(a.value)!=-1 || undefined} onClick={props.onClick ? ()=>props.onClick(a.value) : null}>
-					{a.text}{is_array ? 'a' : ''}
+					{a.text}
 				</div>
 			))}
 		</div>
@@ -48,7 +48,7 @@ var SegmentControl = (props: SegmentControlProps)=>{
 		<Tabs.List className={classNames(style.list, props.className)} style={props.style} data-color={props.color || 'black'} data-divided={props.divided!==false || undefined} {...restProps}>
 			{props.segments && props.segments.map(a=>(
 				<Tabs.Tab value={a.value} render={<div />} style={props.segmentStyle} className={style.segment}>
-					{a.text}{is_array ? 'a' : ''}
+					{a.text}
 				</Tabs.Tab>
 			))}
 			{props.segments && props.segments.length>0 ? (

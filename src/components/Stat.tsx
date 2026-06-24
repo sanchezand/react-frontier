@@ -48,13 +48,21 @@ type StatSubComponents = {
 
 interface StatProps extends PropsWithChildren{
 	className?: string,
+	label?: any,
+	value?: any,
 	style?: React.CSSProperties
 	size?: 'big' | 'small',
 }
 const Stat : React.FC<StatProps> & StatSubComponents = (props: StatProps)=>{
-	var { children, className, size, style: compStyle, ...restProps } = props;
+	var { children, className, size, label, value, style: compStyle, ...restProps } = props;
 	return <div className={classNames('fr2 stat', style.stat, className)} style={props.style} data-size={props.size} {...restProps}>
 		{props.children}
+		{typeof props.value!=='undefined' && (
+			<StatValue text={props.value} />
+		)}
+		{typeof props.label!=='undefined' && (
+			<StatLabel text={props.label} />
+		)}
 	</div>
 }
 
