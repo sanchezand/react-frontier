@@ -230,7 +230,7 @@ const TableBody = (props: TableSubComponentProps)=>{
 						key={`TB-${id}-${i}`} 
 						data-collapsing={(!!props.collapsingIndexes && props.collapsingIndexes.indexOf(i)!=-1) || undefined}
 						data-centered={(!!props.centeredIndexes && props.centeredIndexes.indexOf(i)!=-1) || undefined}
-					>{a}</td>
+					>{b}</td>
 				))}
 			</tr>
 		))}

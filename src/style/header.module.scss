@@ -2,10 +2,10 @@
 @import 'theme.scss';
 
 $header-sizes:
-	"small" 21 0.7em 24 3,
-	"normal" 28 0.5em 32 1,
-	"big" 56 16px 48 -1,
-	"huge" 70 20px 64 -3,
+	"small" 21 21 0.7em 2 24 3 3,
+	"normal" 28 28 0.5em 2 32 1 5,
+	"big" 56 56 0.3em 0 48 -1 0,
+	"huge" 70 70 0.3em 5 64 -2 0,
 ;
 
 .header{
@@ -16,7 +16,6 @@ $header-sizes:
 
 	display: flex;
 	flex-direction: column;
-	
 	
 	.text{
 		color: black;
@@ -45,18 +44,25 @@ $header-sizes:
 	&[data-centered]{
 		align-items: center;
 	}
-	// &[data-loading]{
-	// 	.text{
-	// 		// margin-top: 10px;
-	// 	}
-	// }
+	&[data-loading]{
+		.text{
+			color: #888;
+		}
+	}
 
-	@each $name, $size, $subsize, $iconsize, $margin in $header-sizes{
+	@each $name, $size, $lineheight, $subsize, $submargin, $iconsize, $margin, $loadermargin in $header-sizes{
 		&[data-size="#{$name}"]{
 			font-size: #{$size}px;
+			.text{
+				line-height: #{$lineheight}px;
+			}
 			.subtext{
 				font-size: $subsize;
-				line-height: $subsize;
+				line-height: 1em;
+				margin-top: #{$submargin}px;
+			}
+			.loader{
+				margin-bottom: #{$loadermargin}px;
 			}
 			.icon{
 				margin-bottom: #{$margin}px;

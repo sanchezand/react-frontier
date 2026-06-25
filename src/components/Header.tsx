@@ -62,7 +62,7 @@ var Header = (props: HeaderProps)=>{
 		{...restProps}
 	>
 		{!!props.loading ? (
-			<Loader size={loader_size} inline style={props.loaderStyle} />
+			<Loader className={style.loader} size={loader_size} inline style={props.loaderStyle} />
 		) : !!props.iconName ? (
 			<Icon name={props.iconName} style={props.iconStyle} className={style.icon} />
 		) : null}

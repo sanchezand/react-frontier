@@ -13,10 +13,10 @@ var HeaderDemo = (props: HeaderDemoProps)=>{
 	}, []);
 	
 	return <div style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }}>
-		<Header text={'Header'} subtext={'Header subtext here'} size='small' />
-		<Header text={'Header'} subtext={'Header subtext here'} />
-		<Header text={'Header'} subtext={'Header subtext here'} size='big' />
-		<Header text={'Header'} subtext={'Header subtext here'} size='huge' />
+		<Header text={'Small'} subtext={'Header subtext here'} size='small' />
+		<Header text={'Normal'} subtext={'Header subtext here'} />
+		<Header text={'Big'} subtext={'Header subtext here'} size='big' />
+		<Header text={'Huge'} subtext={'Header subtext here'} size='huge' />
 		<div style={{ marginTop: 50 }} />
 		<Header text={'Header'} subtext={'Header subtext here'} iconName='ban' size='small' />
 		<Header text={'Header'} subtext={'Header subtext here'} iconName='ban' />

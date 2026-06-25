@@ -156,7 +156,7 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 	}
 
-	return <div className={classNames("fr2 dropdown", props.className)} style={props.style} {...restProps}>
+	return <div className={classNames("fr2 dropdown", style.root, props.className)} style={props.style} {...restProps}>
 		<Combobox.Root 
 			items={shown_items}
 			value={real_val || null}
