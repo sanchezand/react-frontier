@@ -180,15 +180,6 @@ $BORDER_RADIUS: 12px;
 					}
 				}
 			}
-			&[data-red]{
-				color: #a72a2a;
-			}
-			&[data-green]{
-				color: green;
-			}
-			&[data-yellow]{
-				color: #c57f41e6;
-			}
 			&[data-empty], &[data-gray]{
 				color: gray;
 				text-align: center;
@@ -229,6 +220,25 @@ $BORDER_RADIUS: 12px;
 			}
 			&:last-child{
 				border-bottom-right-radius: 12px;
+			}
+		}
+	}
+
+	$table-colors:
+		"red" #a72a2a,
+		"green" green,
+		"yellow" #F4AB6A,
+	;
+
+	@each $name, $color in $table-colors{
+		tr[color="#{$name}"]{
+			td,th{
+				color: $color;
+			}
+		}
+		tr td, tr th{
+			&[color="#{$name}"]{
+				color: $color;
 			}
 		}
 	}

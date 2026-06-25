@@ -6,6 +6,7 @@ import Loader from './Loader';
 import classNames from 'classnames';
 import { useLocale } from './useLocale';
 import { InputType } from './Input';
+import { removeAccents } from './Util';
 
 export type DropdownValueChange = (v: any, d: DropdownItemProps)=>boolean | void;
 
@@ -145,19 +146,33 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 	}
 
+	var onItemSelected = (a: DropdownItemProps, e: Combobox.Root.ChangeEventDetails)=>{
+		if(!!props.onAsyncSearch){
+			setSelectedSearch(a);
+		}
+		if(props.onValueChange){
+			if(!a) props.onValueChange(null, null);
+			else props.onValueChange(a.value, a);
+		}
+	}
+
 	return <div className={classNames("fr2 dropdown", props.className)} style={props.style} {...restProps}>
 		<Combobox.Root 
 			items={shown_items}
 			value={real_val || null}
 			disabled={props.disabled}
-			filter={props.onAsyncSearch ? null : undefined}
+			filter={props.onAsyncSearch ? null : (!props.search ? ()=>true : (i, q, s)=>{
+				if(!q || q.length===0) return true;
+				var str = i.value===null ? i.text : s(i);
+				return removeAccents(str).toLowerCase().indexOf(removeAccents(q).toLowerCase())!=-1;
+			})}
 			isItemEqualToValue={(a, v)=>{
 				if(a === v) return true;
 				if(!a || !v) return false;
 				return a.value === v.value || a.value === v;
 			}}
-			itemToStringLabel={(a: DropdownItemProps)=>(a.text || a.value)}
-			itemToStringValue={(a: DropdownItemProps)=>(a.value || a.text)}
+			itemToStringLabel={(a: DropdownItemProps)=>a.value===null ? null : (a.text || a.value)}
+			itemToStringValue={(a: DropdownItemProps)=>a.value===null ? null : (a.value || a.text)}
 			openOnInputClick={!props.onAsyncSearch || !!props.value}
 			onInputValueChange={!props.onAsyncSearch ? null : (v, { reason })=>{
 				setSearchValue(v);
@@ -182,15 +197,7 @@ var Dropdown = (props: DropdownProps)=>{
 					})
 				}, (props.searchTimeout || 500)))
 			}}
-			onValueChange={(a, e)=>{
-				if(!!props.onAsyncSearch){
-					setSelectedSearch(a);
-				}
-				if(props.onValueChange){
-					if(!a) props.onValueChange(null, null);
-					else props.onValueChange(a.value, a);
-				}
-			}}
+			onValueChange={onItemSelected}
 		>
 			{!!props.label && (
 				<label className={style.label} data-type={props.type}>
@@ -260,8 +267,8 @@ var Dropdown = (props: DropdownProps)=>{
 						)}
 						<Combobox.List className={style.list}>
 							{(a: DropdownItemProps)=>(
-								<Combobox.Item disabled={a.disabled || false} key={a.value} value={a} className={classNames(style.item, a.className)} style={{...props.itemStyle, ...a.style}}>
-									<div className={style.contents} onClick={a.onClick || null} >
+								<Combobox.Item onClick={a.onClick || undefined} disabled={a.disabled || false} key={a.value} value={a?.value!==null ? a : undefined} className={classNames(style.item, a.className)} style={{...props.itemStyle, ...a.style}} >
+									<div className={style.contents} >
 										{has_icons ? (
 											a.iconName ? (
 												<Icon name={a.iconName} className={style.itemIcon} />

@@ -72,6 +72,46 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 			onValueChange={a=>setVal2(a)}
 			items={TEST_ITEMS}
 		/>
+
+		<Dropdown
+			style={{ marginTop: 15 }}
+			label='Testing'
+			value={val2}
+			onValueChange={a=>setVal2(a)}
+			items={[
+				{ text: 'Add test', value: null, onClick: ()=>{
+					console.log("Tets");
+				} },
+				{ text: "Testing 1", value: 100001 },
+				{ text: "Testing 2", value: 100002 },
+				{ text: "Testing 3", value: 100003 },
+				{ text: "Testing 4", value: 100004 },
+				{ text: "Testing 5", value: 100005 },
+				{ text: "Testing 6", value: 100006 },
+				{ text: "Testing 7", value: 100007 },
+				{ text: "Testing 8", value: 100008 },
+			]}
+		/>
+		<Dropdown
+			search
+			style={{ marginTop: 15 }}
+			label='Testing'
+			value={val2}
+			onValueChange={a=>setVal2(a)}
+			items={[
+				{ text: 'Add test', value: null, onClick: ()=>{
+					console.log("Tets");
+				} },
+				{ text: "Testing 1", value: 100001 },
+				{ text: "Testing 2", value: 100002 },
+				{ text: "ABC 3", value: 100003 },
+				{ text: "DEF 4", value: 100004 },
+				{ text: "GHI 5", value: 100005 },
+				{ text: "JKL 6", value: 100006 },
+				{ text: "MNO 7", value: 100007 },
+				{ text: "PQR 8", value: 100008 },
+			]}
+		/>
 	</div>
 }
 

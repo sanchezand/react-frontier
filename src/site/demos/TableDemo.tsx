@@ -52,12 +52,12 @@ var TableDemo = (props: TableDemoProps)=>{
 			</Table.Head>
 			<Table.Body>
 				<Table.Row data={[ 'frontier', 'frontier', 'frontier', 'frontier' ]} />
-				<Table.Row data={[ 'frontier', 'frontier', 'frontier', 'frontier' ]} />
+				<Table.Row color='red' data={[ 'frontier', 'frontier', 'frontier', 'frontier' ]} />
 				<Table.Row data={[ 'frontier', 'frontier', 'frontier', 'frontier' ]} />
 				<Table.Row>
-					<Table.Cell collapsing value={'test'} />
+					<Table.Cell color='green' collapsing value={'test'} />
 					<Table.Cell>testt</Table.Cell>
-					<Table.Cell>Testtt</Table.Cell>
+					<Table.Cell color='yellow'>Testtt</Table.Cell>
 					<Table.Cell>Testttt</Table.Cell>
 				</Table.Row>
 				<Table.Divider />

@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { PropsWithChildren, useMemo } from 'react';
 import { randomRange } from './Util';
 import style from '../style/table.module.scss';
+
+type TableColors = 'red' | 'green' | 'yellow';
 
 type TableCellProps<E extends React.ElementType=any> = {
 	as?: E,
@@ -18,6 +19,7 @@ type TableCellProps<E extends React.ElementType=any> = {
 	value?: any,
 	style?: React.CSSProperties,
 	empty?: boolean,
+	color?: TableColors,
 	onClick?: ()=>void,
 } & React.ComponentPropsWithoutRef<E>;
 
@@ -36,6 +38,8 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 		empty,
 		as,
 		value,
+		color,
+		header,
 		...restProps
 	} = props
 	const CellElement = props.header ? 'th' : 'td';
@@ -48,6 +52,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 			style={props.style} 
 			onClick={onClick}
 			className={props.className}
+			color={props.color || undefined}
 			data-collapsing={props.collapsing || undefined}
 			data-compact={(compact || props.as==='a') || undefined}
 			data-normal={compact===false || undefined}
@@ -81,6 +86,7 @@ type TableRowProps<E extends React.ElementType = any> = {
 	empty?: boolean,
 	details?: boolean,
 	compact?: boolean,
+	color?: TableColors,
 } & React.ComponentPropsWithoutRef<E>;
 
 const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
@@ -98,6 +104,7 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		compact,
 		as,
 		children,
+		color,
 		...restProps
 	} = props;
 	var id = useMemo(()=>{
@@ -126,6 +133,7 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		data-empty={empty || undefined}
 		data-header={header || undefined}
 		data-details={details || undefined}
+		color={props.color || undefined}
 		className={className}
 		onClick={onClick}>
 		{data && data.map((b, bi)=>{
@@ -289,104 +297,37 @@ interface TableProps extends PropsWithChildren{
 	fitted?: boolean,
 	className?: string,
 	selectable?: boolean,
+	bordered?: boolean,
 	style?: React.CSSProperties,
 }
 
 const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
+	var {
+		striped,
+		divided,
+		celled,
+		details,
+		fitted,
+		className,
+		selectable,
+		bordered,
+		style: propsStyle,
+		...restProps
+	} = props;
 	return <table 
 		style={props.style}
 		className={classNames('fr2 table', style.table, props.className)} 
+		data-bordered={props.bordered}
 		data-striped={props.striped!==false || undefined}
 		data-divided={props.divided || undefined}
 		data-celled={props.celled || undefined}
 		data-details={props.details || undefined}
 		data-fitted={props.fitted || undefined}
 		data-selectable={props.selectable || undefined}
+		{...restProps}
 	>
 		{props.children}
 	</table>
-	// var [id, setId] = useState<number>(randomRange(0, 256682));
-
-	// var clickRow = (a: any, i: number)=>{
-	// 	return ()=>{
-	// 		if(props.onClick) props.onClick(a, i);
-	// 	}
-	// }
-
-	// var colspan = props.headers ? props.headers.length : (props.data && props.data.length>0 ? props.data[0].length : 999);
-	
-	// return <table className={classNames("fr2 table", props.className, {
-	// 	striped: props.striped,
-	// 	divided: props.divided,
-	// 	details: props.details,
-	// 	celled: props.celled,
-	// 	fitted: props.fitted,
-	// 	selectable: props.selectable,
-	// })} style={props.style}>
-	// 	<thead>
-	// 		{!!props.title && (
-	// 			<tr>
-	// 				<th className={classNames('title', {
-	// 					button: !!props.button,
-	// 				}, props.titleSize)} colSpan={colspan}>
-	// 					<div style={{ display: 'flex', flexDirection: 'row', justifyContent: props.titleCentered ? 'center' : 'space-between', alignItems: 'center', }}>
-	// 						{props.title}
-	// 						{props.button}
-	// 					</div>
-	// 				</th>
-	// 			</tr>
-	// 		)}
-	// 		{props.headers && props.headers.length>0 && (
-	// 			<tr>
-	// 				{props.headers.map((a,i)=>(
-	// 					<th className={classNames({
-	// 						collapsing: props.collapsingIndexes && props.collapsingIndexes.indexOf(i)!=-1,
-	// 						centered: props.centeredIndexes && props.centeredIndexes.indexOf(i)!=-1
-	// 					})} style={props.headersStyle} key={`TH-${id}-${i}`}>{a}</th>
-	// 				))}
-	// 			</tr>
-	// 		)}
-	// 	</thead>
-	// 	<tbody>
-	// 		{props.children}
-	// 		{((props.data && props.data.length===0) || props.empty) ? (
-	// 			<tr>
-	// 				<td className='empty' style={props.emptyStyle} colSpan={colspan}>{props.emptyText}</td>
-	// 			</tr>
-	// 		) : props.data ? props.data.map((a,i)=>{
-	// 			return (
-	// 				<tr key={`TR-${id}-${i}`} className={classNames({ 
-	// 					divider: props.nullIsDivider!==false && (a===null || a.length==0),
-	// 				})} onClick={clickRow(a, i)}>
-	// 					{(a===null || a.length===0) ? (
-	// 						new Array(props.headers ? props.headers.length : (props.details ? 2 : 1)).fill('a').map((d,bi)=>(
-	// 							<td key={`TD-${id}-${i}${bi}`}></td>
-	// 						))
-	// 					) : a.map((b, bi)=>(
-	// 						<td key={`TD-${id}-${i}${bi}`} className={classNames({
-	// 							collapsing: props.collapsingIndexes && props.collapsingIndexes.indexOf(bi)!=-1,
-	// 							centered: props.centeredIndexes && props.centeredIndexes.indexOf(bi)!=-1
-	// 						})}>
-	// 							{b}
-	// 						</td>
-	// 					))}
-	// 				</tr>
-	// 			)
-	// 		}) : null}
-	// 	</tbody>
-	// 	{(props.footer || props.actions) && (
-	// 		<tfoot>
-	// 			{props.footer}
-	// 			{!!props.actions && (
-	// 				<tr>
-	// 					<td colSpan={colspan} className='actions' style={props.actionsStyle}>
-	// 						{props.actions}
-	// 					</td>
-	// 				</tr>	
-	// 			)}
-	// 		</tfoot>	
-	// 	)}
-	// </table>
 }
 
 Table.Head = TableHeader;

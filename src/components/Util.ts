@@ -8,7 +8,13 @@ const bindClick = <T>(setVal: (val: T)=>void, val: T=null)=>{
 	}
 }
 
+function removeAccents(s: string){
+	if(!s) return '';
+	return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 export {
 	bindClick,
 	randomRange,
+	removeAccents,
 }
