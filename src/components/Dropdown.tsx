@@ -44,6 +44,7 @@ export interface DropdownProps{
 export interface DropdownItemProps{
 	value?: any,
 	text: any,
+	searchText?: string,
 	meta?: any,
 	disabled?: boolean,
 	className?: string,
@@ -152,7 +153,7 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 		if(props.onValueChange){
 			if(!a) props.onValueChange(null, null);
-			else props.onValueChange(a.value, a);
+			else props.onValueChange(a.value || null, a);
 		}
 	}
 
@@ -163,7 +164,8 @@ var Dropdown = (props: DropdownProps)=>{
 			disabled={props.disabled}
 			filter={props.onAsyncSearch ? null : (!props.search ? ()=>true : (i, q, s)=>{
 				if(!q || q.length===0) return true;
-				var str = i.value===null ? i.text : s(i);
+				var str = (i.value===null || typeof i.value==='undefined') ? (i.searchText || i.text) : (i.searchText || i.text || i.value || null);
+				if(typeof str !== 'string') return false;
 				return removeAccents(str).toLowerCase().indexOf(removeAccents(q).toLowerCase())!=-1;
 			})}
 			isItemEqualToValue={(a, v)=>{
@@ -171,8 +173,8 @@ var Dropdown = (props: DropdownProps)=>{
 				if(!a || !v) return false;
 				return a.value === v.value || a.value === v;
 			}}
-			itemToStringLabel={(a: DropdownItemProps)=>a.value===null ? null : (a.text || a.value)}
-			itemToStringValue={(a: DropdownItemProps)=>a.value===null ? null : (a.value || a.text)}
+			itemToStringLabel={(a: DropdownItemProps)=>(a.value===null || typeof a.value==='undefined') ? null : (a.text || a.value || null)}
+			itemToStringValue={(a: DropdownItemProps)=>(a.value===null || typeof a.value==='undefined') ? null : (a.value || a.text || null)}
 			openOnInputClick={!props.onAsyncSearch || !!props.value}
 			onInputValueChange={!props.onAsyncSearch ? null : (v, { reason })=>{
 				setSearchValue(v);

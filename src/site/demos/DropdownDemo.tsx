@@ -82,6 +82,7 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 				{ text: 'Add test', value: null, onClick: ()=>{
 					console.log("Tets");
 				} },
+				{ text: (<i>Testing elements</i>) },
 				{ text: "Testing 1", value: 100001 },
 				{ text: "Testing 2", value: 100002 },
 				{ text: "Testing 3", value: 100003 },
@@ -97,11 +98,15 @@ var DropdownDemo = (props: DropdownDemoProps)=>{
 			style={{ marginTop: 15 }}
 			label='Testing'
 			value={val2}
-			onValueChange={a=>setVal2(a)}
+			onValueChange={a=>{
+				console.log(a);
+				setVal2(a)
+			}}
 			items={[
 				{ text: 'Add test', value: null, onClick: ()=>{
 					console.log("Tets");
 				} },
+				{ text: (<i>Testing elements</i>), searchText: 'testing elements' },
 				{ text: "Testing 1", value: 100001 },
 				{ text: "Testing 2", value: 100002 },
 				{ text: "ABC 3", value: 100003 },
