@@ -153,7 +153,7 @@ var Dropdown = (props: DropdownProps)=>{
 		}
 		if(props.onValueChange){
 			if(!a) props.onValueChange(null, null);
-			else props.onValueChange(a.value || null, a);
+			else props.onValueChange(typeof a.value==='undefined' ? null : a.value, a);
 		}
 	}
 
