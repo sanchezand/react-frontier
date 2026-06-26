@@ -20,6 +20,7 @@ type TableCellProps<E extends React.ElementType=any> = {
 	style?: React.CSSProperties,
 	empty?: boolean,
 	color?: TableColors,
+	selectable?: boolean,
 	onClick?: ()=>void,
 } & React.ComponentPropsWithoutRef<E>;
 
@@ -30,6 +31,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 		collapsing,
 		centered,
 		colSpan,
+		selectable,
 		rowSpan,
 		row,
 		compact,
@@ -54,6 +56,7 @@ const TableCell : React.FC<TableCellProps> = (props: TableCellProps)=>{
 			className={props.className}
 			color={props.color || undefined}
 			data-collapsing={props.collapsing || undefined}
+			data-selectable={props.selectable || undefined}
 			data-compact={(compact || props.as==='a') || undefined}
 			data-normal={compact===false || undefined}
 			data-empty={props.empty || undefined}

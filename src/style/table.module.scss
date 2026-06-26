@@ -1,5 +1,6 @@
 @import 'theme.scss';
 $HOVER_COLOR: rgba(0, 0, 0, 0.06) !important;
+$CELL_PADDING: 0.75rem 1rem;
 $BORDER_RADIUS: 12px;
 
 .table{
@@ -44,7 +45,7 @@ $BORDER_RADIUS: 12px;
 		height: 100%;
 	}
 	&:not([data-compact]) tr:not([data-compact]) td:not([data-compact]), tr[data-normal] td, tr td[data-normal]{
-		padding: 0.75rem 1rem;
+		padding: $CELL_PADDING;
 	}
 	&[data-details] td, tr[data-details] td{
 		border-right: 1px solid rgba(0,0,0,0.1);
@@ -79,7 +80,7 @@ $BORDER_RADIUS: 12px;
 		text-transform: uppercase;
 		background-color: #F9FAFB;
 		border-bottom: 1px solid #e5e7eb;
-		padding: 0.75rem 1rem;
+		padding: $CELL_PADDING;
 		text-align: left;
 		font-weight: bold;
 		font-size: 12px;
@@ -98,7 +99,20 @@ $BORDER_RADIUS: 12px;
 			margin-right: 0;
 		}
 	}
-	tbody td, thead th{
+	tbody td, thead th, tfoot td{
+		> a{
+			&:not(:global(.normal)):not(:global(.compact)){
+				padding: $CELL_PADDING;
+				color: black;
+				display: block;
+				text-decoration: none;
+			}
+		}
+		&[data-selectable]{
+			&:hover{
+				background-color: $HOVER_COLOR;
+			}
+		}
 		&[data-centered]{
 			text-align: center;
 		}
@@ -107,6 +121,24 @@ $BORDER_RADIUS: 12px;
 			white-space: nowrap;
 		}
 	}
+
+	tbody tr, thead tr, tfoot tr{
+		&:last-of-type{
+			td,th{
+				&[data-selectable]{
+					cursor: pointer;
+					&:first-child{
+						border-bottom-left-radius: $BORDER_RADIUS;
+					}
+					&:last-child{
+						border-bottom-right-radius: $BORDER_RADIUS;
+					}
+				}
+			}
+		}
+	}
+
+
 	&:not([data-fitted]){
 		thead th{
 			&:not([data-normal]):first-child{

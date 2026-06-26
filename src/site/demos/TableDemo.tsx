@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Pagination, Table } from '../../components';
+import { Link } from 'react-router-dom';
 
 interface TableDemoProps{
 	
@@ -67,6 +68,26 @@ var TableDemo = (props: TableDemoProps)=>{
 			<Table.Footer actions={(
 				<Button text='Test' color='black' />
 			)} />
+		</Table>
+
+		<Table style={{ marginTop: 15 }}>
+			<Table.Head title='Links' />
+			<Table.Body>
+				<Table.Row selectable compact 
+					as={Link} 
+					to={'/button'}
+					data={['Link', 'Link', 'Link']}
+				/>
+				<Table.Row>
+					<Table.Cell selectable compact as={Link} to={'/dropdown'}>Link cell</Table.Cell>
+					<Table.Cell>
+						<Link to={'/label'} className='compact'>
+							Normal link
+						</Link>
+					</Table.Cell>
+					<Table.Cell selectable>Selectable</Table.Cell>
+				</Table.Row>
+			</Table.Body>
 		</Table>
 	</div>
 }
