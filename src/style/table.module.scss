@@ -185,7 +185,7 @@ $BORDER_RADIUS: 12px;
 	}
 	tbody tr{
 		td{
-			> :global(.fr2.label){
+			:global(.fr2.label){
 				line-height: 16px;
 			}
 			> .meta, > a > .meta, > :global(.meta), > a > :global(.meta){

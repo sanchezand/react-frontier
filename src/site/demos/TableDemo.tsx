@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Pagination, Table } from '../../components';
+import { Button, Label, Pagination, Table } from '../../components';
 import { Link } from 'react-router-dom';
 
 interface TableDemoProps{
@@ -21,7 +21,7 @@ var TableDemo = (props: TableDemoProps)=>{
 			<Table.Body>
 				<Table.Row data={[ 'ID', 'ROW' ]} />
 				<Table.Row data={[ 'ID', 'ROW' ]} />
-				<Table.Row data={[ 'ID', 'ROW' ]} />
+				<Table.Row data={[ 'ID', <Label value={'Testing'} /> ]} />
 				<Table.Row data={[ 'ID', 'ROW' ]} />
 			</Table.Body>
 			<Table.Footer actions={(
@@ -86,6 +86,11 @@ var TableDemo = (props: TableDemoProps)=>{
 						</Link>
 					</Table.Cell>
 					<Table.Cell selectable>Selectable</Table.Cell>
+				</Table.Row>
+				<Table.Row>
+					<Table.Cell compact as={Link} to={'/test'}>
+						<Label value={'test'} />
+					</Table.Cell>
 				</Table.Row>
 			</Table.Body>
 		</Table>

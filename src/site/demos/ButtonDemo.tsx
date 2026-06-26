@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, IconsList } from '../../components';
+import { Link } from 'react-router-dom';
 
 var ButtonDemo = ()=>{
 	useEffect(()=>{
@@ -49,10 +50,10 @@ var ButtonDemo = ()=>{
 		<div className="demo buttons">
 			<Button text='Options' iconRight='caret-down' menu={[
 				{ text: 'Test button', iconName: 'ticket' },
-				{ text: 'Test 2' },
+				{ text: 'Link item', as: Link, to: '/modal' },
 				{ text: 'Test 3', items: [
 					{ text: 'Sub 1', iconName: 'address-card' },
-					{ text: 'Sub 2' },
+					{ text: 'Sub Link', as: Link, to: '/label' },
 					{ separator: true },
 					{ text: 'Sub 3' },
 				]},

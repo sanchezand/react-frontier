@@ -34,7 +34,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 	</>
 
 	var item_class = classNames('item', style.toolbarItem, className);
-	var Component = as ?? 'div';
+	var Component = props.as ?? 'div';
 	return <Component 
 		className={item_class} 
 		onClick={props.onClick} 
@@ -48,7 +48,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 }
 
 function ToolbarDropdownItem<E extends ElementType = typeof defaultItemElement, K extends ElementType = typeof defaultItemElement>(props: ToolbarDropdownItemProps<E, K>){
-	var { text, onClick, iconName, className, active, disabled, if: propIf, space, items, as, style: compStyle, ...restProps } = props;
+	var { text, onClick, iconName, className, active, disabled, if: propIf, space, items, as, style: compStyle, divider, ...restProps } = props;
 	if(props.divider){
 		return <Menu.Separator className={style.separator} />
 	}
@@ -84,7 +84,7 @@ function ToolbarDropdownItem<E extends ElementType = typeof defaultItemElement, 
 		data-disabled={props.disabled || undefined}
 		data-active={props.active || undefined}
 		onClick={props.onClick}
-		render={<ItemComp />}
+		render={<ItemComp {...restProps} />}
 		{...restProps}
 	>
 		<div className={style.contents}>

@@ -7,7 +7,7 @@ import styles from '../style/button.module.scss';
 import DropdownStyle from '../style/dropdown.module.scss';
 import Loader from './Loader';
 
-interface ButtonMenuProps{
+type ButtonMenuProps<E extends ElementType=any> = {
 	text?: any,
 	items?: ButtonMenuProps[]
 	className?: string,
@@ -16,9 +16,10 @@ interface ButtonMenuProps{
 	if?: boolean,
 	disabled?: boolean,
 	separator?: boolean,
+	as?: E,
 	onClick?: ()=>void,
 	style?: React.CSSProperties,
-}
+} & React.ComponentPropsWithoutRef<E>;
 
 type ButtonProps<E extends ElementType> = {
 	as?: E,
@@ -123,8 +124,13 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 			<Menu.Portal>
 				<Menu.Positioner sideOffset={8} align='start' style={{ zIndex: 1001 }}>
 					<Menu.Popup className={DropdownStyle.popup} data-fluid>
-						{props.menu.filter(a=>a.if!==false).map((a, i)=>(
-							a.separator ? (
+						{props.menu.filter(a=>a.if!==false).map((a, i)=>{
+							var {
+								as, className, disabled, iconName, iconSolid, if: aIf, items, onClick, separator, style, text,
+								...itemRestProps
+							} = a;
+							var ItemComp = a.as || 'div';
+							return a.separator ? (
 								<Menu.Separator className={DropdownStyle.separator} />
 							) : a.items && a.items.length>0 ? (
 								<Menu.SubmenuRoot>
@@ -137,11 +143,16 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 									<Menu.Portal>
 										<Menu.Positioner style={{ zIndex: 1001 }}>
 											<Menu.Popup className={DropdownStyle.popup}>
-												{a.items.map(b=>(
-													b.separator ? (
+												{a.items.map(b=>{
+													var {
+														as, className, disabled, iconName, iconSolid, if: bIf, items, onClick, separator, style, text,
+														...subItemRestProps
+													} = b;
+													const SubComp = b.as || 'div';
+													return b.separator ? (
 														<Menu.Separator className={DropdownStyle.separator} />
 													) : (
-														<Menu.Item disabled={b.disabled} key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
+														<Menu.Item render={<SubComp {...subItemRestProps} />} disabled={b.disabled} key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
 															<div className={DropdownStyle.contents}>
 																{!!b.iconName && (
 																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} solid={!!b.iconSolid} />
@@ -150,13 +161,13 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 															</div>
 														</Menu.Item>
 													)
-												))}
+												})}
 											</Menu.Popup>
 										</Menu.Positioner>
 									</Menu.Portal>
 								</Menu.SubmenuRoot>
 							) : (
-								<Menu.Item key={`BTNMENU-${a.text}`} disabled={a.disabled} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
+								<Menu.Item render={<ItemComp {...itemRestProps} />} key={`BTNMENU-${a.text}`} disabled={a.disabled} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
 									<div className={DropdownStyle.contents}>
 										{!!a.iconName && (
 											<Icon className={DropdownStyle.itemIcon} name={a.iconName} solid={!!a.iconSolid} />
@@ -165,7 +176,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 									</div>
 								</Menu.Item>
 							)
-						))}
+						})}
 					</Menu.Popup>
 				</Menu.Positioner>
 			</Menu.Portal>

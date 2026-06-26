@@ -9,14 +9,14 @@ interface ToolbarDemoProps{
 var ToolbarDemo = (props: ToolbarDemoProps)=>{
 	return <div style={{ margin: 'auto', maxWidth: 400, marginTop: 10 }}>
 		<Toolbar>
-			<Toolbar.Item text='Frontier' iconName='wrench' />
+			<Toolbar.Item text='Frontier' iconName='wrench' as={Link} to={'/modal'} />
 			<Toolbar.Dropdown text='Dropdown' iconName='pen' items={[
-				{ text: 'Frontier', iconName: 'address-book' },
+				{ text: 'Frontier', iconName: 'address-book', as: Link, to: '/dropdown' },
 				{ text: 'Submenu', items: [
 					{ text: 'Submenu 1' },
 					{ text: 'Submenu 2' },
 					{ text: 'Submenu 3', items: [
-						{ text: 'Subsubmenu!!' },
+						{ text: 'Subsubmenu!!', as: Link, to: '/button' },
 						{ text: 'Subsubmenu!!' },
 						{ text: 'Subsubmenu!!' },
 					] },
