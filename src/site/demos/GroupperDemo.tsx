@@ -52,10 +52,8 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum reiciendis dolore animi hic suscipit placeat voluptatem maiores sint. Ea similique dolore veritatis ad modi architecto aspernatur aperiam est illo impedit.
 		</Groupper>
 
-		<Groupper title={"test"} style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }}>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim vero soluta dignissimos voluptas necessitatibus illum rem reiciendis fugit veritatis, eum cum quos repudiandae adipisci aliquid? Nostrum saepe tenetur libero modi?
-
-			<Table details fitted>
+		<Groupper title={"test"} style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }} fitted>
+			<Table details>
 				<Table.Head title='frontierO' titleRight={(
 					<Button text='button' size='tiny' iconName='wrench' color='blue' />
 				)} />
@@ -63,7 +61,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 					<Table.Row data={[ 'ID', 'ROW' ]} />
 					<Table.Row data={[ 'ID', 'ROW' ]} />
 					<Table.Row data={[ 'ID', 'ROW' ]} />
-					<Table.Row data={[ 'ID', 'ROW' ]} />
+					<Table.Row selectable data={[ 'ID', 'ROW' ]} />
 				</Table.Body>
 			</Table>
 		</Groupper>

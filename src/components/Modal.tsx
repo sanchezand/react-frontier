@@ -103,7 +103,7 @@ const Modal : React.FC<ModalProps> & ModalSubComponents = (props: ModalProps)=>{
 	return <Dialog.Root open={props.open} onOpenChange={(o, ev)=>{
 		if(!o && props.onClose) return props.onClose(o);
 	}}>
-		<Dialog.Portal>
+		<Dialog.Portal className={style.root}>
 			<Dialog.Backdrop className={style.backdrop} />
 			<Dialog.Viewport className={style.viewport}>
 				<ScrollArea.Root style={{ position: undefined }} className={style.scrollViewport}>

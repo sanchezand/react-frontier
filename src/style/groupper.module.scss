@@ -69,11 +69,25 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 			}
 		}
 
-		&:not([data-fitted]){
-			:global(table){
+		:global(table){
+			&[data-fitted]{
 				margin: 0 -20px;
 				width: calc(100% + calc($GROUPPER_PADDING * 2));
+
+				&:global(.first){
+					margin-top: -20px;
+				}
+				&:global(.last){
+					margin-bottom: -20px;
+				}
 			}
+		}
+
+		> :global(.first){
+			margin-top: -20px;
+		}
+		> :global(.last){
+			margin-bottom: -20px;
 		}
 
 		:global(.toolbar){
@@ -103,6 +117,10 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 
 			:global(.toolbar){
 				margin: 0;
+			}
+			:global(table){
+				border-radius: 0;
+				box-shadow: none;
 			}
 		}
 	}

@@ -109,7 +109,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		style={props.style}
 		{...restProps}
 	>
-		{props.loading ? (
+		{loading ? (
 			<Loader size={loaderSize} />
 		) : <>
 			{!!iconName && <Icon name={props.iconName!} style={props.iconStyle} />}

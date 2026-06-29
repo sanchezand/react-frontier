@@ -10,6 +10,7 @@ interface ModalDemoProps{
 var ModalDemo = (props: ModalDemoProps)=>{
 	var { t } = useTranslation();
 	var [simpleModal, setSimpleModal] = useState<boolean>(false);
+	var [secondModal, setSecondModal] = useState<boolean>(false);
 	useEffect(()=>{
 		
 	}, []);
@@ -31,7 +32,7 @@ var ModalDemo = (props: ModalDemoProps)=>{
 			)} />
 			<Modal.Input placeholder='Search' />
 			<Toolbar>
-				<Toolbar.Item text='Frontier' iconName='wrench' />
+				<Toolbar.Item text='Open second modal' iconName='wrench' onClick={()=>setSecondModal(true)} />
 				<Toolbar.Dropdown text='Dropdown' iconName='pen' items={[
 					{ text: 'Frontier' },
 					{ text: 'Frontier', disabled: true },
@@ -72,6 +73,16 @@ var ModalDemo = (props: ModalDemoProps)=>{
 			</Modal.Content>
 			<Modal.Actions>
 				<Button text='Close?' onClick={()=>setSimpleModal(false)} />
+			</Modal.Actions>
+		</Modal>
+
+		<Modal open={secondModal} onClose={()=>setSecondModal(false)}>
+			<Modal.Header>test</Modal.Header>
+			<Modal.Content>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quod, a esse ut delectus molestias, eius dolorum quisquam ducimus, obcaecati mollitia aliquid accusantium repellat fugit voluptatum perspiciatis! Error, recusandae distinctio.
+			</Modal.Content>
+			<Modal.Actions>
+				<Button text='Close' onClick={()=>setSecondModal(false)} />
 			</Modal.Actions>
 		</Modal>
 	</div>

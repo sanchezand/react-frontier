@@ -136,6 +136,15 @@ $BORDER_RADIUS: 12px;
 				}
 			}
 		}
+		&[data-selectable]{
+			cursor: pointer;
+			td:first-child,th:first-child{
+				border-bottom-left-radius: $BORDER_RADIUS;
+			}
+			td:last-child,th:last-child{
+				border-bottom-right-radius: $BORDER_RADIUS;
+			}
+		}
 	}
 
 

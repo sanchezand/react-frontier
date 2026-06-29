@@ -258,6 +258,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	}
 	&:hover:not([data-disabled]){
 		> .contents{
+			color: black;
 			background-color: rgba(0,0,0,0.05);
 			&[data-selected]{
 				background-color: rgba(0,0,0,0.1);
