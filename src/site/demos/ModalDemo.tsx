@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Dropdown, Input, Table, Toolbar } from '../../components';
+import { Button, Dropdown, Input, Table, Toolbar, useFrontier } from '../../components';
 import Modal from '../../components/Modal';
 
 interface ModalDemoProps{
@@ -9,12 +9,17 @@ interface ModalDemoProps{
 
 var ModalDemo = (props: ModalDemoProps)=>{
 	var { t } = useTranslation();
+	var { Toast } = useFrontier();
 	var [simpleModal, setSimpleModal] = useState<boolean>(false);
 	var [secondModal, setSecondModal] = useState<boolean>(false);
 	useEffect(()=>{
 		
 	}, []);
 	
+	var showToast = ()=>{
+		Toast.error('Test toast')
+	}
+
 	return <div style={{ maxWidth: 500, margin: 'auto', paddingTop: 20 }}>
 		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum libero vel blanditiis, sequi dicta exercitationem dolorum, aperiam magni quia officia eius, dolor sapiente alias est maxime molestiae rem praesentium accusantium!
 		<Button text='Open modal' onClick={()=>setSimpleModal(true)} />
@@ -37,7 +42,7 @@ var ModalDemo = (props: ModalDemoProps)=>{
 					{ text: 'Frontier' },
 					{ text: 'Frontier', disabled: true },
 				]} />
-				<Toolbar.Item text='Frontier' iconName='wrench' />
+				<Toolbar.Item text='Frontier' iconName='wrench' onClick={showToast} />
 			</Toolbar>
 			<Modal.Content>
 				<Dropdown search
