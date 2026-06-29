@@ -108,8 +108,8 @@ type ToolbarDropdownProps<E extends ElementType = typeof defaultItemElement, K e
 	items: ToolbarDropdownItemProps<K, V>[]
 }
 var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
-	return <Menu.Root>
-		<Menu.Trigger className={classNames(style.toolbarItem, 'item')} render={<div />} nativeButton={false}>
+	return <Menu.Root disabled={props.disabled}>
+		<Menu.Trigger className={classNames(style.toolbarItem, 'item')} render={<div />} nativeButton={false} data-disabled={props.disabled || undefined}>
 			{!!props.iconName && (
 				<Icon name={props.iconName} className={style.toolbarIcon} />
 			)}

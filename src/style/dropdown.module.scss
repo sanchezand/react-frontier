@@ -360,6 +360,11 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 		text-decoration: none;
 		color: black;
 
+		&[data-disabled]{
+			cursor: default;
+			color: gray;
+		}
+
 		&:hover:not([data-disabled]),&[data-active]{
 			background-color: darken(#F9FAFB, 3%);
 		}
