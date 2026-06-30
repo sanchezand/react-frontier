@@ -42,10 +42,10 @@ var SegmentControl = (props: SegmentControlProps)=>{
 		</div>
 	}
 
-	return <Tabs.Root value={props.selected} onValueChange={v=>{
+	return <Tabs.Root style={props.style} value={props.selected} onValueChange={v=>{
 		props.onClick(v)
 	}}>
-		<Tabs.List className={classNames(style.list, props.className)} style={props.style} data-color={props.color || 'black'} data-divided={props.divided!==false || undefined} {...restProps}>
+		<Tabs.List className={classNames(style.list, props.className)} data-color={props.color || 'black'} data-divided={props.divided!==false || undefined} {...restProps}>
 			{props.segments && props.segments.map(a=>(
 				<Tabs.Tab value={a.value} render={<div />} style={props.segmentStyle} className={style.segment}>
 					{a.text}

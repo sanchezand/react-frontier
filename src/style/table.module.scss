@@ -76,7 +76,7 @@ $BORDER_RADIUS: 12px;
 		}
 	}
 
-	thead th, tbody td.header, tbody tr.header td{
+	thead th, tbody td[data-header], tbody tr[data-header] td{
 		text-transform: uppercase;
 		background-color: #F9FAFB;
 		border-bottom: 1px solid #e5e7eb;
