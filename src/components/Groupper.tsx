@@ -1,6 +1,7 @@
-import React, { CSSProperties, PropsWithChildren, useEffect, useState } from 'react';
+import React, { CSSProperties, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import style from '../style/groupper.module.scss'
 import classNames from 'classnames';
+import Input, { InputProps } from './Input';
 
 interface GroupperDividerProps extends PropsWithChildren{
 	type?: 'solid' | 'text' | 'dashed' | 'dotted' | 'line text',
@@ -39,12 +40,45 @@ const GroupperDivider = (props: GroupperDividerProps)=>{
 	</div>
 }
 
-interface GroupperDividerInput{
-
+interface GroupperDividerInput extends InputProps{
+	removeBorder?: ('top' | 'bottom')[],
+	removeMargin?: ('top' | 'bottom')[],
 }
 
 const GroupperDividerInput = (props: GroupperDividerInput)=>{
-	
+	var {
+		removeBorder,
+		removeMargin,
+		...restProps
+	} = props;
+
+	var borders = useMemo(()=>{
+		var top = false, bottom = false;
+		if(!!props.removeBorder){
+			top = props.removeBorder.indexOf('top')!=-1;
+			bottom = props.removeBorder.indexOf('bottom')!=-1;
+		}
+		return { top, bottom }
+	}, [props.removeBorder]);
+
+	var margins = useMemo(()=>{
+		var top = false, bottom = false;
+		if(!!props.removeMargin){
+			top = props.removeMargin.indexOf('top')!=-1;
+			bottom = props.removeMargin.indexOf('bottom')!=-1;
+		}
+		return { top, bottom }
+	}, [props.removeMargin]);
+
+	return <Input 
+		{...restProps} 
+		label={null} 
+		data-fitted 
+		data-no-border-top={borders.top || undefined} 
+		data-no-border-bottom={borders.bottom || undefined} 
+		data-no-margin-top={margins.top || undefined} 
+		data-no-margin-bottom={margins.bottom || undefined} 
+	/>
 }
 
 interface GroupperProps extends PropsWithChildren{
@@ -79,14 +113,14 @@ const Groupper : React.FC<GroupperProps> & GroupperSubComponents = (props: Group
 		...restProps
 	} = props;
 	
-	return <div className={classNames(style.groupper, props.className)} style={propsStyle} {...restProps}>
+	return <div className={classNames('fr2 groupper', style.groupper, props.className)} style={propsStyle} {...restProps}>
 		{!!props.title && (
 			<div className={style.title} style={props.titleStyle} data-size={props.titleSize || undefined} data-centered={props.titleCentered || undefined}>
 				<div className={style.text}>{props.title}</div>
 				{props.titleRight}
 			</div>
 		)}
-		<div className={style.contents} data-fitted={props.fitted || undefined}>
+		<div className={classNames(style.contents, 'contents')} data-fitted={props.fitted || undefined}>
 			{props.children}
 		</div>
 		{!!props.actions && (

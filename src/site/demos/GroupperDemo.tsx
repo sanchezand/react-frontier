@@ -7,10 +7,7 @@ interface GroupperDemoProps{
 }
 
 var GroupperDemo = (props: GroupperDemoProps)=>{
-	var { t } = useTranslation();
-	useEffect(()=>{
-		
-	}, []);
+	var [inputValue, setInputValue] = useState<string>(null);
 	
 	return <div style={{ maxWidth: 800, margin: 'auto', marginTop: 15 }}>
 		<Groupper style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} titleRight={(
@@ -23,6 +20,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 		)} actions={(
 			<Button text='Frontier' />
 		)}>
+			<Groupper.DividerInput removeMargin={['top']} removeBorder={['top']} placeholder='Test frontier' label='label test' value={inputValue} onChange={setInputValue} />
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
 			<Groupper.Divider />
@@ -32,6 +30,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 		<Groupper fitted titleSize='small' style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} actions={(
 			<Button text='Frontier' />
 		)}>
+			<Groupper.DividerInput removeMargin={['top']} inputStyle={{ fontSize: 18 }} removeBorder={['top']} placeholder='Test frontier' label='label test' value={inputValue} onChange={setInputValue} />
 			<Groupper.Divider text={'test2'} top />
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, veritatis. Quaerat quod obcaecati eveniet porro suscipit dicta illum accusamus vel esse, expedita facere consectetur laudantium iusto fuga ipsa molestias mollitia!
 			<Groupper.Divider text={'line test!'} type='line text' />

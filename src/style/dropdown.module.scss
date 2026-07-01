@@ -247,6 +247,13 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	color: black;
 	text-decoration: none;
 
+	&:first-child{
+		margin-top: 2px;
+	}
+	&:last-child{
+		margin-bottom: 2px;
+	}
+
 	&[data-selected]{
 		> .contents{
 			background-color: rgba(0,0,0,0.08);
@@ -267,7 +274,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	}
 
 	> .contents{
-		border-radius: 7px;
+		border-radius: 6px;
 		display: flex;
 		align-items: center;
 		padding: 8px 10px;
