@@ -86,6 +86,7 @@ type TableRowProps<E extends React.ElementType = any> = {
 	onClick?: ()=>any,
 	data?: any[]
 	header?: boolean,
+	headerCell?: boolean,
 	empty?: boolean,
 	details?: boolean,
 	compact?: boolean,
@@ -102,6 +103,7 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		onClick,
 		data,
 		header,
+		headerCell,
 		empty,
 		details,
 		compact,
@@ -141,14 +143,16 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 		onClick={onClick}>
 		{data && data.map((b, bi)=>{
 			var ComponentRender = Component ? <Component {...restProps}>{b}</Component> : b;
+
+			const CellElement = props.headerCell ? 'th' : 'td';
 			return (
-				<td 
+				<CellElement 
 					key={`TD-${id}-${bi}`} 
 					data-collapsing={collapsingIndexes && collapsingIndexes.indexOf(bi)!=-1 || undefined}
 					data-centered={centeredIndexes && centeredIndexes.indexOf(bi)!=-1 || undefined}
 				>
 					{ComponentRender}
-				</td>
+				</CellElement>
 			)
 		})}
 		{childs}

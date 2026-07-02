@@ -29,7 +29,7 @@ const GroupperDivider = (props: GroupperDividerProps)=>{
 		...restProps
 	} = props;
 	var divider_type = props.type || (typeof props.type==='undefined' && (!!props.text || !!props.children) ? 'text' : 'solid');
-	return <div className={style.divider} data-top={!!props.top || undefined} data-centered={props.centered || undefined} data-type={divider_type} {...restProps}>
+	return <div className={style.divider} data-top={!!props.top || undefined} style={props.style} data-centered={props.centered || undefined} data-type={divider_type} {...restProps}>
 		{(divider_type==='text') ? (
 			props.children || props.text
 		) : divider_type==='line text' ? <>
