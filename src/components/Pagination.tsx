@@ -7,7 +7,9 @@ import style from '../style/pagination.module.scss';
 interface PaginationProps{
 	className?: string,
 	leftIcon?: IconName,
+	leftIconSolid?: boolean,
 	rightIcon?: IconName,
+	rightIconSolid?: boolean,
 	page: number,
 	inline?: boolean,
 	pageCount?: number,
@@ -108,7 +110,7 @@ var Pagination = (props: PaginationProps)=>{
 
 	return <div ref={ref} className={classNames("fr2 pagination", style.pagination, props.className)} style={props.style} data-color={props.color || 'black'} data-disabled={props.disabled || undefined} data-inline={props.inline || undefined} {...restProps}>
 		<div className={classNames("prev page", style.move)} onClick={(prev_disabled || props.page<=0) ? null : pageChange(props.page-1)} data-disabled={prev_disabled || undefined}>
-			<Icon name={props.leftIcon || 'chevron-left'} />
+			<Icon name={props.leftIcon || 'chevron-left'} solid={props.leftIconSolid} />
 		</div>
 		<div className={style.pages} data-pages={pages.length}>
 			{pages.map(a=>(
@@ -124,7 +126,7 @@ var Pagination = (props: PaginationProps)=>{
 			))}
 		</div>
 		<div className={classNames("next page", style.move)} onClick={next_disabled ? null : pageChange((props.page || 0)+1)} data-disabled={next_disabled || undefined}>
-			<Icon name={props.rightIcon || 'chevron-right'} />
+			<Icon name={props.rightIcon || 'chevron-right'} solid={props.rightIconSolid} />
 		</div>
 	</div>
 }

@@ -116,9 +116,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		{loading ? (
 			<Loader size={loaderSize} />
 		) : <>
-			{!!iconName && <Icon name={props.iconName!} solid={props.iconSolid} style={props.iconStyle} />}
+			{!!iconName && <Icon name={props.iconName} solid={props.iconSolid} style={props.iconStyle} />}
 			{text}
-			{!!iconRight && <Icon name={props.iconRight!} solid={props.iconRightSolid===false ? undefined : true} style={props.iconRightStyle} className={styles.iconRight} />}
+			{!!iconRight && <Icon name={props.iconRight} solid={props.iconRightSolid} style={props.iconRightStyle} className={styles.iconRight} />}
 		</>}
 	</ComponentType>
 
@@ -140,6 +140,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 								<Menu.SubmenuRoot>
 									<Menu.SubmenuTrigger className={classNames(DropdownStyle.item, DropdownStyle.submenuItem)}>
 										<div className={DropdownStyle.contents}>
+											{!!a.iconName && (
+												<Icon className={DropdownStyle.itemIcon} name={a.iconName} solid={a.iconSolid} />
+											)}
 											<div className={DropdownStyle.text}>{a.text}</div>
 											<Icon name='caret-right' className={DropdownStyle.menuIcon} />
 										</div>
@@ -159,7 +162,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 														<Menu.Item render={<SubComp {...subItemRestProps} />} disabled={b.disabled} key={`BTNMENU-${a.text}-${b.text}`} className={classNames(DropdownStyle.item, b.className)} style={b.style} onClick={b.onClick}>
 															<div className={DropdownStyle.contents}>
 																{!!b.iconName && (
-																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} solid={!!b.iconSolid} />
+																	<Icon className={DropdownStyle.itemIcon} name={b.iconName} solid={b.iconSolid} />
 																)}
 																{b.text}
 															</div>
@@ -174,7 +177,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 								<Menu.Item render={<ItemComp {...itemRestProps} />} key={`BTNMENU-${a.text}`} disabled={a.disabled} className={classNames(DropdownStyle.item, a.className)} style={a.style} onClick={a.onClick}>
 									<div className={DropdownStyle.contents}>
 										{!!a.iconName && (
-											<Icon className={DropdownStyle.itemIcon} name={a.iconName} solid={!!a.iconSolid} />
+											<Icon className={DropdownStyle.itemIcon} name={a.iconName} solid={a.iconSolid} />
 										)}
 										{a.text}
 									</div>

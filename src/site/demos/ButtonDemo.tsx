@@ -49,9 +49,9 @@ var ButtonDemo = ()=>{
 		<div className="section head">Button menu</div>
 		<div className="demo buttons">
 			<Button text='Options' iconRight='caret-down' menu={[
-				{ text: 'Test button', iconName: 'ticket' },
-				{ text: 'Link item', as: Link, to: '/modal' },
-				{ text: 'Test 3', items: [
+				{ text: 'Test button', iconName: 'circle', iconSolid: false },
+				{ text: 'Link item', as: Link, to: '/modal', iconName: 'plus' },
+				{ text: 'Test 3', iconName: 'plus', items: [
 					{ text: 'Sub 1', iconName: 'address-card' },
 					{ text: 'Sub Link', as: Link, to: '/label' },
 					{ separator: true },

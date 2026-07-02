@@ -58,7 +58,7 @@ function ToolbarDropdownItem<E extends ElementType = typeof defaultItemElement, 
 			<Menu.SubmenuTrigger className={classNames(style.item, 'item', props.className)}>
 				<div className={classNames(style.contents, style.submenuItem)}>
 					{!!props.iconName && (
-						<Icon name={props.iconName} className={style.toolbarIcon} />
+						<Icon name={props.iconName} solid={props.iconSolid} className={style.toolbarIcon} />
 					)}
 					<div className={style.text}>
 						{props.text}
@@ -90,7 +90,7 @@ function ToolbarDropdownItem<E extends ElementType = typeof defaultItemElement, 
 	>
 		<div className={style.contents}>
 			{!!props.iconName && (
-				<Icon name={props.iconName} className={style.toolbarIcon} />
+				<Icon name={props.iconName} solid={props.iconSolid} className={style.toolbarIcon} />
 			)}
 			{props.text}
 		</div>

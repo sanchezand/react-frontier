@@ -10,6 +10,7 @@ interface SiteContainerProps{
 	items: {
 		path: string,
 		iconName: IconName,
+		iconSolid?: boolean,
 		title: string,
 	}[]
 }
@@ -38,37 +39,13 @@ var SiteContainer = (props: SiteContainerProps)=>{
 	return <Sidebar>
 		<Sidebar.Menu header={'Frontier'}>
 			{props.items.map((a, ix)=>(
-				<Sidebar.Item key={`SBR${ix}`} text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
+				<Sidebar.Item key={`SBR${ix}`} text={a.title} as={Link} to={a.path} iconName={a.iconName} iconSolid={a.iconSolid} active={ix===active_index} />
 			))}
 		</Sidebar.Menu>
 		<Sidebar.Contents header={active_index!=-1 ? props.items[active_index]?.title : null}>
 			{props.outlet}
 		</Sidebar.Contents>
 	</Sidebar>
-	
-	// return <div className={style.root}>
-	// 	<div className={style.sidebar}>
-	// 		<Link className={classNames(style.header, style.icon)} to={'/'}>
-	// 			<div className={style.text}>Frontier</div>
-	// 			{/* <img src={`${CDN_URL}/logo/LogoWH_Large.webp`} alt="Logo" /> */}
-	// 		</Link>
-	// 		<div className={style.contents}>
-	// 			{props.items.map((a, ix)=>(
-	// 				<SidebarItem text={a.title} as={Link} to={a.path} iconName={a.iconName} active={ix===active_index} />
-	// 			))}
-	// 		</div>
-	// 	</div>
-	// 	<div className={style.contents}>
-	// 		<div className={style.header}>
-	// 			<div className={style.text}>
-	// 				{active_index!=-1 ? props.items[active_index]?.title : null}
-	// 			</div>
-	// 		</div>
-	// 		<div className={style.contents}>
-	// 			{props.outlet}
-	// 		</div>
-	// 	</div>
-	// </div>
 }
 
 export default SiteContainer;

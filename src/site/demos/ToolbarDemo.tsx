@@ -11,7 +11,7 @@ var ToolbarDemo = (props: ToolbarDemoProps)=>{
 		<Toolbar>
 			<Toolbar.Item text='Frontier' iconName='wrench' as={Link} to={'/modal'} />
 			<Toolbar.Dropdown text='Dropdown' iconName='pen' items={[
-				{ text: 'Frontier', iconName: 'address-book', as: Link, to: '/dropdown' },
+				{ text: 'Frontier', iconName: 'circle', iconSolid: false, as: Link, to: '/dropdown' },
 				{ text: 'Submenu', items: [
 					{ text: 'Submenu 1' },
 					{ text: 'Submenu 2' },
