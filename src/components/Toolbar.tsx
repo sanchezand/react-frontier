@@ -11,6 +11,7 @@ type ToolbarItemProps<E extends ElementType> = {
 	text?: string,
 	onClick?: ()=>void,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	className?: string,
 	active?: boolean,
 	disabled?: boolean,
@@ -19,14 +20,14 @@ type ToolbarItemProps<E extends ElementType> = {
 	style?: React.CSSProperties,
 } & React.ComponentPropsWithoutRef<E>;
 function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: ToolbarItemProps<E>){
-	var { text, onClick, iconName, className, if: propIf, as, items, children, style: propStyle, space, active, disabled, ...restProps } = props;
+	var { text, onClick, iconName, className, if: propIf, as, items, children, style: propStyle, space, active, disabled, iconSolid, ...restProps } = props;
 
 	if(typeof propIf!=='undefined' && !propIf) return null;
 	if(space) return <div className={classNames(style.item, props.className)} style={props.style} data-space={props.space || undefined} />
 
 	var contents = (children && !items) ? children : <>
 		{!!iconName && (
-			<Icon name={props.iconName} className={style.toolbarIcon} data-single={!props.text || props.text.length==0 || undefined} />
+			<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} className={style.toolbarIcon} data-single={!props.text || props.text.length==0 || undefined} />
 		)}
 		<div className={style.toolbarText}>
 			{text}
@@ -48,7 +49,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 }
 
 function ToolbarDropdownItem<E extends ElementType = typeof defaultItemElement, K extends ElementType = typeof defaultItemElement>(props: ToolbarDropdownItemProps<E, K>){
-	var { text, onClick, iconName, className, active, disabled, if: propIf, space, items, as, style: compStyle, divider, ...restProps } = props;
+	var { text, onClick, iconName, className, active, disabled, if: propIf, space, items, as, style: compStyle, divider, iconSolid, ...restProps } = props;
 	if(props.divider){
 		return <Menu.Separator className={style.separator} />
 	}
@@ -101,6 +102,7 @@ type ToolbarDropdownProps<E extends ElementType = typeof defaultItemElement, K e
 	text?: string,
 	onClick?: ()=>void,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	className?: string,
 	disabled?: boolean,
 	if?: boolean,
@@ -111,7 +113,7 @@ var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
 	return <Menu.Root disabled={props.disabled}>
 		<Menu.Trigger className={classNames(style.toolbarItem, 'item')} render={<div />} nativeButton={false} data-disabled={props.disabled || undefined}>
 			{!!props.iconName && (
-				<Icon name={props.iconName} className={style.toolbarIcon} />
+				<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} className={style.toolbarIcon} />
 			)}
 			<div className={style.toolbarText}>
 				{props.text}

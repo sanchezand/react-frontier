@@ -31,6 +31,7 @@ export interface DropdownProps{
 	type?: InputType,
 	onValueChange?: DropdownValueChange,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	menuStyle?: React.CSSProperties,
 	itemStyle?: React.CSSProperties,
 	style?: React.CSSProperties,
@@ -49,6 +50,7 @@ export interface DropdownItemProps{
 	disabled?: boolean,
 	className?: string,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	if?: boolean,
 	onClick?: ()=>void,
 	style?: React.CSSProperties,
@@ -80,6 +82,7 @@ var Dropdown = (props: DropdownProps)=>{
 		required,
 		comment,
 		commentStyle,
+		iconSolid,
 		...restProps
 	} = props;
 	var [searchValue, setSearchValue] = useState<string>('');
@@ -215,21 +218,21 @@ var Dropdown = (props: DropdownProps)=>{
 			{!!(props.search || props.onAsyncSearch) ? (
 				<div className={style.trigger} data-search data-disabled={props.disabled || undefined} data-type={props.type}>
 					{!!props.iconName && (
-						<Combobox.Trigger className={style.iconLeft} nativeButton={false} render={<Icon name={props.iconName} />} data-absolute data-placeholder={is_placeholder || undefined} />
+						<Combobox.Trigger className={style.iconLeft} nativeButton={false} render={<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} />} data-absolute data-placeholder={is_placeholder || undefined} />
 					)}
 					<Combobox.Input className={style.input} placeholder={props.placeholder || props.label} data-loading={props.loading || undefined} data-icon={!!props.iconName || undefined} />
 					{!!props.loading ? (
 						<Loader inline size={20} style={{ marginTop: 1, marginRight: 10 }} />
 					) : (
 						<Combobox.Trigger className={style.iconRight} data-padding nativeButton={false} render={<div />}>
-							<Icon name='caret-down'/>
+							<Icon name='caret-down' />
 						</Combobox.Trigger>
 					)}
 				</div>
 			) : (
 				<Combobox.Trigger className={style.trigger} data-type={props.type}>
 					{!!props.iconName && (
-						<Icon className={style.iconLeft} name={props.iconName} data-placeholder={is_placeholder || undefined} />
+						<Icon className={style.iconLeft} solid={props.iconSolid===false ? undefined : true} name={props.iconName} data-placeholder={is_placeholder || undefined} />
 					)}
 					<div className={style.text} data-empty={(props.value===null && !(props.placeholder || props.label)) || undefined} data-placeholder={is_placeholder || undefined}>
 						{shown_value}
@@ -273,7 +276,7 @@ var Dropdown = (props: DropdownProps)=>{
 									<div className={style.contents} >
 										{has_icons ? (
 											a.iconName ? (
-												<Icon name={a.iconName} className={style.itemIcon} />
+												<Icon name={a.iconName} solid={a.iconSolid===false ? undefined : true} className={style.itemIcon} />
 											) : (
 												<span className={style.itemIcon} data-empty />
 											)

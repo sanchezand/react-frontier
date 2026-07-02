@@ -7,17 +7,18 @@ type SidebarItemProps<E extends ElementType=any> = {
 	text: string,
 	style?: React.CSSProperties,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	className?: string,
 	active?: boolean,
 	as?: E
 } & React.PropsWithChildren & React.PropsWithoutRef<E>
 
 var SidebarItem = (props: SidebarItemProps)=>{
-	var { text, iconName, className, as, active, style: compStyle, ...restProps } = props;
+	var { text, iconName, className, as, active, style: compStyle, children, iconSolid, ...restProps } = props;
 	const Elem = as || 'div';
 	return <Elem className={classNames(style.item, className)} data-active={props.active || undefined} style={props.style} {...restProps}>
 		{!!iconName && (
-			<Icon name={iconName} />
+			<Icon name={iconName} solid={props.iconSolid===false ? undefined : true} />
 		)}
 		{text}
 		{props.children}

@@ -21,6 +21,7 @@ export interface InputProps{
 	comment?: string,
 	inputType?: React.HTMLInputTypeAttribute,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	iconStyle?: React.CSSProperties,
 	autoFocus?: boolean,
 	style?: React.CSSProperties,
@@ -73,6 +74,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 		readonly,
 		required,
 		style: propStyle,
+		iconSolid,
 		submitOnEnter,
 		textarea,
 		textareaRows,
@@ -196,7 +198,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			{loading ? (
 				<Loader size={15} inline className={style.loader} />
 			) : !!props.iconName && (
-				<Icon name={props.iconName} style={props.iconStyle} className={style.icon} data-placeholder={(props.calendar ? !props.calendar.date : !props.value) || undefined} />
+				<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} style={props.iconStyle} className={style.icon} data-placeholder={(props.calendar ? !props.calendar.date : !props.value) || undefined} />
 			)}
 			<div className={style.content}>
 				{props.calendar ? (

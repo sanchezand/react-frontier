@@ -18,6 +18,7 @@ type LabelProps<E extends ElementType> = PropsWithChildren & {
 	className?: string,
 	onClick?: ()=>void,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	iconStyle?: React.CSSProperties,
 	style?: React.CSSProperties,
 } & React.ComponentPropsWithoutRef<E>;
@@ -36,6 +37,7 @@ var Label = <E extends ElementType = typeof defaultElement>(props: LabelProps<E>
 		style: propsStyle,
 		children,
 		iconName,
+		iconSolid,
 		iconStyle,
 		...restProps
 	} = props;
@@ -56,7 +58,7 @@ var Label = <E extends ElementType = typeof defaultElement>(props: LabelProps<E>
 			<Loader inline size={props.size==='small' ? 10 : 15} />
 		) : <>
 			{!!iconName && (
-				<Icon name={iconName} style={iconStyle} />
+				<Icon name={iconName} solid={props.iconSolid===false ? undefined : true} style={iconStyle} />
 			)}
 			{value}
 			{children}

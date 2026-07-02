@@ -7,6 +7,7 @@ import Loader from './Loader';
 interface HeaderProps extends PropsWithChildren{
 	loading?: boolean,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	text?: any,
 	subtext?: any
 	size?: 'small' | 'normal' | 'big' | 'huge'
@@ -30,6 +31,7 @@ var Header = (props: HeaderProps)=>{
 		children,
 		className,
 		iconName,
+		iconSolid,
 		iconStyle,
 		loaderSize,
 		loaderStyle,
@@ -64,7 +66,7 @@ var Header = (props: HeaderProps)=>{
 		{!!props.loading ? (
 			<Loader className={style.loader} size={loader_size} inline style={props.loaderStyle} />
 		) : !!props.iconName ? (
-			<Icon name={props.iconName} style={props.iconStyle} className={style.icon} />
+			<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} style={props.iconStyle} className={style.icon} />
 		) : null}
 		<div className={style.text} style={props.textStyle}>{props.text}</div>
 		<div className={style.subtext} style={props.subtextStyle}>{props.subtext}</div>

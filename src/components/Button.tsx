@@ -33,8 +33,10 @@ type ButtonProps<E extends ElementType> = {
 	icon?: boolean,
 	checkmark?: boolean,
 	iconName?: IconName,
+	iconSolid?: boolean,
 	iconStyle?: React.CSSProperties,
 	iconRight?: IconName,
+	iconRightSolid?: boolean,
 	iconRightStyle?: React.CSSProperties,
 	size?: 'small' | 'tiny' | 'big',
 	disabled?: boolean,
@@ -53,7 +55,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		color,
 		loading: propsLoading,
 		className,
+		iconSolid,
 		icon,
+		iconRightSolid,
 		iconName,
 		size,
 		disabled,
@@ -112,9 +116,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		{loading ? (
 			<Loader size={loaderSize} />
 		) : <>
-			{!!iconName && <Icon name={props.iconName!} style={props.iconStyle} />}
+			{!!iconName && <Icon name={props.iconName!} solid={props.iconSolid===false ? undefined : true} style={props.iconStyle} />}
 			{text}
-			{!!iconRight && <Icon name={props.iconRight!} style={props.iconRightStyle} className={styles.iconRight} />}
+			{!!iconRight && <Icon name={props.iconRight!} solid={props.iconRightSolid===false ? undefined : true} style={props.iconRightStyle} className={styles.iconRight} />}
 		</>}
 	</ComponentType>
 
