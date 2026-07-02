@@ -27,7 +27,7 @@ function ToolbarItem<E extends ElementType = typeof defaultItemElement>(props: T
 
 	var contents = (children && !items) ? children : <>
 		{!!iconName && (
-			<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} className={style.toolbarIcon} data-single={!props.text || props.text.length==0 || undefined} />
+			<Icon name={props.iconName} solid={props.iconSolid} className={style.toolbarIcon} data-single={!props.text || props.text.length==0 || undefined} />
 		)}
 		<div className={style.toolbarText}>
 			{text}
@@ -113,7 +113,7 @@ var ToolbarDropdown = (props: ToolbarDropdownProps)=>{
 	return <Menu.Root disabled={props.disabled}>
 		<Menu.Trigger className={classNames(style.toolbarItem, 'item')} render={<div />} nativeButton={false} data-disabled={props.disabled || undefined}>
 			{!!props.iconName && (
-				<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} className={style.toolbarIcon} />
+				<Icon name={props.iconName} solid={props.iconSolid} className={style.toolbarIcon} />
 			)}
 			<div className={style.toolbarText}>
 				{props.text}

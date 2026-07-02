@@ -46,6 +46,7 @@ var Header = (props: HeaderProps)=>{
 	} = props;
 	var loader_size = useMemo(()=>{
 		if(props.loaderSize) return props.loaderSize;
+		if(props.loading && !props.size) return 50;
 		switch(props.size){
 			case 'small': return 30;
 			case 'normal': return 40;
@@ -58,7 +59,7 @@ var Header = (props: HeaderProps)=>{
 	return <div
 		className={classNames(style.header, props.className)}
 		data-loading={props.loading || undefined}
-		data-size={props.size || 'normal'}
+		data-size={props.size || (props.loading ? 'small' : 'normal')}
 		data-centered={props.centered!==false || undefined}
 		style={props.style}
 		{...restProps}
@@ -66,7 +67,7 @@ var Header = (props: HeaderProps)=>{
 		{!!props.loading ? (
 			<Loader className={style.loader} size={loader_size} inline style={props.loaderStyle} />
 		) : !!props.iconName ? (
-			<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} style={props.iconStyle} className={style.icon} />
+			<Icon name={props.iconName} solid={props.iconSolid} style={props.iconStyle} className={style.icon} />
 		) : null}
 		<div className={style.text} style={props.textStyle}>{props.text}</div>
 		<div className={style.subtext} style={props.subtextStyle}>{props.subtext}</div>

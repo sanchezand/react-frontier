@@ -18,7 +18,7 @@ var SidebarItem = (props: SidebarItemProps)=>{
 	const Elem = as || 'div';
 	return <Elem className={classNames(style.item, className)} data-active={props.active || undefined} style={props.style} {...restProps}>
 		{!!iconName && (
-			<Icon name={iconName} solid={props.iconSolid===false ? undefined : true} />
+			<Icon name={iconName} solid={props.iconSolid} />
 		)}
 		{text}
 		{props.children}

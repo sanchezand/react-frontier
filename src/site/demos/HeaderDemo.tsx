@@ -24,7 +24,7 @@ var HeaderDemo = (props: HeaderDemoProps)=>{
 		<Header text={'Header'} subtext={'Header subtext here'} iconName='ticket' size='huge' />
 		<div style={{ marginTop: 50 }} />
 		<Header text={'Header'} subtext={'Header subtext here'} size='small' loading />
-		<Header text={'Header'} subtext={'Header subtext here'} loading />
+		<Header text={'Header'} subtext={'Header with no size will show small'} loading />
 		<Header text={'Header'} subtext={'Header subtext here'} size='big' loading actions={<>
 			<Button text='Retry' />	
 		</>} />

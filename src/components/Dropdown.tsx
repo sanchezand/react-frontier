@@ -218,7 +218,7 @@ var Dropdown = (props: DropdownProps)=>{
 			{!!(props.search || props.onAsyncSearch) ? (
 				<div className={style.trigger} data-search data-disabled={props.disabled || undefined} data-type={props.type}>
 					{!!props.iconName && (
-						<Combobox.Trigger className={style.iconLeft} nativeButton={false} render={<Icon name={props.iconName} solid={props.iconSolid===false ? undefined : true} />} data-absolute data-placeholder={is_placeholder || undefined} />
+						<Combobox.Trigger className={style.iconLeft} nativeButton={false} render={<Icon name={props.iconName} solid={props.iconSolid} />} data-absolute data-placeholder={is_placeholder || undefined} />
 					)}
 					<Combobox.Input className={style.input} placeholder={props.placeholder || props.label} data-loading={props.loading || undefined} data-icon={!!props.iconName || undefined} />
 					{!!props.loading ? (
@@ -232,7 +232,7 @@ var Dropdown = (props: DropdownProps)=>{
 			) : (
 				<Combobox.Trigger className={style.trigger} data-type={props.type}>
 					{!!props.iconName && (
-						<Icon className={style.iconLeft} solid={props.iconSolid===false ? undefined : true} name={props.iconName} data-placeholder={is_placeholder || undefined} />
+						<Icon className={style.iconLeft} solid={props.iconSolid} name={props.iconName} data-placeholder={is_placeholder || undefined} />
 					)}
 					<div className={style.text} data-empty={(props.value===null && !(props.placeholder || props.label)) || undefined} data-placeholder={is_placeholder || undefined}>
 						{shown_value}
@@ -276,7 +276,7 @@ var Dropdown = (props: DropdownProps)=>{
 									<div className={style.contents} >
 										{has_icons ? (
 											a.iconName ? (
-												<Icon name={a.iconName} solid={a.iconSolid===false ? undefined : true} className={style.itemIcon} />
+												<Icon name={a.iconName} solid={a.iconSolid} className={style.itemIcon} />
 											) : (
 												<span className={style.itemIcon} data-empty />
 											)

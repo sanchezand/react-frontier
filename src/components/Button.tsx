@@ -116,7 +116,7 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		{loading ? (
 			<Loader size={loaderSize} />
 		) : <>
-			{!!iconName && <Icon name={props.iconName!} solid={props.iconSolid===false ? undefined : true} style={props.iconStyle} />}
+			{!!iconName && <Icon name={props.iconName!} solid={props.iconSolid} style={props.iconStyle} />}
 			{text}
 			{!!iconRight && <Icon name={props.iconRight!} solid={props.iconRightSolid===false ? undefined : true} style={props.iconRightStyle} className={styles.iconRight} />}
 		</>}

@@ -58,7 +58,7 @@ var Label = <E extends ElementType = typeof defaultElement>(props: LabelProps<E>
 			<Loader inline size={props.size==='small' ? 10 : 15} />
 		) : <>
 			{!!iconName && (
-				<Icon name={iconName} solid={props.iconSolid===false ? undefined : true} style={iconStyle} />
+				<Icon name={iconName} solid={props.iconSolid} style={iconStyle} />
 			)}
 			{value}
 			{children}
