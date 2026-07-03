@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Label, Pagination, Table } from '../../components';
+import { Button, Icon, Label, Pagination, Table } from '../../components';
 import { Link } from 'react-router-dom';
 
 interface TableDemoProps{
@@ -28,6 +28,20 @@ var TableDemo = (props: TableDemoProps)=>{
 				<Pagination inline page={3} onPageChange={()=>{}} />
 			)}>
 			</Table.Footer>
+		</Table>
+		<Table style={{ marginTop: 15 }}>
+			<Table.Head title='Test icons' />
+			<Table.Body>
+				<Table.Row
+					collapsingIndexes={[1]}
+					data={[
+						'Test',
+						<Button icon iconName='pencil' size='tiny' menu={[
+							{ text: 'test' }
+						]} />
+					]}
+				/>
+			</Table.Body>
 		</Table>
 		<Table style={{ marginTop: 15 }}>
 			<Table.Head title='frontier'>

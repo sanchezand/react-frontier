@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Groupper, Table } from '../../components';
+import { Button, Groupper, Input, Table } from '../../components';
 
 interface GroupperDemoProps{
 	
@@ -25,6 +25,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
 			<Groupper.Divider />
 			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum architecto voluptatibus optio quaerat nobis obcaecati eaque commodi, suscipit, earum, nihil consectetur? Ipsa blanditiis rem beatae natus dolorem. Totam, fugit sunt. <br />
+			<Input label='Test' />
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum reiciendis dolore animi hic suscipit placeat voluptatem maiores sint. Ea similique dolore veritatis ad modi architecto aspernatur aperiam est illo impedit.
 		</Groupper>
 		<Groupper fitted titleSize='small' style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} actions={(

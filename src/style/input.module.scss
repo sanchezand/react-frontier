@@ -88,7 +88,7 @@ $BORDER_RADIUS: 8px;
 :global(.fr2.groupper){
 	:global(.contents){
 		&:not([data-fitted]){
-			.root{
+			.root[data-fitted]{
 				margin-left: -20px;
 				margin-right: -20px;
 				width: calc(100% + 40px);
@@ -98,7 +98,16 @@ $BORDER_RADIUS: 8px;
 				&:global(.bottom){
 					margin-bottom: -20px;
 				}
+				&[data-no-border-top]{
+					.input{
+						border-top: 0;
+					}
+				}
 				.input{
+					border-left: 0;
+					border-right: 0;
+					border-radius: 0;
+					box-shadow: none;
 					padding: 10px 20px;
 				}
 
@@ -110,30 +119,32 @@ $BORDER_RADIUS: 8px;
 				}
 			}
 		}
-		.root{
-			margin-top: 10px;
-			margin-bottom: 10px;
-			.input{
-				border-left: 0;
-				border-right: 0;
-				border-radius: 0;
-				box-shadow: none;
-			}
-			&[data-no-border-top]{
+		&[data-fitted]{
+			.root{
+				margin-top: 10px;
+				margin-bottom: 10px;
 				.input{
-					border-top: 0;
+					border-left: 0;
+					border-right: 0;
+					border-radius: 0;
+					box-shadow: none;
 				}
-			}
-			&[data-no-border-bottom]{
-				.input{
-					border-bottom: 0;
+				&[data-no-border-top]{
+					.input{
+						border-top: 0;
+					}
 				}
-			}
-			&[data-no-margin-top]{
-				margin-top: 0;
-			}
-			&[data-no-margin-bottom]{
-				margin-bottom: 0;
+				&[data-no-border-bottom]{
+					.input{
+						border-bottom: 0;
+					}
+				}
+				&[data-no-margin-top]{
+					margin-top: 0;
+				}
+				&[data-no-margin-bottom]{
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
