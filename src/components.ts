@@ -13,7 +13,7 @@ import Icon, { IconName as CompIconName, IconsList } from "./components/Icon"
 import { FrontierProvider, useFrontier } from './components/useFrontier';
 import Header from './components/Header';
 import Groupper from './components/Groupper';
-import Input from './components/Input';
+import Input, { InputProps as CompInputProps, InputType as CompInputType } from './components/Input';
 import Field from './components/Field';
 import Image from './components/Image';
 import Label from './components/Label';
@@ -28,6 +28,7 @@ import { FrontierColors as CompFrontierColors } from './components/Classes';
 import Table from './components/Table';
 import Toolbar from './components/Toolbar';
 import Modal from './components/Modal';
+import Menu, { MenuItemProps as CompMenuItemProps } from './components/Menu';
 
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
@@ -35,6 +36,9 @@ export type DropdownSearchResult = CompDropdownSearchResult;
 export type DropdownProps = CompDropdownProps;
 export type DropdownValueChange = CompDropdownValueChange;
 export type FrontierColors = CompFrontierColors
+export type MenuItemProps = CompMenuItemProps;
+export type InputProps = CompInputProps;
+export type InputType = CompInputType;
 
 i18n.use(initReactI18next).use(resourcesToBackend(async (language: string)=>{
 	var lang = (await import(`./locale/${language}.json`)).default;
@@ -61,6 +65,7 @@ export {
 	Header,
 	Icon,
 	IconsList,
+	Menu,
 	Image,
 	Input,
 	Label,

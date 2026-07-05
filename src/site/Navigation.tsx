@@ -22,6 +22,7 @@ import StatDemo from './demos/StatDemo';
 import TableDemo from './demos/TableDemo';
 import ToolbarDemo from './demos/ToolbarDemo';
 import ToastDemo from './demos/ToastDemo';
+import MenuDemo from './demos/MenuDemo';
 
 const NavigationRoutes : {
 	path: string,
@@ -38,6 +39,7 @@ const NavigationRoutes : {
 	{ path: '/groupper', 			title: 'Groupper',			iconName: null, 		element: <GroupperDemo />			},
 	{ path: '/input', 				title: 'Input',				iconName: null, 		element: <InputDemo />				},
 	{ path: '/label', 				title: 'Label',				iconName: null, 		element: <LabelDemo />				},
+	{ path: '/menu',	 				title: 'Menu',					iconName: null, 		element: <MenuDemo />				},
 	{ path: '/message', 				title: 'Message',				iconName: null, 		element: <MessageDemo />			},
 	{ path: '/modal', 				title: 'Modal',				iconName: null, 		element: <ModalDemo />				},
 	{ path: '/pagination', 			title: 'Pagination',			iconName: null, 		element: <PaginationDemo />		},

@@ -157,7 +157,7 @@ const Toolbar : React.FC<ToolbarProps> & ToolbarSubComponents = (props: ToolbarP
 		style={props.style}
 		data-divided={props.divided || undefined}
 		data-fitted={props.fitted || undefined}
-		data-stretch={props.stretch!==false || undefined}
+		data-stretch={props.stretch || undefined}
 		{...restProps}
 	>
 		{!!props.items && props.items.map((a, ix)=>(

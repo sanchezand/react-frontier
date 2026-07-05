@@ -11,7 +11,7 @@ import Loader from './Loader';
 export type InputType = 'error' | 'warning' | 'normal';
 
 export interface InputProps{
-	value?: string,
+	value?: string | number,
 	readonly?: boolean,
 	fluid?: boolean,
 	onChange?: (val: any)=>void,
