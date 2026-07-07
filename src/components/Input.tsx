@@ -202,7 +202,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			)}
 			<div className={style.content}>
 				{props.calendar ? (
-					<Popover.Trigger handle={handle} render={<div />}>
+					<Popover.Trigger handle={handle} className={style.popupTrigger} render={<div />}>
 						{InputElem}
 					</Popover.Trigger>
 				) : InputElem}

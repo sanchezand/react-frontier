@@ -7,6 +7,7 @@ interface PopupProps extends PropsWithChildren{
 	trigger: any,
 	style?: React.CSSProperties,
 	basic?: boolean,
+	openOnHover?: boolean,
 	containWidth?: boolean,
 	containHeight?: boolean,
 	className?: string,
@@ -14,12 +15,8 @@ interface PopupProps extends PropsWithChildren{
 }
 
 var Popup = (props: PopupProps)=>{
-	useEffect(()=>{
-		
-	}, []);
-	
 	return <Popover.Root>
-		<Popover.Trigger render={props.trigger} />
+		<Popover.Trigger openOnHover={props.openOnHover} render={props.trigger} />
 		<Popover.Portal>
 			<Popover.Positioner sideOffset={8} style={{ zIndex: props.zIndex || 1000 }}>
 				<Popover.Popup 

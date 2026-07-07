@@ -19,6 +19,17 @@ var ButtonDemo = ()=>{
 			<Button text='White' color={'white'} />
 			<Button text='Basic' basic />
 		</div>
+		<div className="section head">Basic</div>
+		<div className="demo buttons">
+			<Button text='Normal' basic />
+			<Button text='Black' basic color={'black'} disabled={false} />
+			<Button text='Blue' basic color={'blue'} />
+			<Button text='Green' basic color={'green'} />
+			<Button text='Orange' basic color={'orange'} />
+			<Button text='Purple' basic color={'purple'} />
+			<Button text='Red' basic color={'red'} />
+			<Button text='White' basic color={'white'} />
+		</div>
 		<div className="section head">Sizes</div>
 		<div className="demo buttons">
 			<Button size='tiny' text='Tiny' />

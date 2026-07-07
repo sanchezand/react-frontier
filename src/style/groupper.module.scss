@@ -117,8 +117,11 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 
 			:global(.toolbar){
 				margin: 0;
+				border-radius: 0;
 			}
 			:global(table){
+				margin: 0 !important;
+				width: 100% !important;
 				border-radius: 0;
 				box-shadow: none;
 			}

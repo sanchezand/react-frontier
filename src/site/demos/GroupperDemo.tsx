@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Groupper, Input, Table } from '../../components';
+import { Button, Groupper, Input, Table, Toolbar } from '../../components';
 
 interface GroupperDemoProps{
 	
@@ -53,7 +53,12 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 		</Groupper>
 
 		<Groupper title={"test"} style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }} fitted>
-			<Table details>
+			<Toolbar fitted>
+				<Toolbar.Item text='Test' />
+				<Toolbar.Item text='Test' />
+				<Toolbar.Item text='Test' />
+			</Toolbar>
+			<Table fitted details>
 				<Table.Head title='frontierO' titleRight={(
 					<Button text='button' size='tiny' iconName='wrench' color='blue' />
 				)} />

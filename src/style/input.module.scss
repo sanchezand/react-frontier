@@ -27,6 +27,12 @@ $BORDER_RADIUS: 8px;
 
 	&[data-actions] > .content{
 		display: flex;
+		.popupTrigger{
+			flex-grow: 100;
+			> .input{
+				height: 100%;
+			}
+		}
 		.input{
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;

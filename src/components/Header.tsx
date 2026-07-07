@@ -57,7 +57,7 @@ var Header = (props: HeaderProps)=>{
 	}, [props.loaderSize, props.size]);
 	
 	return <div
-		className={classNames(style.header, props.className)}
+		className={classNames('fr2 header', style.header, props.className)}
 		data-loading={props.loading || undefined}
 		data-size={props.size || (props.loading ? 'small' : 'normal')}
 		data-centered={props.centered!==false || undefined}
