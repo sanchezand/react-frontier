@@ -16,6 +16,28 @@ var ButtonDemo = ()=>{
 				{ text: 'Test frontier' }
 			]}
 		/>
+
+		<Menu
+			inline
+			style={{ position: 'absolute', left: 40, top: 100 }}
+			items={[
+				{ text: 'Test frontier2' },
+				{ separator: true },
+				{ text: 'Test frontier2', items: [
+					{ text: 'Submenu!' },
+					{ text: 'Submenu!' },
+					{ separator: true },
+					{ text: 'Submenu!', items: [
+						{ text: 'Submenu 2!!!!!' },
+						{ text: 'Submenu 2!!!!!' },
+						{ separator: true },
+						{ text: 'Submenu 2!!!!!' },
+						{ text: 'Submenu 2!!!!!' }
+					] },
+				] },
+				{ text: 'Test frontier2' },
+			]}
+		/>
 	</div>
 }
 

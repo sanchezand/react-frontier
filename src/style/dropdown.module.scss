@@ -224,6 +224,11 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 		max-width: 100%;
 		width: auto;
 	}
+
+	&[data-inline]{
+		width: auto;
+		display: inline-block;
+	}
 }
 
 .empty{
@@ -250,7 +255,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	&:first-child{
 		margin-top: 2px;
 	}
-	&:last-child{
+	&:last-of-type{
 		margin-bottom: 2px;
 	}
 
@@ -311,6 +316,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	.menuIcon{
 		height: auto;
 		margin-right: 0;
+		margin-left: 10px;
 	}
 }
 
