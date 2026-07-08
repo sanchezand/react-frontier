@@ -39,6 +39,8 @@ $BORDER_RADIUS: 12px;
 	&[data-fitted]{
 		border-radius: 0;
 		box-shadow: none;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	}
 
 	&[data-compact] tr td{
@@ -148,6 +150,12 @@ $BORDER_RADIUS: 12px;
 	}
 
 
+	&[data-remove-border-top], &[data-top]{
+		border-top: 0;
+	}
+	&[data-remove-border-bottom], &[data-last]{
+		border-bottom: 0;
+	}
 	&:not([data-fitted]){
 		thead th{
 			&:not([data-normal]):first-child{

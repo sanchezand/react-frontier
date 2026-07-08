@@ -1,6 +1,7 @@
 @use "sass:color";
 
 $GROUPPER_PADDING: 20px;
+$GROUPPER_BORDER_RADIUS: 12px;
 $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 
 .groupper{
@@ -65,6 +66,21 @@ $GROUPPER_SECTION_BORDER: 1px solid var(--color-gray-200);
 					flex-grow: 100;
 					height: 1px;
 					border-top: $DIVIDER_BORDER;
+				}
+			}
+		}
+
+		&:not([data-fitted]){
+			:global(table){
+				&[data-remove-margin-top], &[data-top]{
+					margin-top: -$GROUPPER_PADDING;
+				}
+				&[data-remove-margin-bottom], &[data-last]{
+					margin-bottom: -$GROUPPER_PADDING;
+				}
+				&[data-last]{
+					border-bottom-right-radius: $GROUPPER_BORDER_RADIUS;
+					border-bottom-left-radius: $GROUPPER_BORDER_RADIUS;
 				}
 			}
 		}

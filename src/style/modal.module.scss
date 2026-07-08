@@ -92,9 +92,27 @@ $modal-sizes:
 		background-color: white;
 		padding: $MODAL_PADDING;
 
+		&[data-fitted]{
+			padding: 0;
+		}
+
 		:global(table[data-fitted]){
 			margin: 0 -20px;
 			width: calc(100% + 40px);
+		}
+		&:not([data-fitted]){
+			:global(table){
+				&[data-remove-margin-top], &[data-top]{
+					margin-top: -$MODAL_PADDING;
+				}
+				&[data-remove-margin-bottom], &[data-last]{
+					margin-bottom: -$MODAL_PADDING;
+				}
+				&[data-last]{
+					border-bottom-right-radius: $MODAL_BORDER_RADIUS;
+					border-bottom-left-radius: $MODAL_BORDER_RADIUS;
+				}
+			}
 		}
 	}
 

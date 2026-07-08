@@ -306,6 +306,10 @@ interface TableProps extends PropsWithChildren{
 	selectable?: boolean,
 	bordered?: boolean,
 	style?: React.CSSProperties,
+	last?: boolean,
+	top?: boolean,
+	removeBorder?: ('top' | 'bottom')[],
+	removeMargin?: ('top' | 'bottom')[],
 }
 
 const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
@@ -318,9 +322,33 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 		className,
 		selectable,
 		bordered,
+		children,
+		removeBorder,
+		removeMargin,
 		style: propsStyle,
+		last,
+		top,
 		...restProps
 	} = props;
+	
+	var borders = useMemo(()=>{
+		var top = false, bottom = false;
+		if(!!props.removeBorder){
+			top = props.removeBorder.indexOf('top')!=-1;
+			bottom = props.removeBorder.indexOf('bottom')!=-1;
+		}
+		return { top, bottom }
+	}, [props.removeBorder]);
+
+	var margins = useMemo(()=>{
+		var top = false, bottom = false;
+		if(!!props.removeMargin){
+			top = props.removeMargin.indexOf('top')!=-1;
+			bottom = props.removeMargin.indexOf('bottom')!=-1;
+		}
+		return { top, bottom }
+	}, [props.removeMargin]);
+
 	return <table 
 		style={props.style}
 		className={classNames('fr2 table', style.table, props.className)} 
@@ -331,6 +359,12 @@ const Table : React.FC<TableProps> & TableSubComponents = (props: TableProps)=>{
 		data-details={props.details || undefined}
 		data-fitted={props.fitted || undefined}
 		data-selectable={props.selectable || undefined}
+		data-remove-border-top={borders.top || undefined}
+		data-remove-border-bottom={borders.bottom || undefined}
+		data-remove-margin-top={margins.top || undefined}
+		data-remove-margin-bottom={margins.bottom || undefined}
+		data-last={props.last || undefined}
+		data-top={props.top || undefined}
 		{...restProps}
 	>
 		{props.children}

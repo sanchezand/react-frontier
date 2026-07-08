@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Dropdown, Input, Table, Toolbar, useFrontier } from '../../components';
 import Modal from '../../components/Modal';
+import { bindClick } from '../../components/Util';
 
 interface ModalDemoProps{
 	
@@ -12,6 +13,7 @@ var ModalDemo = (props: ModalDemoProps)=>{
 	var { Toast } = useFrontier();
 	var [simpleModal, setSimpleModal] = useState<boolean>(false);
 	var [secondModal, setSecondModal] = useState<boolean>(false);
+	var [test, setTest] = useState<number>(null);
 	useEffect(()=>{
 		
 	}, []);
@@ -23,6 +25,20 @@ var ModalDemo = (props: ModalDemoProps)=>{
 	return <div style={{ maxWidth: 500, margin: 'auto', paddingTop: 20 }}>
 		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum libero vel blanditiis, sequi dicta exercitationem dolorum, aperiam magni quia officia eius, dolor sapiente alias est maxime molestiae rem praesentium accusantium!
 		<Button text='Open modal' onClick={()=>setSimpleModal(true)} />
+		<Button text='Modal test' menu={[
+			{ text: 'Modal 1', onClick: bindClick(setTest, 1) }
+		]} />
+		<Modal open={test===1} size='tiny' onClose={bindClick(setTest)}>
+			<Modal.Header>test</Modal.Header>
+			<Modal.Content>
+				<Table fitted last top>
+					<Table.Body data={[
+						['test', 'test'],
+						['test', 'test'],
+					]} />
+				</Table>
+			</Modal.Content>
+		</Modal>
 		<Modal open={simpleModal} onClose={setSimpleModal}>
 			<Modal.Header text='Test' actions={(
 				<Button text='Test button' menu={[

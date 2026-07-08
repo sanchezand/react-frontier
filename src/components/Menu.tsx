@@ -21,6 +21,7 @@ export type MenuItemProps<E extends ElementType=any> = {
 
 interface MenuProps{
 	trigger: any,
+	disabled?: boolean,
 	items: MenuItemProps[],
 }
 
@@ -30,8 +31,8 @@ var Menu = (props: MenuProps)=>{
 		
 	}, []);
 	
-	return <BaseMenu.Root>
-		<BaseMenu.Trigger nativeButton={true} render={props.trigger} />
+	return <BaseMenu.Root disabled={!!props.disabled}>
+		<BaseMenu.Trigger nativeButton={true} render={props.trigger} disabled={!!props.disabled} />
 		<BaseMenu.Portal>
 			<BaseMenu.Positioner sideOffset={8} align='start' style={{ zIndex: 1001 }}>
 				<BaseMenu.Popup className={DropdownStyle.popup} data-fluid>

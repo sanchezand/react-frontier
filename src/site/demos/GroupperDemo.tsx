@@ -52,13 +52,13 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum reiciendis dolore animi hic suscipit placeat voluptatem maiores sint. Ea similique dolore veritatis ad modi architecto aspernatur aperiam est illo impedit.
 		</Groupper>
 
-		<Groupper title={"test"} style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }} fitted>
+		<Groupper fitted title={"test"} style={{ maxWidth: 500, margin: 'auto', marginTop: 15 }}>
 			<Toolbar fitted>
 				<Toolbar.Item text='Test' />
 				<Toolbar.Item text='Test' />
 				<Toolbar.Item text='Test' />
 			</Toolbar>
-			<Table fitted details>
+			<Table details fitted top>
 				<Table.Head title='frontierO' titleRight={(
 					<Button text='button' size='tiny' iconName='wrench' color='blue' />
 				)} />

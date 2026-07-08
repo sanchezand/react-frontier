@@ -9,11 +9,12 @@ interface ModalContentProps extends PropsWithChildren{
 	shown?: boolean,
 	className?: string,
 	style?: React.CSSProperties,
+	fitted?: boolean,
 }
 var ModalContent = (props: ModalContentProps)=>{
 	var { shown, className, style: propsStyle, ...restProps } = props;
 	if(props.shown===false) return null;
-	return <div className={classNames("content", style.content, props.className)} style={props.style} {...restProps}>
+	return <div className={classNames("content", style.content, props.className)} style={props.style} data-fitted={props.fitted || undefined} {...restProps}>
 		{props.children}
 	</div>
 }
