@@ -11,6 +11,7 @@ interface IconProps{
 	size?: number,
 	color?: string,
 	brand?: boolean,
+	fitted?: boolean,
 }
 
 var Icon = (props: IconProps)=>{
@@ -23,6 +24,7 @@ var Icon = (props: IconProps)=>{
 		size,
 		color,
 		brand,
+		fitted,
 		...restProps
 	} = props;
 	return <i 
@@ -31,6 +33,7 @@ var Icon = (props: IconProps)=>{
 		data-solid={props.solid===false ? undefined : true}
 		data-brand={props.brand || undefined}
 		data-loading={props.loading || undefined}
+		data-fitted={props.fitted || undefined}
 		style={{
 			fontSize: props.size,
 			color: props.color,

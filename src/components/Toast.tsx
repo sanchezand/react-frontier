@@ -7,11 +7,11 @@ import Loader from './Loader';
 
 var ToastList = ()=>{
 	var { t } = useTranslation();
-	var { toasts } = Toast.useToastManager();
+	var { toasts, close } = Toast.useToastManager();
 	
 	return <React.Fragment>
 		{toasts.map(a=>(
-			<Toast.Root key={a.id} toast={a} className={style.toast} swipeDirection={(a.data.dismissable===false || a.data.loading) ? null : undefined}>
+			<Toast.Root key={a.id} toast={a} className={style.toast} swipeDirection={(a.data.dismissable===false || a.data.loading) ? null : undefined} onClick={(a.data.dismissable===false || a.data.loading) ? null : ()=>close(a.id)} data-color={a.data.color || undefined} data-loading={!!a.data.loading || undefined}>
 				<Toast.Content className={style.container} data-loading={!!a.data.loading || undefined}>
 					<Toast.Title className={style.title}>
 						{a.data.header}
@@ -25,7 +25,7 @@ var ToastList = ()=>{
 						</Toast.Close>
 					)}
 					{a.data.loading && (
-						<Loader size={20} />
+						<Loader size={25} />
 					)}
 				</Toast.Content>
 			</Toast.Root>

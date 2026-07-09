@@ -55,6 +55,10 @@
 		font-weight: 400;
 	}
 
+	&[data-fitted]{
+		margin: 0;
+	}
+
 	@each $name, $code in $fontawesome-icons{
 		&[data-icon="#{$name}"]{
 			&::before{

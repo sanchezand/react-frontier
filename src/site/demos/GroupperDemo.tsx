@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Groupper, Input, Table, Toolbar } from '../../components';
+import { Button, Groupper, Header, Input, Table, Toolbar } from '../../components';
 
 interface GroupperDemoProps{
 	
@@ -8,6 +8,19 @@ interface GroupperDemoProps{
 
 var GroupperDemo = (props: GroupperDemoProps)=>{
 	var [inputValue, setInputValue] = useState<string>(null);
+	var [test, setTest] = useState<boolean>(false);
+
+	useEffect(()=>{
+		var t = false;
+		setTest(t);
+		var intv = setInterval(()=>{
+			t = !t;
+			setTest(t);
+		}, 1000);
+		return ()=>{
+			clearInterval(intv);
+		}
+	}, []);
 	
 	return <div style={{ maxWidth: 800, margin: 'auto', marginTop: 15 }}>
 		<Groupper style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} titleRight={(
@@ -29,7 +42,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum reiciendis dolore animi hic suscipit placeat voluptatem maiores sint. Ea similique dolore veritatis ad modi architecto aspernatur aperiam est illo impedit.
 		</Groupper>
 		<Groupper fitted titleSize='small' style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'} actions={(
-			<Button text='Frontier' />
+			<Button text='Frontier' loading={test} />
 		)}>
 			<Groupper.DividerInput removeMargin={['top']} inputStyle={{ fontSize: 18 }} removeBorder={['top']} placeholder='Test frontier' label='label test' value={inputValue} onChange={setInputValue} />
 			<Groupper.Divider text={'test2'} top />
@@ -44,7 +57,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure assumenda minus voluptates ipsam dolorum recusandae! Unde dolorem blanditiis, dicta iste animi ut eum fugiat. Aperiam hic magnam quod obcaecati placeat!
 		</Groupper>
 		<Groupper titleCentered titleSize='big' style={{ maxWidth: 400, margin: 'auto', marginBottom: 15 }} title={'testing'}  actions={(
-			<Button text='Frontier' />
+			<Button text='Frontier' loading={test} />
 		)}>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
@@ -69,6 +82,12 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 					<Table.Row selectable data={[ 'ID', 'ROW' ]} />
 				</Table.Body>
 			</Table>
+		</Groupper>
+		<Groupper fitted style={{ maxWidth: 600, margin: 'auto', marginTop: 15 }} title={"HEY!"}>
+			<div style={{ margin: 15 }}>
+				TEST1
+			</div>
+			{/* <Header style={{ margin: 50 }} text={'Test!'} subtext={"Test but smaller!"} /> */}
 		</Groupper>
 	</div>
 }

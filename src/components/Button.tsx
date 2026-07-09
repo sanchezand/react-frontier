@@ -100,7 +100,9 @@ var Button = <E extends ElementType>(props: ButtonProps<E>)=>{
 		{...restProps}
 	>
 		{loading ? (
-			<Loader size={loaderSize} />
+			<Loader size={loaderSize} inline />
+		) : checkmark ? (
+			<Icon name='check' fitted />
 		) : <>
 			{!!iconName && <Icon name={props.iconName} solid={props.iconSolid} style={props.iconStyle} />}
 			{text}
