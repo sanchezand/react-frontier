@@ -34,7 +34,9 @@ var InputDemo = (props: InputDemoProps)=>{
 		}} buttons={(
 			<Button text='LMAO' />
 		)} />
-		<Input label='Test' value={valTest} onChange={setValTest} iconName='ticket' comment='Comment test' style={{ marginTop: 15 }} />
+		<Input label='Test' value={valTest} onChange={setValTest} onSubmit={()=>{
+			alert("Button submit")
+		}} iconName='ticket' comment='Comment test' style={{ marginTop: 15 }} />
 		<Input label='Test' required textarea style={{ marginTop: 15 }} />
 		<Dropdown value={1} label='Test' required items={[
 			{ text: 'Test 1', value: 1 },

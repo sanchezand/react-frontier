@@ -18,7 +18,7 @@ export interface InputProps{
 	label?: string,
 	placeholder?: string,
 	className?: string,
-	comment?: string,
+	comment?: any,
 	inputType?: React.HTMLInputTypeAttribute,
 	iconName?: IconName,
 	iconSolid?: boolean,
@@ -34,7 +34,6 @@ export interface InputProps{
 	onSubmit?: (setLoading: (loading: boolean)=>void, ...params: any)=>void,
 	loading?: boolean,
 	onLoadingChanged?: (v: boolean)=>void,
-	submitOnEnter?: boolean,
 	error?: boolean
 	type?: InputType,
 	calendar?: CalendarProps,
@@ -75,7 +74,6 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 		required,
 		style: propStyle,
 		iconSolid,
-		submitOnEnter,
 		textarea,
 		textareaRows,
 		type,
@@ -97,7 +95,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 
 	var onInputKeyUp = (ev: React.KeyboardEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
 		if(props.onKeyUp) props.onKeyUp(ev);
-		if(ev.key==='Enter' && props.submitOnEnter){
+		if(ev.key==='Enter' && !!props.onSubmit){
 			onInputSubmit();
 		}
 	}
@@ -130,7 +128,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			readOnly={props.readonly || !!props.calendar || false} 
 			placeholder={props.placeholder || props.label} 
 			onChange={onInputChange} 
-			onKeyUp={(props.onKeyUp || props.submitOnEnter) ? onInputKeyUp : null}
+			onKeyUp={!!(props.onKeyUp || props.onSubmit) ? onInputKeyUp : null}
 			value={!!props.calendar ? (
 				props.calendar.date ? (
 					DateTime.fromJSDate(props.calendar.date).toFormat(props.calendar.format || 'dd/MM/yy'+(props.calendar?.mode && props.calendar.mode=='date' ? '' : ' HH:mm'))
@@ -154,7 +152,7 @@ var Input = React.forwardRef((props: InputProps, ref: Ref<HTMLInputElement|HTMLT
 			readOnly={props.readonly}
 			placeholder={props.placeholder || props.label}
 			onChange={onInputChange}
-			onKeyUp={(props.onKeyUp || props.submitOnEnter) ? onInputKeyUp : null}
+			onKeyUp={(!!props.onKeyUp || !!props.onSubmit) ? onInputKeyUp : null}
 			onFocus={onInputFocus}
 			onClick={onInputClick}
 			autoFocus={props.autoFocus}

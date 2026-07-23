@@ -11,7 +11,24 @@ $BORDER_RADIUS: 12px;
 	border-collapse: collapse;
 	border-radius: $BORDER_RADIUS;
 
-	&[data-selectable]:not([data-celled]) tbody tr:not([data-noselect]), tbody tr[data-selectable]{
+	&[data-selectable]:not([data-celled]) tbody tr:not([data-noselect]){
+		cursor: pointer;
+		&:hover{
+			td{
+				background-color: $HOVER_COLOR;
+			}
+		}
+		&:last-child{
+			td:first-child{
+				border-bottom-left-radius: $BORDER_RADIUS;
+			}
+			td:last-child{
+				border-bottom-right-radius: $BORDER_RADIUS;
+			}
+		}
+	}
+
+	tbody tr[data-selectable]{
 		cursor: pointer;
 		&:hover{
 			td{
@@ -33,6 +50,16 @@ $BORDER_RADIUS: 12px;
 			cursor: pointer;
 			&:hover{
 				background-color: $HOVER_COLOR;
+			}
+		}
+	}
+	tbody tr:last-child{
+		td[data-selectable]{
+			&:first-child{
+				border-bottom-left-radius: $BORDER_RADIUS;
+			}
+			&:last-child{
+				border-bottom-right-radius: $BORDER_RADIUS;
 			}
 		}
 	}
@@ -111,6 +138,7 @@ $BORDER_RADIUS: 12px;
 			}
 		}
 		&[data-selectable]{
+			cursor: pointer;
 			&:hover{
 				background-color: $HOVER_COLOR;
 			}
@@ -123,32 +151,6 @@ $BORDER_RADIUS: 12px;
 			white-space: nowrap;
 		}
 	}
-
-	tbody tr, thead tr, tfoot tr{
-		&:last-of-type{
-			td,th{
-				&[data-selectable]{
-					cursor: pointer;
-					&:first-child{
-						border-bottom-left-radius: $BORDER_RADIUS;
-					}
-					&:last-child{
-						border-bottom-right-radius: $BORDER_RADIUS;
-					}
-				}
-			}
-		}
-		&[data-selectable]{
-			cursor: pointer;
-			td:first-child,th:first-child{
-				border-bottom-left-radius: $BORDER_RADIUS;
-			}
-			td:last-child,th:last-child{
-				border-bottom-right-radius: $BORDER_RADIUS;
-			}
-		}
-	}
-
 
 	&[data-remove-border-top], &[data-top]{
 		border-top: 0;

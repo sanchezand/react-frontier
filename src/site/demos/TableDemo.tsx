@@ -108,6 +108,32 @@ var TableDemo = (props: TableDemoProps)=>{
 				</Table.Row>
 			</Table.Body>
 		</Table>
+		<Table selectable style={{ marginTop: 15 }}>
+			<Table.Head title='Sectable table' />
+			<Table.Body
+				data={[
+					['Test', 'Test'],
+					['Test', 'Test'],
+					['Test', 'Test'],
+				]}
+			/>
+		</Table>
+		<Table style={{ marginTop: 15 }}>
+			<Table.Head title='Sectable some rows' />
+			<Table.Body>
+				<Table.Row data={['Test', 'Test']} />
+				<Table.Row data={['Test', 'Test']} selectable />
+				<Table.Row>
+					<Table.Cell value={'test'} selectable />
+					<Table.Cell value={'test'} />
+				</Table.Row>
+				<Table.Row data={['Test', 'Test']} selectable />
+				<Table.Row>
+					<Table.Cell value={'test'} selectable />
+					<Table.Cell value={'test'} selectable />
+				</Table.Row>
+			</Table.Body>
+		</Table>
 	</div>
 }
 

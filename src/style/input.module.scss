@@ -44,6 +44,7 @@ $BORDER_RADIUS: 8px;
 				border-right: 1px solid #e0e0e0;
 				&:global(.fr2.button){
 					min-width: 80px;
+					line-height: 18px;
 				}
 				&:last-child{
 					border-right: 0;
@@ -98,6 +99,7 @@ $BORDER_RADIUS: 8px;
 				margin-left: -20px;
 				margin-right: -20px;
 				width: calc(100% + 40px);
+
 				&:global(.top){
 					margin-top: -20px;
 				}
@@ -114,7 +116,15 @@ $BORDER_RADIUS: 8px;
 					border-right: 0;
 					border-radius: 0;
 					box-shadow: none;
-					padding: 10px 20px;
+					padding: 12px 20px;
+				}
+				.actions{
+					> * {
+						padding: 13px 15px 12px 15px;
+						&:last-child{
+							border-radius: 0 !important;
+						}
+					}
 				}
 
 				&[data-no-margin-top]{

@@ -33,7 +33,9 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 		)} actions={(
 			<Button text='Frontier' />
 		)}>
-			<Groupper.DividerInput removeMargin={['top']} removeBorder={['top']} placeholder='Test frontier' label='label test' value={inputValue} onChange={setInputValue} />
+			<Groupper.DividerInput removeMargin={['top']} removeBorder={['top']} placeholder='Test frontier' label='label test' value={inputValue} onChange={setInputValue} buttons={(
+				<Button text='Hello' />
+			)} />
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ad nam, fugiat pariatur debitis sed rem doloribus, sint reiciendis quibusdam fuga dolorem explicabo ducimus culpa et molestiae facere ipsam id? <br />
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus illo, recusandae itaque consectetur non ipsam sunt repellat iste vitae veniam dolor deleniti repudiandae culpa quisquam, adipisci, quos officiis dolores rem. <br />
 			<Groupper.Divider />
@@ -45,7 +47,7 @@ var GroupperDemo = (props: GroupperDemoProps)=>{
 			<Button text='Frontier' loading={test} />
 		)}>
 			<Groupper.DividerInput removeMargin={['top']} inputStyle={{ fontSize: 18 }} removeBorder={['top']} placeholder='Test frontier' label='label test' value={inputValue} onChange={setInputValue} />
-			<Groupper.Divider text={'test2'} top />
+			<Groupper.Divider text={'test2'} />
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, veritatis. Quaerat quod obcaecati eveniet porro suscipit dicta illum accusamus vel esse, expedita facere consectetur laudantium iusto fuga ipsa molestias mollitia!
 			<Groupper.Divider text={'line test!'} type='line text' />
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio vitae, consequatur nostrum ut non officia quas impedit quos nemo hic assumenda minus sunt possimus iure. Accusamus velit perferendis illo voluptatibus?

@@ -41,9 +41,13 @@ $GROUPPER_COLOR: darken(white, 2%);
 				background-color: darken(white, 1%);
 				border-top: $DIVIDER_BORDER;
 				border-bottom: $DIVIDER_BORDER;
-				padding: 5px 12px;
+				// padding: 5px 12px;
+				padding: 10px 14px;
+				font-size: 18px;
+				line-height: 18px;
 				font-weight: bold;
 				width: calc(100% + 24px);
+
 				&[data-centered]{
 					text-align: center;
 				}
@@ -61,6 +65,8 @@ $GROUPPER_COLOR: darken(white, 2%);
 				align-items: center;
 				.text{
 					margin: 0 15px;
+					font-size: 16px;
+					line-height: 16px;
 					color: gray;
 				}
 				.line{
