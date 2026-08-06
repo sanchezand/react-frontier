@@ -28,10 +28,13 @@ const GroupperDivider = (props: GroupperDividerProps)=>{
 		type,
 		...restProps
 	} = props;
-	var divider_type = props.type || (typeof props.type==='undefined' && (!!props.text || !!props.children) ? 'text' : 'solid');
-	return <div className={style.divider} data-top={!!props.top || undefined} style={props.style} data-centered={props.centered || undefined} data-type={divider_type} {...restProps}>
-		{(divider_type==='text') ? (
-			<div className="text" style={props.textStyle}>{props.children || props.text}</div>
+	// var divider_type = props.type || (typeof props.type==='undefined' && (!!props.text || !!props.children) ? 'text' : 'solid');
+	var divider_type = props.type || undefined;
+	return <div className={classNames(style.divider, props.className)} data-top={!!props.top || undefined} style={props.style} data-centered={props.centered || undefined} data-type={divider_type || (props.children ? 'text' : undefined)} {...restProps}>
+		{typeof divider_type==='undefined' ? (
+			props.children || props.text
+		) : divider_type==='text' ? (
+			<div className={style.text} style={props.textStyle}>{props.children || props.text}</div>
 		) : divider_type==='line text' ? <>
 			<div className={style.line} style={props.lineStyle}></div>
 			<div className={style.text} style={props.textStyle}>{props.text}</div>

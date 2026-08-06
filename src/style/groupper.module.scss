@@ -30,6 +30,9 @@ $GROUPPER_COLOR: darken(white, 2%);
 			width: calc(100% + $GROUPPER_PADDING * 2);
 			margin: 20px 0 20px calc($GROUPPER_PADDING * -1);
 
+			&[data-type="none"]{
+				height: auto;
+			}
 			&[data-type="dashed"]{
 				border-top-style: dashed;
 			}
@@ -38,15 +41,16 @@ $GROUPPER_COLOR: darken(white, 2%);
 			}
 			&[data-type="text"]{
 				height: auto;
-				background-color: darken(white, 1%);
+				background-color: darken(white, 2%);
 				border-top: $DIVIDER_BORDER;
 				border-bottom: $DIVIDER_BORDER;
-				// padding: 5px 12px;
 				padding: 10px 14px;
-				font-size: 18px;
-				line-height: 18px;
-				font-weight: bold;
-				width: calc(100% + 24px);
+				// width: calc(100% + 24px);
+				> .text{
+					font-size: 18px;
+					line-height: 18px;
+					font-weight: bold;
+				}
 
 				&[data-centered]{
 					text-align: center;

@@ -124,6 +124,8 @@ const TableRow : React.FC<TableRowProps> = (props: TableRowProps)=>{
 				...(a.props as any),
 				as: (a.props as any).as || props.as,
 			} as unknown)
+		}else{
+			return a;
 		}
 	});
 
@@ -209,7 +211,7 @@ const TableHeader = (props: TableSubComponentProps & TableHeaderProps)=>{
 				</th>
 			</tr>
 		)}
-		{props.data && props.data.map((a, r)=>(
+		{props.data && props.data.map && props.data.map((a, r)=>(
 			<tr key={`TH-${id}-${r}`}>
 				{a.map((b, i)=>(
 					<th 
@@ -230,7 +232,7 @@ const TableBody = (props: TableSubComponentProps)=>{
 		return randomRange(0, 256682)
 	}, []);
 	return <tbody className={props.className} style={props.style} {...restProps}>
-		{props.data && props.data.map((a, r)=>(
+		{props.data && props.data.map && props.data.map((a, r)=>(
 			<tr key={`TB-${id}-${r}`}>
 				{a.map((b, i)=>(
 					<td 
@@ -265,7 +267,7 @@ const TableFooter = (props: TableFootProps)=>{
 		return randomRange(0, 256682)
 	}, []);
 	return <tfoot className={props.className} style={props.style} {...restProps}>
-		{props.data && props.data.map((a, r)=>(
+		{props.data && props.data.map && props.data.map((a, r)=>(
 			<tr key={`TF-${id}-${r}`}>
 				{a.map((b, i)=>(
 					<td
