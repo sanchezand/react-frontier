@@ -17,18 +17,23 @@ $modal-sizes:
 .backdrop{
 	// z-index: 101;
 	position: fixed;
+	width: 100vw;
 	min-height: 100dvh;
 	inset: 0;
 	background-color: rgba(0, 0, 0);
 	opacity: 0.8;
 	transition: opacity 220ms ease, backdrop-filter 280ms ease;
 	backdrop-filter: blur(30px);
+	top: 0;
+	left: 0;
 
 	/* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
-	@supports (-webkit-touch-callout: none) {
-		position: absolute;
-	}
+	// @supports (-webkit-touch-callout: none) {
+		// position: absolute;
+	// }
 
+	will-change: opacity;
+	will-change: transform;
 	&[data-starting-style],
 	&[data-ending-style] {
 		backdrop-filter: blur(0);
