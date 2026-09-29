@@ -67,12 +67,13 @@ $HEADER_HEIGHT: 50px;
 		text-decoration: none;
 		color: black;
 
-		.text{
+		&.text{
 			text-align: center;
 			line-height: $HEADER_HEIGHT;
 			font-size: 20px;
 			font-weight: bold;
 		}
+
 		&.icon{
 			text-align: center;
 			img{
@@ -93,9 +94,9 @@ $HEADER_HEIGHT: 50px;
 
 	> .contents{
 		flex-grow: 100;
-		> .header .text{
+		> .header.text{
 			text-align: left;
-			margin-left: 15px
+			padding-left: 15px
 		}
 		> .contents{
 			padding: 15px;

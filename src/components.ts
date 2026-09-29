@@ -30,6 +30,9 @@ import Toolbar from './components/Toolbar';
 import Modal from './components/Modal';
 import Menu, { MenuItemProps as CompMenuItemProps } from './components/Menu';
 
+import es_locale from './locale/es.json';
+import en_locale from './locale/es.json';
+
 export type IconName = CompIconName;
 export type DropdownItemProps = CompDrItPr;
 export type DropdownSearchResult = CompDropdownSearchResult;
@@ -40,10 +43,11 @@ export type MenuItemProps = CompMenuItemProps;
 export type InputProps = CompInputProps;
 export type InputType = CompInputType;
 
-i18n.use(initReactI18next).use(resourcesToBackend(async (language: string)=>{
-	var lang = (await import(`./locale/${language}.json`)).default;
-	return lang;
-})).init({
+i18n.use(initReactI18next).init({
+	resources: {
+		en: { translation: en_locale },
+		es: { translation: es_locale },
+	},
 	fallbackLng: 'en',
 	react: {
 		useSuspense: false,

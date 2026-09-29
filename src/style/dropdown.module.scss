@@ -203,7 +203,7 @@ $PLACEHOLDER_COLOR: #b4b4b4;
 	box-sizing: border-box;
 	border-radius: 8px;
 	
-	width: var(--anchor-width);
+	min-width: var(--anchor-width);
 	max-height: 23rem;
 	max-width: var(--available-width);
 	transition: opacity 0.1s, transform 0.1s;
